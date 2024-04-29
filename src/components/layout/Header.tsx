@@ -1,43 +1,36 @@
 import Image from 'next/image';
-import React from 'react';
-
 import ActionButton from '../common/button/ActionButton';
-import LogoIcon from '@/assets/logo-icon.svg';
-import TextFieldMenu from '../common/text/TextFieldMenu';
+import { HEADER_MENU } from '@/utils/routes';
+import Link from 'next/link';
 
-const Header = () => {
+export default function Header() {
+  const last_menu_num = HEADER_MENU.length - 1;
+
   return (
-    <header className="w-full h-16 bg-[#FFF]">
-      <div className="mx-[12rem] ">
-        <div className="w-full flex justify-between my-4">
-          <div>
-            <Image src={LogoIcon} alt="글공방" />
-          </div>
-          <div className="flex justify-between w-[29vw]">
-            <div className="flex justify-between items-center mr-7 w-full">
-              <div>
-                <TextFieldMenu text={'워크스페이스'} />
-              </div>
-              <p>|</p>
-              <div>
-                <TextFieldMenu text={'요금제'} />
-              </div>
-              <p>|</p>
-              <div>
-                <TextFieldMenu text={'고객센터'} />
-              </div>
-            </div>
-            <div className="h-5">
-              <ActionButton
-                text={'시작하기'}
-                size={'w-[7.35rem] py-[0.55rem]'}
-              />
-            </div>
-          </div>
+    <header className="sticky top-0 right-0 left-0 flex items-center justify-center h-63 z-sticky bg-white">
+      <div className="flex justify-between items-center w-full max-w-980 px-20">
+        <Image
+          width={100}
+          height={30}
+          src="/images/logo-icon.svg"
+          alt="글공방 로고 이미지 또는 글공방 메인 홈으로 가기 버튼"
+        />
+        <div className="flex items-center">
+          <ul className="flex items-center h-28 text-bold text-[#4D4D4D]">
+            {HEADER_MENU.map((menu, index) => {
+              return (
+                <Link href={menu.path} key={index} className="flex items-center">
+                  <li className="flex justify-center items-center px-16">{menu.title}</li>
+                  {index !== last_menu_num && <span className="h-14 w-1 bg-[#212121]" />}
+                </Link>
+              );
+            })}
+          </ul>
+          <Link href="/create">
+            <ActionButton text="시작하기" size="w-117 h-35 text-13 font-bold ml-20" />
+          </Link>
         </div>
       </div>
     </header>
   );
-};
-
-export default Header;
+}
