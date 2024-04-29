@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
-import Head from 'next/head';
 
 export const metadata: Metadata = {
   title: '글공방',
