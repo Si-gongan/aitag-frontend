@@ -59,6 +59,7 @@ module.exports = {
           6: '#878D91',
           600: '#777777',
         },
+        white: '#FFF',
         'brand/mainblue-d1': '#2c5ae9',
         'brand/mainblue-0': '#4c80f1',
         'brand/mainblue-l1': '#87b1f3',

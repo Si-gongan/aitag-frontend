@@ -5,9 +5,7 @@ const ActionButton = (props: ActionButtonType) => {
   const { text, size } = props;
 
   return (
-    <button
-      className={`${size} text-[#fff] bg-brand/mainblue-0 rounded-[0.25rem] `}
-    >
+    <button className={`flex items-center justify-center ${size} text-[#fff] bg-brand/mainblue-0 rounded-[0.25rem] `}>
       {text}
     </button>
   );
