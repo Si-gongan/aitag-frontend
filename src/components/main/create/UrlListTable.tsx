@@ -161,8 +161,13 @@ export default function UrlListTable({ urls, setUrls, initailItemKey }: UrlListT
   };
 
   const handleClickDelete = (item: string) => {
-    const updatedUrls = urls.filter((url) => url !== item);
-    setUrls(updatedUrls as React.SetStateAction<string[]>);
+    if (item === 'all') {
+      console.log('전체삭제');
+      setUrls([]);
+    } else {
+      const updatedUrls = urls.filter((url) => url !== item);
+      setUrls(updatedUrls as React.SetStateAction<string[]>);
+    }
   };
 
   return (
@@ -174,7 +179,12 @@ export default function UrlListTable({ urls, setUrls, initailItemKey }: UrlListT
           </th>
           {URL_TABLE_HEADER.map((header, index) => (
             <th key={index}>
-              {header.text} {header.image && <Image src={header.image} width={24} height={24} alt="url 삭제 이미지" />}
+              {header.text}{' '}
+              {header.image && (
+                <div onClick={() => handleClickDelete('all')}>
+                  <Image src={header.image} width={24} height={24} alt="url 삭제 이미지" />
+                </div>
+              )}
             </th>
           ))}
         </tr>
