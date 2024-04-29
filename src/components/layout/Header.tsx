@@ -15,8 +15,8 @@ export default function Header() {
           src="/images/logo-icon.svg"
           alt="글공방 로고 이미지 또는 글공방 메인 홈으로 가기 버튼"
         />
-        <div className="flex items-center">
-          <ul className="flex items-center h-28 text-bold text-[#4D4D4D]">
+        <nav className="flex items-center">
+          <ul className="flex items-center h-28 font-bold text-[#4D4D4D]">
             {HEADER_MENU.map((menu, index) => {
               return (
                 <Link href={menu.path} key={index} className="flex items-center">
@@ -29,7 +29,7 @@ export default function Header() {
           <Link href="/create">
             <ActionButton text="시작하기" size="w-117 h-35 text-13 font-bold ml-20" />
           </Link>
-        </div>
+        </nav>
       </div>
     </header>
   );

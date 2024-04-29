@@ -15,9 +15,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <Head>
-        <link rel="icon" href="/images/logo.png" type="image/png" sizes="16x16" />
-      </Head>
       <body>
         <Header />
         {children}
