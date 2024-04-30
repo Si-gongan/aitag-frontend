@@ -1,7 +1,16 @@
 import Link from 'next/link';
-import React from 'react'
+'use client';
+import { MouseEvent, useState } from 'react';
+import {FiEyeOff, FiEye} from 'react-icons/fi'
 
 export default function Login() {
+
+  const[showPwd, setShowPwd] = useState(false)
+  const pressShow = (e: MouseEvent) => {
+    e.preventDefault();
+    setShowPwd(!showPwd)
+  }
+
   return (
     <div className="flex items-center justify-center h-[calc(100vh-63px)] bg-gray-50 px-6">
       <div className="w-full h-3/5 max-w-2xl">
@@ -9,10 +18,13 @@ export default function Login() {
         <h1 className='text-xl text-center text-gray-600 mb-40'>맞춤형 대체텍스트 제작소, 글공방에 오신 것을 환영합니다!</h1>
         <form className="px-8 pt-6 pb-8 mb-4">
           <div className="mb-10">
-            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="id" type="text" placeholder="ID" />
+            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="id" type= "text" placeholder="ID" />
           </div>
-          <div className="mb-15">
-            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="pwd" type="password" placeholder="PW" />
+          <div className="mb-15 mx-auto relative">
+            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="pwd" type={showPwd ? "text" : 'password'} placeholder="PW" />
+            <button onClick = {e=>pressShow(e)} className='absolute bottom-15 right-15 text-gray-700'>
+              {showPwd ? <FiEye /> : <FiEyeOff /> }
+            </button>
           </div>
           <div className="flex items-center justify-end mb-15">
             <a className="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800" href="#">

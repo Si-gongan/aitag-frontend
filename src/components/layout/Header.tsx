@@ -26,7 +26,7 @@ export default function Header() {
               );
             })}
           </ul>
-          <Link href="/create">
+          <Link href="/login">
             <ActionButton text="시작하기" size="w-117 h-35 text-13 font-bold ml-20" />
           </Link>
         </div>
