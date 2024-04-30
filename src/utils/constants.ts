@@ -14,3 +14,8 @@ export const URL_PREVIEW_TABLE_HEADER = [
   { text: '언어 선택', value: 'thumbnail' },
   { text: '맞춤형 키워드', value: 'thumbnail' },
 ];
+
+export const TABLE_BODY_NUMBER = {
+  URL_LIST: 5,
+  URL_IMAGE_LIST: 5,
+};

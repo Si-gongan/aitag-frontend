@@ -115,9 +115,10 @@ interface UrlListTableProps {
   urls: string[];
   setUrls: React.Dispatch<React.SetStateAction<string[]>>;
   initailItemKey?: string;
+  listNumber?: number;
 }
 
-export default function UrlListTable({ urls, setUrls, initailItemKey }: UrlListTableProps) {
+export default function UrlListTable({ urls, setUrls, initailItemKey, listNumber = 5 }: UrlListTableProps) {
   const [selections, setSelections] = useState<Set<string>>(new Set());
 
   const tableHeaderKey = URL_TABLE_HEADER.map((header) => header.value); // value 순서에 맞게 테이블 데이터를 출력하기 위한 배열
@@ -191,34 +192,40 @@ export default function UrlListTable({ urls, setUrls, initailItemKey }: UrlListT
       </thead>
       <tbody>
         {Array.isArray(tableItems) &&
-          tableItems.map((item: TableItemType, index) => (
-            <tr
-              key={index}
-              className={`h-48 border-b-1 ${
-                selections.has(item[itemKey as keyof TableItemType]) ? 'bg-[#F2F6FE]' : ''
-              }`}>
-              <td>
-                <Checkbox
-                  checked={selections.has(item[itemKey as keyof TableItemType])}
-                  value={item[itemKey as keyof TableItemType]}
-                  onChange={handleCheckboxChange}
-                />
-              </td>
-              {tableHeaderKey.map((key) => (
-                <td key={key + index} className={`${key === 'delete' ? '' : 'px-12'}`}>
-                  {key === 'delete' ? (
-                    <div
-                      onClick={() => handleClickDelete(item[itemKey as keyof TableItemType])}
-                      className="flex justify-center items-center">
-                      <Image src={item[key]} width={24} height={24} alt="url 삭제 이미지" />
-                    </div>
-                  ) : (
-                    item['urlAddress']
-                  )}
-                </td>
-              ))}
-            </tr>
-          ))}
+          tableItems.map((item: TableItemType, index) => {
+            if (index < listNumber) {
+              return (
+                <tr
+                  key={index}
+                  className={`h-48 border-b-1 ${
+                    selections.has(item[itemKey as keyof TableItemType]) ? 'bg-[#F2F6FE]' : ''
+                  }`}>
+                  <td>
+                    <Checkbox
+                      checked={selections.has(item[itemKey as keyof TableItemType])}
+                      value={item[itemKey as keyof TableItemType]}
+                      onChange={handleCheckboxChange}
+                    />
+                  </td>
+                  {tableHeaderKey.map((key) => (
+                    <td key={key + index} className={`${key === 'delete' ? '' : 'px-12'}`}>
+                      {key === 'delete' ? (
+                        <div
+                          onClick={() => handleClickDelete(item[itemKey as keyof TableItemType])}
+                          className="flex justify-center items-center">
+                          <Image src={item[key]} width={24} height={24} alt="url 삭제 이미지" />
+                        </div>
+                      ) : (
+                        item['urlAddress']
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              );
+            } else {
+              return null; // index가 4보다 큰 경우에는 null 반환하여 렌더링하지 않음
+            }
+          })}
       </tbody>
     </table>
   );

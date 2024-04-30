@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react';
+
 export type MainLayoutType = {
   children: ReactNode;
 };
@@ -18,6 +20,12 @@ export interface TextFiledGrayType {
 export interface ActionButtonType {
   text: string;
   size: string;
+}
+
+export interface ActionButtonSkyBlueType {
+  text: string;
+  size: string;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface TextTitleFieldType {
