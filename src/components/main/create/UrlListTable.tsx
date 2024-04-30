@@ -171,17 +171,17 @@ export default function UrlListTable({ urls, setUrls, initailItemKey }: UrlListT
   };
 
   return (
-    <table>
-      <thead>
+    <table className="border-1 border-#B0BAC9 text-grey/7">
+      <thead className="bg-grey/0 h-64 border-b-1">
         <tr>
-          <th>
+          <th className="w-124">
             <Checkbox checked={isSelectedAll()} value="all" onChange={handleCheckboxChange} />
           </th>
           {URL_TABLE_HEADER.map((header, index) => (
-            <th key={index}>
+            <th key={index} className={`${header.image ? 'w-124' : 'px-12'}`}>
               {header.text}{' '}
               {header.image && (
-                <div onClick={() => handleClickDelete('all')}>
+                <div onClick={() => handleClickDelete('all')} className="flex justify-center items-center">
                   <Image src={header.image} width={24} height={24} alt="url 삭제 이미지" />
                 </div>
               )}
@@ -192,7 +192,11 @@ export default function UrlListTable({ urls, setUrls, initailItemKey }: UrlListT
       <tbody>
         {Array.isArray(tableItems) &&
           tableItems.map((item: TableItemType, index) => (
-            <tr key={index} className={`${selections.has(item[itemKey as keyof TableItemType]) ? 'bg-[#F2F6FE]' : ''}`}>
+            <tr
+              key={index}
+              className={`h-48 border-b-1 ${
+                selections.has(item[itemKey as keyof TableItemType]) ? 'bg-[#F2F6FE]' : ''
+              }`}>
               <td>
                 <Checkbox
                   checked={selections.has(item[itemKey as keyof TableItemType])}
@@ -201,9 +205,11 @@ export default function UrlListTable({ urls, setUrls, initailItemKey }: UrlListT
                 />
               </td>
               {tableHeaderKey.map((key) => (
-                <td key={key + index}>
+                <td key={key + index} className={`${key === 'delete' ? '' : 'px-12'}`}>
                   {key === 'delete' ? (
-                    <div onClick={() => handleClickDelete(item[itemKey as keyof TableItemType])}>
+                    <div
+                      onClick={() => handleClickDelete(item[itemKey as keyof TableItemType])}
+                      className="flex justify-center items-center">
                       <Image src={item[key]} width={24} height={24} alt="url 삭제 이미지" />
                     </div>
                   ) : (
