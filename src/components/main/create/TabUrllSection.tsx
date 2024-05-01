@@ -47,7 +47,6 @@ export default function TabUrlSection() {
           alt: image.alt,
           language: '한국어',
           keywords: [],
-          // keywords: <ActionButtonWhite text="추가하기" size="w-77 h-24" />,
         };
       });
 
@@ -89,7 +88,7 @@ export default function TabUrlSection() {
           {selectedUrls.size !== 0 && <CreateButtons setProgressStage={setProgressStage} />}
         </div>
       ) : (
-        <RequestForExpert />
+        <RequestForExpert selectedImages={selectedImages} />
       )}
     </>
   );

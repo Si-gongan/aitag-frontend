@@ -26,3 +26,22 @@ export const TABLE_BODY_NUMBER = {
   URL_LIST: 5,
   URL_IMAGE_LIST: 5,
 };
+
+export const WorkItemFormFormat = {
+  image: '',
+  language: 'Korean',
+  keywords: [],
+};
+
+export const ExportRequestFormFormat = {
+  title: 'url 해설진 생성 요청',
+  target: 'comment',
+  works: [
+    {
+      image: '',
+      language: 'Korean',
+      keywords: [],
+    },
+  ],
+  detail: '',
+};
