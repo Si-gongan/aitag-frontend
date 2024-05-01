@@ -3,3 +3,9 @@ export const HEADER_MENU = [
   { title: '요금제', path: '/plan' },
   { title: '고객센터', path: '/support' },
 ];
+
+export const BASE_URL = 'https://gongbang.sigongan-ai.shop';
+
+export const API_ROUTE = {
+  SCRAP_IMAGES: (url: string) => `${BASE_URL}/scrap/images?url=${url}`,
+};

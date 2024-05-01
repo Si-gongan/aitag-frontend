@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
-import Head from 'next/head';
 
 export const metadata: Metadata = {
   title: '글공방',
@@ -15,9 +14,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <Head>
-        <link rel="icon" href="/images/logo.png" type="image/png" sizes="16x16" />
-      </Head>
       <body>
         <Header />
         {children}
