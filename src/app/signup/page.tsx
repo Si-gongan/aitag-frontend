@@ -2,29 +2,16 @@ import Link from 'next/link';
 'use client';
 import { MouseEvent, useState } from 'react';
 import {FiEyeOff, FiEye} from 'react-icons/fi';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 export default function Signup() {
 
+  const [value, setValue] = useState('');
   const[showPwd, setShowPwd] = useState(false)
   const pressShow = (e: MouseEvent) => {
     e.preventDefault();
     setShowPwd(!showPwd)
-  }
-
-  const[phoneNum, setPhoneNum] = useState('');
-  const[valid, setValid] = useState(true);
-
-  const handleChange = (e: { target: { value: any; }; }) => {
-    const input = e.target.value;
-    setPhoneNum(input);
-    setValid(validPhoneNum(input));
-  };
-
-  const validPhoneNum = (phoneNum: string) => {
-    const phoneNumPattern = /^\d{11}$/;
-    return phoneNumPattern.test(phoneNum);
   }
 
   return (
@@ -61,7 +48,13 @@ export default function Signup() {
           </div>
           <div className="mb-20">
             <h1 className='text-lg font-bold text-left mb-3'>전화번호 (선택)</h1>
-            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="phone" type= "text" value = {phoneNum} onChange={handleChange} />
+            <PhoneInput 
+                country={'kr'}
+                value={value}
+                onChange={phone => setValue(phone)}
+                dropdownStyle={{height:'80px'}}
+                inputStyle = {{height:'40px', width: '100%'}}
+              />
           </div>
           <button className="w-full bg-blue-500 hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none" type="submit">
               회원가입하기
