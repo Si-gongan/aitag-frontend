@@ -8,6 +8,13 @@ export const URL_TABLE_HEADER = [
   { image: '/images/mingcute_close-fill.svg', value: 'delete' },
 ];
 
+export const IMAGE_TABLE_HEADER = [
+  { text: '이미지', value: 'image' },
+  { text: '기존 대체 텍스트', value: 'alt' },
+  { text: '언어 선택', value: 'language' },
+  { text: '맞춤형 키워드', value: 'keyword' },
+];
+
 export const URL_PREVIEW_TABLE_HEADER = [
   { text: '이미지', value: 'thumbnail' },
   { text: '기존 대체 텍스트', value: 'thumbnail' },

@@ -1,5 +1,5 @@
-import ImageSection from '@/components/main/create/ImageSection';
+import Tabs from '@/components/main/create/Tabs';
 
 export default function Create() {
-  return <></>;
+  return <Tabs />;
 }

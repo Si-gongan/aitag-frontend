@@ -5,12 +5,15 @@ interface CheckboxProps {
   value: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   checked?: boolean;
+  disabled?: boolean;
 }
 
-export default function Checkbox({ value, checked, onChange }: CheckboxProps) {
+export default function Checkbox({ value, checked, onChange, disabled }: CheckboxProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+    if (disabled) return;
+
     const newValue = !isChecked;
     setIsChecked(newValue);
 
