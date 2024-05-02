@@ -9,12 +9,14 @@ export default function Header() {
   return (
     <header className="sticky top-0 right-0 left-0 flex items-center justify-center h-63 z-sticky bg-white">
       <div className="flex justify-between items-center w-full max-w-980 px-20">
-        <Image
-          width={100}
-          height={30}
-          src="/images/logo-icon.svg"
-          alt="글공방 로고 이미지 또는 글공방 메인 홈으로 가기 버튼"
-        />
+        <Link href={"/"}>
+          <Image
+            width={100}
+            height={30}
+            src="/images/logo-icon.svg"
+            alt="글공방 로고 이미지 또는 글공방 메인 홈으로 가기 버튼"
+          />
+        </Link>
         <div className="flex items-center">
           <ul className="flex items-center h-28 text-bold text-[#4D4D4D]">
             {HEADER_MENU.map((menu, index) => {
