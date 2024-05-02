@@ -1,13 +1,18 @@
 // src/app/signup/page.tsx
 'use client';
 import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
-import axios from 'axios';
-import { usePathname, useRouter } from 'next/navigation';
+import axios, {AxiosError} from 'axios';
+import { useRouter } from 'next/navigation';
 import {FiEyeOff, FiEye} from 'react-icons/fi';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
 export default function Signup() {
+
+  // 에러 메시지
+  interface ErrorResponse {
+    message: string; 
+  }
 
   const[formData, setFormData] = useState({
     clientId: '',
@@ -20,11 +25,7 @@ export default function Signup() {
   const[showPwd, setShowPwd] = useState(false)
   const [pwdCheck, setPwdCheck] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
-  const pathname = usePathname();
   const router = useRouter();
-
-  //const [value, setValue] = useState('');
   
   const pressShow = (e: MouseEvent) => {
     e.preventDefault();
@@ -66,10 +67,21 @@ export default function Signup() {
       });
       localStorage.setItem('token', response.data.result.token);
       alert('회원가입 성공!');
+      console.log('회원가입 성공:', response.data);
       router.push('/login'); // Redirect to login page
     } catch (error) {
-      console.error('회원가입 실패:', (error as Error).message);
-      setErrorMessage((error as Error).message);
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<ErrorResponse>;
+        if (axiosError.response?.data?.message) {
+          setErrorMessage(axiosError.response.data.message);
+        } else {
+          console.error('회원가입 실패:', axiosError.response?.data);
+          setErrorMessage('회원가입에 실패했습니다.');
+        }
+      } else {
+        console.error('회원가입 실패:', (error as Error).message);
+        setErrorMessage((error as Error).message);
+      }
     }
   };
 

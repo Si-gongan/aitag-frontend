@@ -40,20 +40,27 @@ export interface InfoCardType {
   title: string;
 }
 
-//signup
-export interface UserType {
-  clientId: string; // 2자 이상
-	password: string;
-	name: string;
-	email: string;
-	phone: string;
-}
+// //signup
+// export interface UserType {
+//   clientId: string; // 2자 이상
+// 	password: string;
+// 	name: string;
+// 	email: string;
+// 	phone: string;
+// }
 
-//signup 응답
-export interface SignupResponseType {
-  statusCode: number;
-  result: {
-    user: UserType;
-    token: string;
-  };
-}
+// //signup 응답
+// export interface SignupResponseType {
+//   statusCode: number;
+//   result: {
+//     user: UserType;
+//     token: string;
+//   };
+// }
+
+// // //에러 응답
+// // export interface ErrorResponse {
+// //   statusCode: number;
+// //   message: string;
+// //   error: string;
+// // }

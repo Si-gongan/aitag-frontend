@@ -6,6 +6,10 @@ import { FiEyeOff, FiEye } from 'react-icons/fi'
 
 export default function Login() {
 
+  interface ErrorResponse {
+    message: string; 
+  }
+
   const[showPwd, setShowPwd] = useState(false)
   const pressShow = (e: MouseEvent) => {
     e.preventDefault();
@@ -39,17 +43,19 @@ export default function Login() {
         })
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error('로그인 실패');
+        throw new Error((result as ErrorResponse).message);
       }
 
-      const result = await response.json();
+      
       localStorage.setItem('token', result.result.token); // 토큰 저장
       router.push('/dashboard'); // 성공 시 대시보드로 리디렉션
       alert('로그인 성공!');
     } catch (error) {
-      console.error('로그인 실패:', error);
-      setErrorMessage('로그인 정보가 정확하지 않습니다.');
+      console.error('로그인 실패:', (error as Error));
+      setErrorMessage((error as Error).message);
     }
   };
 
@@ -58,6 +64,7 @@ export default function Login() {
       <div className="w-full h-3/5 max-w-4xl">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-15">로그인</h1>
         <h1 className='text-xl text-center text-gray-600 mb-40'>맞춤형 대체텍스트 제작소, 글공방에 오신 것을 환영합니다!</h1>
+        {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
         <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
           <div className="mb-10">
             <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="clientId" type= "text" placeholder="ID" value={loginData.clientId} onChange={handleChange} />

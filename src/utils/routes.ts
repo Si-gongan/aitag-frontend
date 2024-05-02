@@ -4,9 +4,9 @@ export const HEADER_MENU = [
   { title: '고객센터', path: '/support' },
 ];
 
-export const BASE_URL = 'https://gongbang.sigongan-ai.shop';
+// export const BASE_URL = 'https://gongbang.sigongan-ai.shop';
 
-export const API_ROUTE = {
-  SIGN_UP: () => `${BASE_URL}/user/signup`,
+// export const API_ROUTE = {
+//   SIGN_UP: () => `${BASE_URL}/user/signup`,
   
-};
+// };
