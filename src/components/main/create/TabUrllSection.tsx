@@ -1,3 +1,5 @@
+'use client';
+
 import TextInputField from '@/components/common/input/TextInputField';
 import { useEffect, useState } from 'react';
 import SectionLayout from './SectionLayout';

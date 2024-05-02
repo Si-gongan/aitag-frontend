@@ -1,7 +1,8 @@
 export const PATH = {
   HOME: '/',
   DASHBOARD: '/dashbaord',
-  CREATE: '/create',
+  CREATE_URL: '/create/url',
+  CREATE_IMAGE: '/create/image',
 };
 
 export const HEADER_MENU = [
