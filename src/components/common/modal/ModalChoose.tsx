@@ -36,8 +36,16 @@ export default function ModalChoose({
           </div>
         </div>
         <div className="flex gap-30">
-          <ActionButtonGray text={leftButtonText} size="w-233 h-54" onClick={onCancle ? onCancle : onClose} />
-          <ActionButton text={rightButtonText} size="w-233 h-54" onClick={onClick ? onClick : onClose} />
+          <ActionButtonGray
+            text={leftButtonText ? leftButtonText : '취소'}
+            size="w-233 h-54"
+            onClick={onCancle ? onCancle : onClose}
+          />
+          <ActionButton
+            text={rightButtonText ? rightButtonText : '확인'}
+            size="w-233 h-54"
+            onClick={onClick ? onClick : onClose}
+          />
         </div>
       </div>
     </div>,

@@ -2,9 +2,10 @@
 
 import ActionButtonSkyBlue from '@/components/common/button/ActionButtonSkyBlue';
 import Checkbox from '@/components/common/input/Checkbox';
+import ModalChoose from '@/components/common/modal/ModalChoose';
 import { TABLE_BODY_NUMBER, URL_TABLE_HEADER } from '@/utils/constants';
 import Image from 'next/image';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface TableItemType {
   urlAddress: string;
@@ -20,6 +21,7 @@ interface UrlListTableProps {
 
 export default function UrlListTable({ urls, setUrls, selectedUrls, setSelectedUrls }: UrlListTableProps) {
   const [listNumber, setListNumber] = useState<number>(TABLE_BODY_NUMBER.URL_LIST);
+  const [showModalDelete, setShowModalDelete] = useState<boolean>(false);
 
   const tableHeaderKey = URL_TABLE_HEADER.map((header) => header.value); // value 순서에 맞게 테이블 데이터를 출력하기 위한 배열
   const itemKey = tableHeaderKey[0];
@@ -66,7 +68,8 @@ export default function UrlListTable({ urls, setUrls, selectedUrls, setSelectedU
 
   const handleClickDelete = (item: string) => {
     if (item === 'all') {
-      setUrls([]);
+      setShowModalDelete(true);
+      // setUrls([]);
     } else {
       const updatedUrls = urls.filter((url) => url !== item);
       setUrls(updatedUrls as React.SetStateAction<string[]>);
@@ -136,6 +139,16 @@ export default function UrlListTable({ urls, setUrls, selectedUrls, setSelectedU
         </tbody>
       </table>
       {overListNumber && <ActionButtonSkyBlue text="더보기" size="h-54 w-full" onClick={handleClickMore} />}
+      {showModalDelete && (
+        <ModalChoose
+          title="전체 삭제"
+          description="입력한 모든 URL를 삭제합니다."
+          leftButtonText="취소"
+          rightButtonText="확인"
+          onClose={() => setShowModalDelete(false)}
+          onClick={() => setUrls([])}
+        />
+      )}
     </>
   );
 }
