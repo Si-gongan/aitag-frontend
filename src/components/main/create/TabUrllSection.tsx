@@ -87,7 +87,9 @@ export default function TabUrlSection() {
               selectedImages={selectedImages}
             />
           </SectionLayout>
-          {selectedUrls.size !== 0 && <CreateButtons setProgressStage={setProgressStage} />}
+          {selectedUrls.size !== 0 && (
+            <CreateButtons setProgressStage={setProgressStage} selectedImages={selectedImages} />
+          )}
         </div>
       ) : (
         <RequestForExpert selectedImages={selectedImages} setProgressStage={setProgressStage} />
