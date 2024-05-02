@@ -45,3 +45,15 @@ export const ExportRequestFormFormat = {
   ],
   detail: '',
 };
+
+export const AiRequestFormFormat = {
+  title: 'ai 생성 요청',
+  target: 'ai',
+  works: [
+    {
+      image: '',
+      language: 'Korean',
+      keywords: [],
+    },
+  ],
+};

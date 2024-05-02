@@ -1,3 +1,9 @@
+export const PATH = {
+  HOME: '/',
+  DASHBOARD: '/dashbaord',
+  CREATE: '/create',
+};
+
 export const HEADER_MENU = [
   { title: '워크스페이스', path: '/dashboard' },
   { title: '요금제', path: '/plan' },

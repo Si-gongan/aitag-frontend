@@ -6,6 +6,7 @@ import { PreviewImageItemType } from '@/types/common';
 import { ExportRequestFormFormat } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
+import ModalConfirm from '@/components/common/modal/ModalConfirm';
 
 interface RequestForExpertProps {
   selectedImages: PreviewImageItemType[] | [];
@@ -15,6 +16,7 @@ interface RequestForExpertProps {
 export default function RequestForExpert({ selectedImages, setProgressStage }: RequestForExpertProps) {
   const [value, setValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [showModalConfirm, setShowModalConfirm] = useState<boolean>(false);
 
   const handleChangeTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
@@ -38,7 +40,10 @@ export default function RequestForExpert({ selectedImages, setProgressStage }: R
 
     try {
       const response = await fetchWithInterceptor(API_ROUTE.POST, options);
-      const result = await response.json();
+      // const result = await response.json();
+      if (response.ok || response.status === 201) {
+        setShowModalConfirm(true);
+      }
     } catch (error) {
       alert('에러');
     } finally {
@@ -51,7 +56,7 @@ export default function RequestForExpert({ selectedImages, setProgressStage }: R
   };
 
   return (
-    <div className="flex flex-col gap-40 w-full p-40">
+    <div className="flex flex-col gap-40 w-full p-40 mb-60">
       <ActionButtonGray text="뒤로가기" size="w-144 h-54" type="back" onClick={handleChangeStage} />
       <SectionLayout title="해설진 작성 세부 요청서">
         <textarea
@@ -61,6 +66,14 @@ export default function RequestForExpert({ selectedImages, setProgressStage }: R
         />
         <ActionButton text="확인" size="w-full h-54" onClick={handleClickRequest} />
       </SectionLayout>
+      {showModalConfirm && (
+        <ModalConfirm
+          title="서비스 접수 완료"
+          description="서비스가 정상적으로 접수되었습니다"
+          buttonText="확인"
+          onClose={() => setShowModalConfirm(false)}
+        />
+      )}
     </div>
   );
 }
