@@ -24,6 +24,8 @@ export default function TabUrlSection() {
   const handleSubmitUrl = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (!(event.target as HTMLFormElement).url.value) return;
+
     // URL 리스트에 추가
     const newUrl = (event.target as HTMLFormElement).url.value;
     setUrls((prev) => [...prev, newUrl]);
@@ -88,7 +90,7 @@ export default function TabUrlSection() {
           {selectedUrls.size !== 0 && <CreateButtons setProgressStage={setProgressStage} />}
         </div>
       ) : (
-        <RequestForExpert selectedImages={selectedImages} />
+        <RequestForExpert selectedImages={selectedImages} setProgressStage={setProgressStage} />
       )}
     </>
   );
