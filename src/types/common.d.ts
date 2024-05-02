@@ -20,6 +20,7 @@ export interface TextFiledGrayType {
 export interface ActionButtonType {
   text: string;
   size: string;
+  type?: string;
   onClick?: () => void;
 }
 
@@ -105,10 +106,11 @@ export interface PaginationType {
 export interface OptionsType {
   method: string;
   headers?: {
-    'Content-Type': 'application/json' | 'multipart/form-data';
+    'Content-Type'?: string;
     authorization?: string;
   };
-  body?: string | FormData;
+  // body?: string | FormData;
+  body?: any;
 }
 
 // url 이미지 크롤링 요청

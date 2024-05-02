@@ -7,7 +7,7 @@ export const fetchWithInterceptor = async (url: string, options: OptionsType) =>
   const accessToken = await getToken();
   if (accessToken) {
     if (!options.headers) {
-      options.headers = { 'Content-Type': 'application/json' };
+      options.headers = {};
     }
     options.headers.authorization = `Bearer ${accessToken}`;
   }

@@ -24,6 +24,8 @@ export default function TabUrlSection() {
   const handleSubmitUrl = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (!(event.target as HTMLFormElement).url.value) return;
+
     // URL 리스트에 추가
     const newUrl = (event.target as HTMLFormElement).url.value;
     setUrls((prev) => [...prev, newUrl]);
@@ -47,7 +49,6 @@ export default function TabUrlSection() {
           alt: image.alt,
           language: '한국어',
           keywords: [],
-          // keywords: <ActionButtonWhite text="추가하기" size="w-77 h-24" />,
         };
       });
 
@@ -89,7 +90,7 @@ export default function TabUrlSection() {
           {selectedUrls.size !== 0 && <CreateButtons setProgressStage={setProgressStage} />}
         </div>
       ) : (
-        <RequestForExpert />
+        <RequestForExpert selectedImages={selectedImages} setProgressStage={setProgressStage} />
       )}
     </>
   );
