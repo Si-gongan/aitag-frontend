@@ -1,21 +1,21 @@
 import Spinner from '@/components/common/animation/Spinner';
-import { PreviewInfoItemType } from '@/types/common';
+import { PreviewImageItemType, PreviewInfoItemType } from '@/types/common';
 import Image from 'next/image';
 import React from 'react';
 
 interface imageUploadCardProps {
-  info: PreviewInfoItemType;
-  previewInfos: PreviewInfoItemType[];
-  setPreviewInfos: React.Dispatch<React.SetStateAction<PreviewInfoItemType[]>>;
+  info: PreviewImageItemType;
+  previewImages: PreviewImageItemType[];
+  setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
   uploading: boolean;
 }
 
-export default function ImageUploadCard({ info, previewInfos, setPreviewInfos, uploading }: imageUploadCardProps) {
-  const { name, size, type } = info;
+export default function ImageUploadCard({ info, previewImages, setPreviewImages, uploading }: imageUploadCardProps) {
+  const { name, size } = info;
 
   const handleDelete = (name: string) => {
-    const newPreviewInfos = previewInfos.filter((previewInfo) => previewInfo.name !== name);
-    setPreviewInfos(newPreviewInfos);
+    const newPreviewImages = previewImages.filter((image) => image.name !== name);
+    setPreviewImages(newPreviewImages);
   };
 
   return (

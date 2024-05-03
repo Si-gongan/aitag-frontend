@@ -87,11 +87,13 @@ export interface TableHeaderType {
 }
 
 export interface PreviewImageItemType {
-  urlName: string;
-  image: string;
+  name: string;
+  image: string; // 이미지 src
   alt: string;
   language: string;
   keywords: string[];
+  size?: string;
+  file?: File;
 }
 
 export interface PaginationType {
@@ -102,9 +104,10 @@ export interface PaginationType {
 
 export interface PreviewInfoItemType {
   name: string;
-  size: string;
-  type: string;
-  file: File;
+  size: string; // 파일 크기
+  type: string; // jpg, png 등
+  previewUrl: string; // 미리보기 url
+  file: File; // 이미지 원본 파일
 }
 
 // 서버 요청 및 리스폰스 데이터 타입

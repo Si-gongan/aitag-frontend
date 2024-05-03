@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { PreviewInfoItemType } from '@/types/common';
+import { PreviewImageItemType, PreviewInfoItemType } from '@/types/common';
 
 interface FileInputFieldProps {
-  previewInfos: PreviewInfoItemType[];
-  setPreviewInfos: React.Dispatch<React.SetStateAction<PreviewInfoItemType[]>>;
+  previewImages: PreviewImageItemType[];
+  setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
   setUploading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function FileInputField({ previewInfos, setPreviewInfos, setUploading }: FileInputFieldProps) {
+export default function FileInputField({ previewImages, setPreviewImages, setUploading }: FileInputFieldProps) {
   const [isActive, setIsActive] = useState(false);
 
   const handleDragStart = () => setIsActive(true); // 드래그 할때
@@ -28,20 +28,37 @@ export default function FileInputField({ previewInfos, setPreviewInfos, setUploa
       return;
     }
 
-    const newPreviewInfos = Array.from(files).reduce<PreviewInfoItemType[]>((acc, file) => {
-      const { name, size: byteSize, type } = file;
-      const sizeInKB = (byteSize / 1024).toFixed(2) + 'KB ·';
+    const newPreviewInfos: PreviewImageItemType[] = [];
+
+    Array.from(files).forEach((file) => {
+      const { name, size: byteSize } = file;
+      const sizeInKB = (byteSize / 1024).toFixed(2) + 'KB';
 
       if (byteSize > 50 * 1024 * 1024) {
-        console.error('파일 크기가 50MB를 초과합니다.');
+        setUploading(false);
+        alert('파일 크기가 50MB를 초과합니다.');
       } else {
-        acc.push({ name, size: sizeInKB, type, file });
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const previewUrl = reader.result as string;
+          newPreviewInfos.push({
+            name,
+            image: previewUrl,
+            alt: '',
+            language: '한국어',
+            keywords: [],
+            size: sizeInKB,
+            file,
+          });
+          if (newPreviewInfos.length === files.length) {
+            // 이미지 정보를 모두 수집한 후에 state를 업데이트합니다.
+            setPreviewImages((prev) => [...prev, ...newPreviewInfos]);
+            setUploading(false);
+          }
+        };
       }
-      return acc;
-    }, []);
-
-    setPreviewInfos((prev) => [...prev, ...newPreviewInfos]);
-    setUploading(false);
+    });
   };
 
   return (
