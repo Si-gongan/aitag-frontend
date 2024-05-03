@@ -100,6 +100,13 @@ export interface PaginationType {
   total: number;
 }
 
+export interface PreviewInfoItemType {
+  name: string;
+  size: string;
+  type: string;
+  file: File;
+}
+
 // 서버 요청 및 리스폰스 데이터 타입
 
 // options
