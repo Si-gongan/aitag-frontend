@@ -1,3 +1,5 @@
+'use client';
+
 import TextInputField from '@/components/common/input/TextInputField';
 import { useEffect, useState } from 'react';
 import SectionLayout from './SectionLayout';
@@ -17,9 +19,7 @@ export default function TabUrlSection() {
   const [loading, setIsLoading] = useState(false);
   const [progressStage, setProgressStage] = useState('one'); // one: url 입력, two: 해설진 작성
 
-  const selectedImages = previewImages.filter((previewImage) =>
-    Array.from(selectedUrls).includes(previewImage.urlName)
-  );
+  const selectedImages = previewImages.filter((previewImage) => Array.from(selectedUrls).includes(previewImage.name));
 
   const handleSubmitUrl = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,7 +44,7 @@ export default function TabUrlSection() {
 
       const newImageDatas = resultImages.map((image: ScrapImagesResponseType) => {
         return {
-          urlName: newUrl,
+          name: newUrl,
           image: image.url,
           alt: image.alt,
           language: '한국어',
@@ -61,7 +61,7 @@ export default function TabUrlSection() {
   };
 
   useEffect(() => {
-    const updatedPreviewImages = previewImages.filter((previewImage) => urls.includes(previewImage.urlName));
+    const updatedPreviewImages = previewImages.filter((previewImage) => urls.includes(previewImage.name));
 
     setPreviewImages(updatedPreviewImages);
   }, [urls]);

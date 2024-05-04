@@ -8,13 +8,15 @@ import { IMAGE_TABLE_HEADER } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 
 interface ImageListTableProps {
+  type?: string;
   previewImages: PreviewImageItemType[] | [];
   setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
-  selectedUrls: Set<string>;
+  selectedUrls: Set<string> | PreviewImageItemType[];
   selectedImages: PreviewImageItemType[] | [];
 }
 
 export default function ImageListTable({
+  type = 'url',
   previewImages,
   setPreviewImages,
   selectedUrls,
@@ -25,6 +27,8 @@ export default function ImageListTable({
   const startIndex = (pagination.click - 1) * 5;
   const endIndex = pagination.click * 5;
   const tableHeaderKey = IMAGE_TABLE_HEADER.map((header) => header.value); // value 순서에 맞게 테이블 데이터를 출력하기 위한 배열
+
+  const selectedItem = Array.isArray(selectedUrls) ? selectedUrls.map((item) => item.name) : Array.from(selectedUrls);
 
   const isSelectedAll = () => {
     if (selectedImages) {
@@ -75,17 +79,16 @@ export default function ImageListTable({
         <tbody>
           {Array.isArray(previewImages) &&
             previewImages.map((item: PreviewImageItemType, index) => {
-              // if (pagination.click <= index + 1 && index + 1 < pagination.click + 5) {
               if (startIndex <= index && index < endIndex) {
                 return (
                   <tr
                     key={index}
                     className={`h-48 border-b-1 ${
-                      Array.from(selectedUrls).some((url) => url === item.urlName) ? 'bg-[#F2F6FE]' : ''
+                      selectedItem.some((url) => url === item.name) ? 'bg-[#F2F6FE]' : ''
                     }`}>
                     <td>
                       <Checkbox
-                        checked={Array.from(selectedUrls).some((url) => url === item.urlName)}
+                        checked={selectedItem.some((url) => url === item.name)}
                         value={item.image as string}
                         disabled
                       />

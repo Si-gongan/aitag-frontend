@@ -7,13 +7,16 @@ import { ExportRequestFormFormat } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
 import ModalConfirm from '@/components/common/modal/ModalConfirm';
+import { getToken } from '@/utils/getToken';
+import uploadImage from '@/utils/uploadImage';
 
 interface RequestForExpertProps {
+  type?: string; // image 업로드로 요청하는건지 확인 => 업로드 url api 추가 필요
   selectedImages: PreviewImageItemType[] | [];
   setProgressStage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function RequestForExpert({ selectedImages, setProgressStage }: RequestForExpertProps) {
+export default function RequestForExpert({ type = 'url', selectedImages, setProgressStage }: RequestForExpertProps) {
   const [value, setValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [showModalConfirm, setShowModalConfirm] = useState<boolean>(false);
@@ -23,13 +26,26 @@ export default function RequestForExpert({ selectedImages, setProgressStage }: R
   };
 
   const handleClickRequest = async () => {
-    const selectedImagesWorks = selectedImages.map((selectedImage) => {
-      return {
-        image: selectedImage.image,
-        language: 'Korean',
-        keywords: selectedImage.keywords,
-      };
-    });
+    const selectedImagesWorks = await Promise.all(
+      selectedImages.map(async (selectedImage) => {
+        if (type === 'image' && selectedImage.file) {
+          const newGongbangUrl = await uploadImage(selectedImage.file);
+
+          return {
+            image: newGongbangUrl,
+            language: 'Korean',
+            keywords: selectedImage.keywords,
+          };
+        }
+
+        return {
+          image: selectedImage.image,
+          language: 'Korean',
+          keywords: selectedImage.keywords,
+        };
+      })
+    );
+
     setLoading(true);
 
     const ExportRequestForm = { ...ExportRequestFormFormat, works: selectedImagesWorks, detail: value };
@@ -40,7 +56,7 @@ export default function RequestForExpert({ selectedImages, setProgressStage }: R
 
     try {
       const response = await fetchWithInterceptor(API_ROUTE.POST, options);
-      // const result = await response.json();
+
       if (response.ok || response.status === 201) {
         setShowModalConfirm(true);
       }

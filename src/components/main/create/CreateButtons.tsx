@@ -4,16 +4,19 @@ import ModalChoose from '@/components/common/modal/ModalChoose';
 import { PreviewImageItemType } from '@/types/common';
 import { AiRequestFormFormat } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
+import { getToken } from '@/utils/getToken';
 import { API_ROUTE, PATH } from '@/utils/routes';
+import uploadImage from '@/utils/uploadImage';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 interface CreateButtonsProps {
+  type?: string; // image 업로드로 요청하는건지 확인 => 업로드 url api 추가 필요
   setProgressStage: React.Dispatch<React.SetStateAction<string>>;
   selectedImages: PreviewImageItemType[] | [];
 }
 
-export default function CreateButtons({ setProgressStage, selectedImages }: CreateButtonsProps) {
+export default function CreateButtons({ type = 'url', setProgressStage, selectedImages }: CreateButtonsProps) {
   const [showModalCreact, setShowModalCreact] = useState(false);
   const [showModalComplete, setShowModalComplete] = useState(false);
 
@@ -30,13 +33,28 @@ export default function CreateButtons({ setProgressStage, selectedImages }: Crea
   const handleClickCreate = async () => {
     setShowModalCreact(false);
 
-    const selectedImagesWorks = selectedImages.map((selectedImage) => {
-      return {
-        image: selectedImage.image,
-        language: 'Korean',
-        keywords: selectedImage.keywords,
-      };
-    });
+    const selectedImagesWorks = await Promise.all(
+      selectedImages.map(async (selectedImage) => {
+        // 이미지로 대체텍스트 생성시 업로드해서 url을 다시 받아와야 함
+        // fetchWithInterceptor를 사용하지 않고 직접 fetch로 구현함 + "Content-Type": "multipart/form-data" 안써줌. => 이유: FormData를 쓰면 자동으로 브라우저가 multipart/form-data로 설정해준다. 만약  내가 직접 사용하면 axios때는 문제가 안되지만 Multipart: Boundary not found가 발생함.
+
+        if (type === 'image' && selectedImage.file) {
+          const newGongbangUrl = await uploadImage(selectedImage.file);
+
+          return {
+            image: newGongbangUrl,
+            language: 'Korean',
+            keywords: selectedImage.keywords,
+          };
+        }
+
+        return {
+          image: selectedImage.image,
+          language: 'Korean',
+          keywords: selectedImage.keywords,
+        };
+      })
+    );
 
     const AiRequestForm = { ...AiRequestFormFormat, works: selectedImagesWorks };
     const options = {
@@ -46,7 +64,8 @@ export default function CreateButtons({ setProgressStage, selectedImages }: Crea
 
     try {
       const response = await fetchWithInterceptor(API_ROUTE.POST, options);
-      // const result = await response.json();
+      const result = await response.json();
+
       if (response.ok || response.status === 201) {
         setShowModalComplete(true);
       }
