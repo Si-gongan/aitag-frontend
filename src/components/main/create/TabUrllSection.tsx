@@ -73,7 +73,7 @@ export default function TabUrlSection() {
           {loading && <ModalLoading>이미지 미리보기를 불러오는 중입니다!</ModalLoading>}
           <SectionLayout>
             <form onSubmit={handleSubmitUrl}>
-              <TextInputField name="url" placeholder="웹 URL 주소를 입력해주세요" buttonText="확인" />
+              <TextInputField name="url" placeholder="웹 URL 주소를 입력해주세요" buttonText="확인" loading={loading} />
             </form>
           </SectionLayout>
           <SectionLayout title="URL 리스트" description="대체텍스트 생성이 진행될 URL 리스트입니다.">
