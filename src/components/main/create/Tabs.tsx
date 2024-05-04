@@ -10,11 +10,11 @@ export default function Tabs() {
   const parts = pathname.split('/');
   const page = parts[2];
 
-  const handleClickTabs = () => {
-    if (page === 'url') {
-      router.push(PATH.CREATE_IMAGE);
-    } else {
+  const handleClickTabs = (id: string) => {
+    if (id === 'url') {
       router.push(PATH.CREATE_URL);
+    } else {
+      router.push(PATH.CREATE_IMAGE);
     }
   };
 
@@ -26,7 +26,7 @@ export default function Tabs() {
           className={`flex items-center justify-center w-1/2 h-full ${index === 0 ? 'border-r-1 border-grey/3' : ''} ${
             page === tab.id && 'bg-grey/1'
           }`}
-          onClick={handleClickTabs}>
+          onClick={() => handleClickTabs(tab.id)}>
           {tab.title}
         </div>
       ))}

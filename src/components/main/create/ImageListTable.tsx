@@ -79,7 +79,6 @@ export default function ImageListTable({
         <tbody>
           {Array.isArray(previewImages) &&
             previewImages.map((item: PreviewImageItemType, index) => {
-              // if (pagination.click <= index + 1 && index + 1 < pagination.click + 5) {
               if (startIndex <= index && index < endIndex) {
                 return (
                   <tr

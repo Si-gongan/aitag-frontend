@@ -74,3 +74,8 @@ export const AiRequestFormFormat = {
     },
   ],
 };
+
+export const ERROR_MESSAGE = {
+  KEYWORDS_LENGTH: '10자 이내로 입력해 주세요.',
+  KEYWORDS_COUNT: '키워드는 3개까지 입력할 수 있어요.',
+};
