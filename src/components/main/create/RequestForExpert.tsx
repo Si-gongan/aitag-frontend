@@ -72,7 +72,7 @@ export default function RequestForExpert({ type = 'url', selectedImages, setProg
   };
 
   return (
-    <div className="flex flex-col gap-40 w-full p-40 mb-60">
+    <div className="flex flex-col gap-40 w-980 p-40 mb-60">
       <ActionButtonGray text="뒤로가기" size="w-144 h-54" type="back" onClick={handleChangeStage} />
       <SectionLayout title="해설진 작성 세부 요청서">
         <textarea
