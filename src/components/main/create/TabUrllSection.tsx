@@ -42,8 +42,6 @@ export default function TabUrlSection() {
       const result = await response.json();
       const resultImages = result.result.images;
 
-      console.log(resultImages);
-
       const newImageDatas = resultImages.map((image: ScrapImagesResponseType) => {
         return {
           name: newUrl,

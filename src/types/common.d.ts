@@ -110,6 +110,11 @@ export interface PreviewInfoItemType {
   file: File; // 이미지 원본 파일
 }
 
+export interface DashbaordSortType {
+  id: string;
+  name: string;
+}
+
 // 서버 요청 및 리스폰스 데이터 타입
 
 // options
