@@ -1,4 +1,3 @@
-import ActionButtonGray from '../button/ActionButtonGray';
 import ActionButtonSkyBlue from '../button/ActionButtonSkyBlue';
 
 interface TextInputFieldProps {
@@ -18,7 +17,7 @@ export default function TextInputField({ name, placeholder, buttonText, loading 
         <input
           type="text"
           name={name}
-          placeholder={loading ? '이미지를 불러오는 중입니다.' : placeholder}
+          placeholder={loading ? '이미지를 불러오는 중이니 조금만 기다려주세요.' : placeholder}
           className={`grow border-1 border-grey/4 rounded-4 h-54 px-24 focus:border-primary-500 
           text-grey/7 placeholder-text-grey/5 ${loading ? 'bg-grey/0' : ''}`}
           disabled={loading}

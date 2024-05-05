@@ -4,6 +4,7 @@ import AddKeywordsButton from '@/components/common/button/AddKeywordsButton';
 import PagenationButton from '@/components/common/button/PaginationButton';
 import Checkbox from '@/components/common/input/Checkbox';
 import { PreviewImageItemType } from '@/types/common';
+import Base64Decoder from '@/utils/Base64Decoder';
 import { IMAGE_TABLE_HEADER } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 
@@ -99,6 +100,7 @@ export default function ImageListTable({
                           <div className="flex justify-center items-center">
                             <img
                               src={item.image}
+                              // src={Base64Decoder(item.image)}
                               alt={`이미지 미리보기 썸네일 ${index}`}
                               width={40}
                               height={40}
