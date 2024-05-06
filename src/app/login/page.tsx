@@ -9,6 +9,11 @@ interface ErrorResponse {
   message: string; 
 }
 
+interface User {
+  name: string;
+  // 필요한 다른 속성들을 추가 가능
+}
+
 export default function Login() {
 
   const[showPwd, setShowPwd] = useState(false)
@@ -18,6 +23,7 @@ export default function Login() {
     clientId: '',
     password: ''
   });
+  const [user, setUser] = useState<User | null>(null);
 
   // 자동 리디렉션 로직
   useEffect(() => {
@@ -60,16 +66,18 @@ export default function Login() {
       }
 
       localStorage.setItem('token', result.result.token); // 토큰 저장
+      setUser(result.result.user);
       router.replace('/dashboard'); // 성공 시 대시보드로 리디렉션
     } catch (error) {
       const serverError = error instanceof Error ? error.message : "알 수 없는 에러가 발생했습니다."
       console.error('로그인 실패:', serverError);
+      setUser(null);
       setErrorMessage(serverError);
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-63px)] bg-gray-50 px-6">
+    <div className="flex items-center justify-center h-[calc(100vh-63px)] bg-[#FAFBFC] px-6">
       <div className="w-full h-3/5 max-w-4xl">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-15">로그인</h1>
         <h1 className='text-xl text-center text-gray-600 mb-40'>맞춤형 대체텍스트 제작소, 글공방에 오신 것을 환영합니다!</h1>

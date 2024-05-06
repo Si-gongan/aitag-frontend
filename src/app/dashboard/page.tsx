@@ -21,12 +21,6 @@ const DashboardPage = () => {
     <div className="flex items-center justify-center h-screen">
       <div className="text-center">
         <h1 className="text-4xl font-bold">대시보드 페이지</h1>
-        <button
-          onClick={handleLogout}
-          className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-        >
-          로그아웃
-        </button>
       </div>
     </div>
   );

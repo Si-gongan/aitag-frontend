@@ -129,7 +129,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-63px)] bg-gray-50 px-6">
+    <div className="flex items-center justify-center h-[calc(100vh-63px)] bg-[#FAFBFC] px-6">
       <div className="w-full h-fit max-w-4xl">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">회원가입</h1>
         <h1 className='text-xl text-center text-gray-600 mb-20'>회원가입을 위해 아래의 정보를 입력해주세요</h1>
