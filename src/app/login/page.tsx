@@ -1,28 +1,37 @@
 import Link from 'next/link';
 'use client';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, MouseEvent } from 'react';
 import { FiEyeOff, FiEye } from 'react-icons/fi'
+
+interface ErrorResponse {
+  message: string; 
+}
 
 export default function Login() {
 
-  interface ErrorResponse {
-    message: string; 
-  }
-
   const[showPwd, setShowPwd] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
+  const [loginData, setLoginData] = useState({
+    clientId: '',
+    password: ''
+  });
+
+  // 자동 리디렉션 로직
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      router.replace('/dashboard'); // 로그인 상태일 때 대시보드로 리디렉션
+    }
+  }, [router]);
+
   const pressShow = (e: MouseEvent) => {
     e.preventDefault();
     setShowPwd(!showPwd)
   }
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter();
-
-  const [loginData, setLoginData] = useState({
-    clientId: '',
-    password: ''
-  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -46,16 +55,16 @@ export default function Login() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error((result as ErrorResponse).message);
+        const errorInfo: ErrorResponse = result as ErrorResponse;
+        throw new Error(errorInfo.message || '로그인에 실패했습니다.' );
       }
 
-      
       localStorage.setItem('token', result.result.token); // 토큰 저장
-      router.push('/dashboard'); // 성공 시 대시보드로 리디렉션
-      alert('로그인 성공!');
+      router.replace('/dashboard'); // 성공 시 대시보드로 리디렉션
     } catch (error) {
-      console.error('로그인 실패:', (error as Error));
-      setErrorMessage((error as Error).message);
+      const serverError = error instanceof Error ? error.message : "알 수 없는 에러가 발생했습니다."
+      console.error('로그인 실패:', serverError);
+      setErrorMessage(serverError);
     }
   };
 

@@ -41,11 +41,52 @@ export default function Signup() {
     setFormData(prev => ({ ...prev, phone }));
   };
 
+
+  // checkId
+  // const checkClientId = async (clientId: string) => {
+  //   try {
+  //     const response = await axios.get(`https://gongbang.sigongan-ai.shop/user/check/client-id/${clientId}`);
+  //     if (!response.data.result.isPossible) {
+  //       setErrorMessage('이미 사용 중인 아이디입니다.');
+  //     } else {
+  //       setErrorMessage('');
+  //     }
+  //   } catch (error) {
+  //     console.error('아이디 중복 확인 실패:', error);
+  //   }
+  // };
+
+  // const checkEmail = async (email: string) => {
+  //   try {
+  //     const response = await axios.get(`https://gongbang.sigongan-ai.shop/user/check/email/${email}`);
+  //     if (!response.data.result.isPossible) {
+  //       setErrorMessage('이미 사용 중인 이메일입니다.');
+  //     } else {
+  //       setErrorMessage('');
+  //     }
+  //   } catch (error) {
+  //     console.error('이메일 중복 확인 실패:', error);
+  //   }
+  // };
+
+  // const handleBlurClientId = () => {
+  //   checkClientId(formData.clientId);
+  // };
+
+  // const handleBlurEmail = () => {
+  //   checkEmail(formData.email);
+  // };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage(''); // Reset error message
     if (formData.password !== pwdCheck) {
       setErrorMessage('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+    //비밀번호 조건 추후 추가
+    if (formData.password.length < 8){
+      setErrorMessage('비밀번호가 8자리 이상이 아닙니다.')
       return;
     }
     if (!formData.clientId || !formData.password || !formData.name || !formData.email) {
@@ -70,13 +111,15 @@ export default function Signup() {
       console.log('회원가입 성공:', response.data);
       router.push('/login'); // Redirect to login page
     } catch (error) {
-      if (axios.isAxiosError(error)) {
+      if (axios.isAxiosError(error) && error.response) {
         const axiosError = error as AxiosError<ErrorResponse>;
         if (axiosError.response?.data?.message) {
           setErrorMessage(axiosError.response.data.message);
         } else {
           console.error('회원가입 실패:', axiosError.response?.data);
-          setErrorMessage('회원가입에 실패했습니다.');
+          const serverError = error.response.data.result.message || '회원가입에 실패했습니다.';
+          setErrorMessage(serverError);
+          // setErrorMessage('회원가입에 실패했습니다.');
         }
       } else {
         console.error('회원가입 실패:', (error as Error).message);
