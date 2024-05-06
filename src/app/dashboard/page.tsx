@@ -25,7 +25,7 @@ export default function Dashbaord() {
         </div>
         <form onSubmit={handleSubmitSearch} className="flex gap-8">
           <SearchInput />
-          <SortDropdown sort={sort} setSort={setSort} onClick={handleClickSort} />
+          <SortDropdown sort={sort} onClick={handleClickSort} />
         </form>
       </section>
     </div>
