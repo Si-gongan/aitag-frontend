@@ -3,7 +3,7 @@ import React from 'react';
 
 const TextFiledWhite = (props: TextFiledWhiteType) => {
   const { text, style } = props;
-  return <p className={`text-[#FFF] ${style} `}>{text}</p>;
+  return <p className={`text-[#F8FAFB] ${style} `}>{text}</p>;
 };
 
 export default TextFiledWhite;
