@@ -1,5 +1,5 @@
-import Link from 'next/link';
 'use client';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, MouseEvent } from 'react';
@@ -93,9 +93,9 @@ export default function Login() {
             </button>
           </div>
           <div className="flex items-center justify-end mb-15">
-            <a className="inline-block align-baseline text-xl text-blue-500 hover:text-blue-800" href="#">
+            <Link className="inline-block align-baseline text-xl text-blue-500 hover:text-blue-800" href="/findID">
               아이디 찾기
-            </a>
+            </Link>
             <h1 className="px-20 text-xl text-blue-500">|</h1>
             <a className="inline-block align-baseline text-xl text-blue-500 hover:text-blue-800" href="#">
               비밀번호 찾기
