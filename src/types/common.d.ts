@@ -1,3 +1,5 @@
+import React, { MouseEvent } from 'react';
+
 export type MainLayoutType = {
   children: ReactNode;
 };
@@ -18,6 +20,21 @@ export interface TextFiledGrayType {
 export interface ActionButtonType {
   text: string;
   size: string;
+  type?: string;
+  onClick?: () => void;
+}
+
+export interface ActionButtonSkyBlueType {
+  text: string;
+  size?: string;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+}
+
+export interface AddKeywordsButtonType {
+  previewImages: PreviewImageItemType[];
+  setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
+  item: PreviewImageItemType;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface TextTitleFieldType {
@@ -40,27 +57,81 @@ export interface InfoCardType {
   title: string;
 }
 
-// //signup
-// export interface UserType {
-//   clientId: string; // 2자 이상
-// 	password: string;
-// 	name: string;
-// 	email: string;
-// 	phone: string;
-// }
+export interface TableBodyItemType {
+  urlAddress: string;
+  delete: string;
+}
 
-// //signup 응답
-// export interface SignupResponseType {
-//   statusCode: number;
-//   result: {
-//     user: UserType;
-//     token: string;
-//   };
-// }
+export interface ImageTableBodyItemType {
+  image: string | null;
+  alt: string;
+  // language: '한국어' | '영어' | '한국어 & 영어';
+  language: string;
+  keywords: JSX.Element;
+  // keywords: React.ComponentType<ActionButtonWhiteProps>;
+}
 
-// // //에러 응답
-// // export interface ErrorResponse {
-// //   statusCode: number;
-// //   message: string;
-// //   error: string;
-// // }
+export interface SelectedImageType {
+  image: string;
+  alt: string;
+  language: 'Korean';
+  keywords: string[];
+}
+
+export type CreateTableBodyItmeType = TableBodyItemType | ImageTableBodyItemType;
+
+export interface TableHeaderType {
+  text?: string;
+  value?: string;
+  image?: string;
+}
+
+export interface PreviewImageItemType {
+  name: string;
+  image: string; // 이미지 src
+  alt: string;
+  language: string;
+  keywords: string[];
+  size?: string;
+  file?: File;
+}
+
+export interface PaginationType {
+  start: number;
+  click: number;
+  total: number;
+}
+
+export interface PreviewInfoItemType {
+  name: string;
+  size: string; // 파일 크기
+  type: string; // jpg, png 등
+  previewUrl: string; // 미리보기 url
+  file: File; // 이미지 원본 파일
+}
+
+// 서버 요청 및 리스폰스 데이터 타입
+
+// options
+export interface OptionsType {
+  method: string;
+  headers?: {
+    'Content-Type'?: string;
+    authorization?: string;
+  };
+  // body?: string | FormData;
+  body?: any;
+}
+
+// url 이미지 크롤링 요청
+export interface ScrapImagesRequestType {
+  url: string;
+}
+
+// url 이미지 크롤링 응답
+export interface ScrapImagesResponseType {
+  url: string | null;
+  alt: string;
+  width: number;
+  height: number;
+}

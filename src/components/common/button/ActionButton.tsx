@@ -2,10 +2,12 @@ import { ActionButtonType } from '@/types/common';
 import React from 'react';
 
 const ActionButton = (props: ActionButtonType) => {
-  const { text, size } = props;
+  const { text, size, onClick } = props;
 
   return (
-    <button className={`flex items-center justify-center ${size} text-[#fff] bg-brand/mainblue-0 rounded-[0.25rem] `}>
+    <button
+      className={`flex items-center justify-center ${size} text-[#fff] bg-brand/mainblue-0 rounded-[0.25rem] `}
+      onClick={onClick}>
       {text}
     </button>
   );
