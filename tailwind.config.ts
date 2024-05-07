@@ -60,6 +60,7 @@ module.exports = {
           600: '#777777',
         },
         white: '#FFF',
+        overlay: 'rgba(0, 0, 0, 0.60)',
         'brand/mainblue-d1': '#2c5ae9',
         'brand/mainblue-0': '#4c80f1',
         'brand/mainblue-l1': '#87b1f3',
