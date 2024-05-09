@@ -4,7 +4,6 @@ import AddKeywordsButton from '@/components/common/button/AddKeywordsButton';
 import PagenationButton from '@/components/common/button/PaginationButton';
 import Checkbox from '@/components/common/input/Checkbox';
 import { PreviewImageItemType } from '@/types/common';
-import Base64Decoder from '@/utils/Base64Decoder';
 import { IMAGE_TABLE_HEADER } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 

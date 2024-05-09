@@ -16,7 +16,7 @@ export default function TabUrlSection() {
   const [urls, setUrls] = useState<string[]>([]);
   const [selectedUrls, setSelectedUrls] = useState<Set<string>>(new Set());
   const [previewImages, setPreviewImages] = useState<PreviewImageItemType[]>([]);
-  const [loading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [progressStage, setProgressStage] = useState('one'); // one: url 입력, two: 해설진 작성
 
   const selectedImages = previewImages.filter((previewImage) => Array.from(selectedUrls).includes(previewImage.name));
@@ -36,7 +36,7 @@ export default function TabUrlSection() {
       method: 'GET',
     };
     try {
-      setIsLoading(true);
+      setLoading(true);
 
       const response = await fetchWithInterceptor(API_ROUTE.SCRAP_IMAGES(newUrl), scrapImagesOptions);
       const result = await response.json();
@@ -56,7 +56,7 @@ export default function TabUrlSection() {
     } catch (error) {
       console.error('크롤링 이미지 데이터 요청 실패', error);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 

@@ -51,7 +51,7 @@ export const WorkItemFormFormat = {
 };
 
 export const ExportRequestFormFormat = {
-  title: 'url 해설진 생성 요청',
+  title: '해설진 생성 요청',
   target: 'comment',
   works: [
     {
@@ -85,3 +85,10 @@ export const DASHBOARD_SORT = [
   { id: 'inspect', name: '해설진 검수' },
   { id: 'comment', name: '해설진 작성' },
 ];
+
+export const ISPECT_SORT = [
+  { id: 'ai', name: 'AI 생성' },
+  { id: 'inspect', name: '해설진 검수' },
+];
+
+export const DASHBOARD_LIMIT = '10';
