@@ -196,7 +196,6 @@ export default function PostIdTable({
       setSelectedWorks(newSelectedWorks);
     }
   };
-  console.log(tbodyHeight);
 
   return (
     <table className="border-1 border-#B0BAC9">
@@ -218,7 +217,6 @@ export default function PostIdTable({
           ))}
         </tr>
       </thead>
-      {/* <tbody className={`block ${tbodyHeight} overflow-y-auto`}> */}
       <tbody className={`block ${tbodyHeight ? tbodyHeight : 'max-h-265'} overflow-y-auto`}>
         {items.map((item, index) => (
           <tr
@@ -239,10 +237,13 @@ export default function PostIdTable({
               <td key={key + index}>
                 {key === 'image' ? (
                   <div className={`flex items-center justify-center ${selectable ? 'w-120' : 'w-160'}`}>
-                    <img src={item.image} alt={`이미지 미리보기 썸네일 ${index}`} className="w-40 h-40" />
-                    {/* <div className="relative w-40 h-40">
-                      <Image src={item.image as string} alt={`이미지 미리보기 썸네일 ${index}`} fill />
-                    </div> */}
+                    <img
+                      src={item.image}
+                      alt={`이미지 미리보기 썸네일 ${index}`}
+                      className="w-40 h-40"
+                      decoding="async"
+                      loading="lazy"
+                    />
                   </div>
                 ) : key === 'id' ? (
                   <div className="hidden" />

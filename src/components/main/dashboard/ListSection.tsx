@@ -52,6 +52,8 @@ export default function ListSection({ items, sortId, pagination, setPagination }
                 src={thumbnail}
                 alt="생성결과의 썸네일 이미지"
                 className="w-183 h-183 overflow-hidden object-cover"
+                decoding="async"
+                loading="lazy"
               />
 
               <div
