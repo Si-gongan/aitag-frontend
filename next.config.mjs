@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
+        hostname: 'gongbang-v2.s3.ap-northeast-2.amazonaws.com',
       },
     ],
   },

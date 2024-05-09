@@ -69,7 +69,6 @@ export default function UrlListTable({ urls, setUrls, selectedUrls, setSelectedU
   const handleClickDelete = (item: string) => {
     if (item === 'all') {
       setShowModalDelete(true);
-      // setUrls([]);
     } else {
       const updatedUrls = urls.filter((url) => url !== item);
       setUrls(updatedUrls as React.SetStateAction<string[]>);
