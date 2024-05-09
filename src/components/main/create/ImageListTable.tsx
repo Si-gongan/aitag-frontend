@@ -99,7 +99,6 @@ export default function ImageListTable({
                           <div className="flex justify-center items-center">
                             <img
                               src={item.image}
-                              // src={Base64Decoder(item.image)}
                               alt={`이미지 미리보기 썸네일 ${index}`}
                               width={40}
                               height={40}
