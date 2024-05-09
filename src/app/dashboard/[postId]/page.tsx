@@ -9,7 +9,7 @@ import { API_ROUTE } from '@/utils/routes';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function PostIdAI() {
+export default function PostId() {
   const [loading, setLoading] = useState<boolean>(false);
   const [post, setPost] = useState<PostType>();
   const [selectedWorks, setSelectedWorks] = useState<WorkType[]>([]);

@@ -15,23 +15,9 @@ interface ListSectionProps {
 export default function ListSection({ items, sortId, pagination, setPagination }: ListSectionProps) {
   const router = useRouter();
 
-  // const getWorkfirstImage = (works: WorkType[]) => {
-  //   const firstImage = works[0].image;
-  //   const workAnswer = works[0].answer;
-  //   const thumbnail =
-  //     firstImage.startsWith('https://gongbang') && workAnswer !== 'ERROR!'
-  //       ? firstImage
-  //       : '/images/dashboard-default-image.png';
-  //   // const thumbnail = firstImage.includes('data:') ? '/images/dashboard-default-image.png' : firstImage;
-
-  //   return thumbnail;
-  // };
-
   const getWorkfirstImage = (works: WorkType[]) => {
     const firstImage = works[0].image;
-    const workAnswer = works[0].answer;
-    const thumbnail = firstImage.startsWith('https://gongbang') && workAnswer !== 'ERROR!' ? firstImage : firstImage;
-    // const thumbnail = firstImage.includes('data:') ? '/images/dashboard-default-image.png' : firstImage;
+    const thumbnail = firstImage.startsWith('data:image') ? '/images/thumb_default.svg' : firstImage;
 
     return thumbnail;
   };
@@ -62,14 +48,12 @@ export default function ListSection({ items, sortId, pagination, setPagination }
               key={item.id}
               className="flex flex-col w-183 rounded-10 border-1 border-grey/1 overflow-hidden"
               onClick={isClickable ? undefined : () => handleClickToLink(item.id, sortId)}>
-              <div className="relative w-183 h-183 overflow-hidden">
-                {/* <Image src={thumbnail} alt="생성결과의 썸네일 이미지" fill style={{ objectFit: 'cover' }} /> */}
-                <img
-                  src={thumbnail}
-                  alt="생성결과의 썸네일 이미지"
-                  className="w-183 h-183 overflow-hidden object-cover"
-                />
-              </div>
+              <img
+                src={thumbnail}
+                alt="생성결과의 썸네일 이미지"
+                className="w-183 h-183 overflow-hidden object-cover"
+              />
+
               <div
                 className={`flex flex-col justify-between h-120 pt-18 pb-17 px-10  bg-grey/1 ${
                   item.target && item.target === 'ai' && item.isComplete === false ? 'text-grey/6' : 'text-grey/7'
@@ -96,3 +80,15 @@ export default function ListSection({ items, sortId, pagination, setPagination }
     </section>
   );
 }
+
+// const getWorkfirstImage = (works: WorkType[]) => {
+//   const firstImage = works[0].image;
+//   const workAnswer = works[0].answer;
+//   const thumbnail =
+//     firstImage.startsWith('https://gongbang') && workAnswer !== 'ERROR!'
+//       ? firstImage
+//       : '/images/dashboard-default-image.png';
+//   // const thumbnail = firstImage.includes('data:') ? '/images/dashboard-default-image.png' : firstImage;
+
+//   return thumbnail;
+// };

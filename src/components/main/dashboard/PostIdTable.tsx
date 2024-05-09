@@ -154,17 +154,14 @@ export default function PostIdTable({
   ];
 
   const items: PostIdTableItemType[] = works.map((work) => {
-    const thumnail =
-      work.image.startsWith('https://gongbang') && work.answer !== 'ERROR!'
-        ? work.image
-        : '/images/dashboard-default-image.png';
+    const thumbnail = work.image.startsWith('data:image/') ? '/images/thumb_default.svg' : work.image;
 
     if (tableSortId === 'ai') {
-      return { image: thumnail, answer: work.before, id: work.id };
+      return { image: thumbnail, answer: work.before, id: work.id };
     } else if (tableSortId === 'inspect') {
-      return { image: thumnail, answer: work.after, id: work.id };
+      return { image: thumbnail, answer: work.after, id: work.id };
     } else {
-      return { image: thumnail, answer: work.answer, id: work.id };
+      return { image: thumbnail, answer: work.answer, id: work.id };
     }
   });
 
@@ -199,6 +196,7 @@ export default function PostIdTable({
       setSelectedWorks(newSelectedWorks);
     }
   };
+  console.log(tbodyHeight);
 
   return (
     <table className="border-1 border-#B0BAC9">
@@ -220,7 +218,8 @@ export default function PostIdTable({
           ))}
         </tr>
       </thead>
-      <tbody className={`block ${tbodyHeight} overflow-y-auto`}>
+      {/* <tbody className={`block ${tbodyHeight} overflow-y-auto`}> */}
+      <tbody className={`block ${tbodyHeight ? tbodyHeight : 'max-h-265'} overflow-y-auto`}>
         {items.map((item, index) => (
           <tr
             key={index}
@@ -240,9 +239,10 @@ export default function PostIdTable({
               <td key={key + index}>
                 {key === 'image' ? (
                   <div className={`flex items-center justify-center ${selectable ? 'w-120' : 'w-160'}`}>
-                    <div className="relative w-40 h-40">
+                    <img src={item.image} alt={`이미지 미리보기 썸네일 ${index}`} className="w-40 h-40" />
+                    {/* <div className="relative w-40 h-40">
                       <Image src={item.image as string} alt={`이미지 미리보기 썸네일 ${index}`} fill />
-                    </div>
+                    </div> */}
                   </div>
                 ) : key === 'id' ? (
                   <div className="hidden" />
