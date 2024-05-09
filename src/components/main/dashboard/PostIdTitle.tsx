@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import SortDropdown from './SortDropdown';
 import { useState } from 'react';
 import { DashbaordSortType } from '@/types/common';
+import DownloadDropdown from './DownloadDropdown';
 
 interface PostIdTitleProps {
   target: string;
@@ -59,12 +60,13 @@ export default function PostIdTitle({
               onClick={() => setRequestExpertPage && setRequestExpertPage(true)}
               disabled={selectedTotal === 0}
             />
-            <ActionButton text="다운로드" size="w-144 h-54" />
+            {/* <ActionButton text="다운로드" size="w-144 h-54" /> */}
+            <DownloadDropdown />
           </div>
         ) : inspectCompletedPage ? (
           <div className="flex gap-8">
             <ActionButton text="다운로드" size="w-144 h-54" />
-            <SortDropdown page="inspect" sort={tableSort as DashbaordSortType} onClick={handleClickSort} />
+            <SortDropdown type="inspect" sort={tableSort as DashbaordSortType} onClick={handleClickSort} />
           </div>
         ) : (
           ''

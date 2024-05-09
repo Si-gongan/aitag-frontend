@@ -91,4 +91,10 @@ export const ISPECT_SORT = [
   { id: 'inspect', name: '해설진 검수' },
 ];
 
+export const DOWNLOAD_SORT = [
+  { id: 'csv', name: 'CSV' },
+  { id: 'json', name: 'JSON' },
+  { id: 'txt', name: 'TXT' },
+];
+
 export const DASHBOARD_LIMIT = '10';
