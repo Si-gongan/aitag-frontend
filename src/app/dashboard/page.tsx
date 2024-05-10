@@ -8,6 +8,7 @@ import { DASHBOARD_LIMIT } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Dashbaord() {
   const [sort, setSort] = useState<DashbaordSortType>({ id: 'ai', name: 'AI 생성' });
@@ -15,6 +16,7 @@ export default function Dashbaord() {
   const [resultData, setResultData] = useState<GetPostResponseType>();
   const [pagination, setPagination] = useState({ start: 1, click: 1, total: 1 });
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const { hasPrevPage, hasNextPage, totalPages, posts } = resultData
     ? resultData
