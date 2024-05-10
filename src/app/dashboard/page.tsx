@@ -60,6 +60,11 @@ export default function Dashbaord() {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      router.replace('/login'); // 뒤로 돌아가기 불가능
+    }
+    
     getResultItem();
   }, []);
 
