@@ -22,6 +22,7 @@ export interface ActionButtonType {
   size: string;
   type?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export interface ActionButtonSkyBlueType {
@@ -65,10 +66,16 @@ export interface TableBodyItemType {
 export interface ImageTableBodyItemType {
   image: string | null;
   alt: string;
-  // language: '한국어' | '영어' | '한국어 & 영어';
   language: string;
   keywords: JSX.Element;
   // keywords: React.ComponentType<ActionButtonWhiteProps>;
+}
+
+export interface PostIdTableItemType {
+  image?: string;
+  answer: string | undefined;
+  [key: string]: string | undefined;
+  id?: string;
 }
 
 export interface SelectedImageType {
@@ -110,6 +117,33 @@ export interface PreviewInfoItemType {
   file: File; // 이미지 원본 파일
 }
 
+export interface DashbaordSortType {
+  id: string;
+  name: string;
+}
+
+export interface WorkType {
+  id: string;
+  image: string;
+  keywords: string[];
+  language: string;
+  answer?: string;
+  before?: string;
+  after?: string;
+}
+
+export interface PostType {
+  createdAt: string;
+  id: string;
+  isComplete: false;
+  target: string;
+  title: string;
+  updatedAt: string;
+  writer: string;
+  works: WorkType[];
+  detail?: string;
+}
+
 // 서버 요청 및 리스폰스 데이터 타입
 
 // options
@@ -134,4 +168,28 @@ export interface ScrapImagesResponseType {
   alt: string;
   width: number;
   height: number;
+}
+
+// GET_POST 요청시 prams
+export interface GetPostRequestParamType {
+  // target: 'comment' | 'ai';
+  target?: string;
+  search: string;
+  limit: string;
+  page: string;
+}
+
+// GET_POST 응답
+export interface GetPostResponseType {
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  limit: number;
+  nextPage: null | number;
+  page: number;
+  pagingCounter: number;
+  posts?: PostType[];
+  inspects?: PostType[];
+  prevPage: null | number;
+  totalDocs: number;
+  totalPages: number;
 }

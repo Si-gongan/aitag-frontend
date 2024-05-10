@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import SectionLayout from './SectionLayout';
 import FileInputField from '@/components/common/input/FileInputField';
-import { PreviewImageItemType, PreviewInfoItemType } from '@/types/common';
+import { PreviewImageItemType } from '@/types/common';
 import ImageUploadCard from './ImageUploadCard';
 import ImageListTable from './ImageListTable';
 import CreateButtons from './CreateButtons';

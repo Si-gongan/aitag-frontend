@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 interface CheckboxProps {
-  value: string;
+  value: string; // 'all' 또는 특정값
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   checked?: boolean;
   disabled?: boolean;

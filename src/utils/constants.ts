@@ -51,7 +51,7 @@ export const WorkItemFormFormat = {
 };
 
 export const ExportRequestFormFormat = {
-  title: 'url 해설진 생성 요청',
+  title: '해설진 생성 요청',
   target: 'comment',
   works: [
     {
@@ -79,3 +79,22 @@ export const ERROR_MESSAGE = {
   KEYWORDS_LENGTH: '10자 이내로 입력해 주세요.',
   KEYWORDS_COUNT: '키워드는 3개까지 입력할 수 있어요.',
 };
+
+export const DASHBOARD_SORT = [
+  { id: 'ai', name: 'AI 생성' },
+  { id: 'inspect', name: '해설진 검수' },
+  { id: 'comment', name: '해설진 작성' },
+];
+
+export const ISPECT_SORT = [
+  { id: 'ai', name: 'AI 생성' },
+  { id: 'inspect', name: '해설진 검수' },
+];
+
+export const DOWNLOAD_SORT = [
+  { id: 'csv', name: 'CSV' },
+  { id: 'json', name: 'JSON' },
+  { id: 'txt', name: 'TXT' },
+];
+
+export const DASHBOARD_LIMIT = '10';
