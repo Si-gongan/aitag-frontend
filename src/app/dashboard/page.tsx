@@ -7,6 +7,7 @@ import { DashbaordSortType, GetPostResponseType } from '@/types/common';
 import { DASHBOARD_LIMIT } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 export default function Dashbaord() {
@@ -15,6 +16,7 @@ export default function Dashbaord() {
   const [resultData, setResultData] = useState<GetPostResponseType>();
   const [pagination, setPagination] = useState({ start: 1, click: 1, total: 1 });
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const { hasPrevPage, hasNextPage, totalPages, posts } = resultData
     ? resultData

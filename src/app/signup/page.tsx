@@ -129,49 +129,49 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-63px)] bg-[#FAFBFC] px-6">
-      <div className="w-full h-fit max-w-4xl">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">회원가입</h1>
-        <h1 className='text-xl text-center text-gray-600 mb-20'>회원가입을 위해 아래의 정보를 입력해주세요</h1>
+    <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] bg-[#FAFBFC] px-6">
+      <div className="w-full h-3/5 max-w-4xl">
+        <h1 className="text-32 font-bold text-center text-gray-800 mt-50 mb-10">회원가입</h1>
+        <h1 className='text-16 text-center text-gray-600 mb-50'>회원가입을 위해 아래의 정보를 입력해주세요</h1>
         {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
         <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-          <div className="mb-10">
-            <h1 className='text-lg font-bold text-left mb-3'>이름 / 기업명</h1>
-            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="name" type= "text" placeholder="이름 혹은 기업명을 입력해주세요" onChange={handleChange}/>
-          </div>
-          <div className="mb-10">
-            <h1 className='text-lg font-bold text-left mb-3'>아이디</h1>
-            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="clientId" type= "text" placeholder="아이디를 입력해주세요" onChange={handleChange}/>
-          </div>
-          <div className="mb-10">
-            <h1 className='text-lg font-bold text-left mb-3'>이메일</h1>
-            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="email" type= "email" placeholder="이메일 주소를 입력해주세요" onChange={handleChange}/>
-          </div>
-          <div className="mb-10 mx-auto relative">
-            <h1 className='text-lg font-bold text-left mb-3'>비밀번호</h1>
-            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="password" type={showPwd ? "text" : 'password'} placeholder="비밀번호를 입력해주세요" onChange={handleChange}/>
-            <button onClick = {pressShow} className='absolute bottom-15 right-15 text-gray-700'>
-              {showPwd ? <FiEye /> : <FiEyeOff /> }
-            </button>
-          </div>
-          <div className="mb-10 mx-auto relative">
-            <h1 className='text-lg font-bold text-left mb-3'>비밀번호 확인</h1>
-            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="pwdcheck" type={showPwd ? "text" : 'password'} placeholder="비밀번호를 다시 입력해주세요" onChange={(e) => setPwdCheck(e.target.value)}/>
-            <button onClick = {pressShow} className='absolute bottom-15 right-15 text-gray-700'>
-              {showPwd ? <FiEye /> : <FiEyeOff /> }
-            </button>
+          <div className="mb-20">
+            <h1 className='text-14 font-bold text-left mb-3'>이름 / 기업명</h1>
+            <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="name" type= "text" placeholder="이름 혹은 기업명을 입력해주세요" onChange={handleChange}/>
           </div>
           <div className="mb-20">
-            <h1 className='text-lg font-bold text-left mb-3'>전화번호 (선택)</h1>
+            <h1 className='text-14 font-bold text-left mb-3'>아이디</h1>
+            <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="clientId" type= "text" placeholder="아이디를 입력해주세요" onChange={handleChange}/>
+          </div>
+          <div className="mb-20">
+            <h1 className='text-14 font-bold text-left mb-3'>이메일</h1>
+            <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="email" type= "email" placeholder="이메일 주소를 입력해주세요" onChange={handleChange}/>
+          </div>
+          <div className="mb-20 mx-auto relative">
+            <h1 className='text-14 font-bold text-left mb-3'>비밀번호</h1>
+            <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="password" type={showPwd ? "text" : 'password'} placeholder="비밀번호를 입력해주세요" onChange={handleChange}/>
+            <button onClick = {pressShow} className='absolute bottom-15 right-15 text-gray-700'>
+              {showPwd ? <FiEye /> : <FiEyeOff /> }
+            </button>
+          </div>
+          <div className="mb-20 mx-auto relative">
+            <h1 className='text-14 font-bold text-left mb-3'>비밀번호 확인</h1>
+            <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16focus:outline-none" id="pwdcheck" type={showPwd ? "text" : 'password'} placeholder="비밀번호를 다시 입력해주세요" onChange={(e) => setPwdCheck(e.target.value)}/>
+            <button onClick = {pressShow} className='absolute bottom-15 right-15 text-gray-700'>
+              {showPwd ? <FiEye /> : <FiEyeOff /> }
+            </button>
+          </div>
+          <div className="mb-30">
+            <h1 className='text-l4 font-bold text-left mb-3'>전화번호 (선택)</h1>
             <PhoneInput 
                 country={'kr'}
                 value={formData.phone}
                 onChange={handlePhoneChange}
-                dropdownStyle={{height:'80px'}}
-                inputStyle = {{height:'40px', width: '100%'}}
+                dropdownStyle={{height:'100px'}}
+                inputStyle = {{height:'50px', width: '100%'}}
               />
           </div>
-          <button className="w-full bg-blue-500 hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none" type="submit">
+          <button className="w-full h-53 text-16 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none mb-50" type="submit">
               회원가입하기
             </button>
         </form>
