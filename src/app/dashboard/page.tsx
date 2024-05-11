@@ -9,6 +9,7 @@ import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Dashbaord() {
   const [sort, setSort] = useState<DashbaordSortType>({ id: 'ai', name: 'AI 생성' });

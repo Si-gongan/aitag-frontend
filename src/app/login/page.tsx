@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { API_ROUTE, PATH } from '@/utils/routes';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, MouseEvent } from 'react';
@@ -29,7 +30,7 @@ export default function Login() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      router.replace('/dashboard'); // 로그인 상태일 때 대시보드로 리디렉션
+      router.replace(PATH.DASHBOARD); // 로그인 상태일 때 대시보드로 리디렉션
     }
   }, [router]);
 
@@ -47,7 +48,7 @@ export default function Login() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://gongbang.sigongan-ai.shop/user/signin', {
+      const response = await fetch(API_ROUTE.LOGIN, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

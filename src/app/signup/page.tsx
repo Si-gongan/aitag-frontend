@@ -1,5 +1,6 @@
 // src/app/signup/page.tsx
 'use client';
+import {API_ROUTE, PATH} from '@/utils/routes';
 import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
 import axios, {AxiosError} from 'axios';
 import { useRouter } from 'next/navigation';
@@ -45,7 +46,7 @@ export default function Signup() {
   // checkId
   // const checkClientId = async (clientId: string) => {
   //   try {
-  //     const response = await axios.get(`https://gongbang.sigongan-ai.shop/user/check/client-id/${clientId}`);
+  //     const response = await axios.get(API_ROUTE.GET_CLIENT_ID);
   //     if (!response.data.result.isPossible) {
   //       setErrorMessage('이미 사용 중인 아이디입니다.');
   //     } else {
@@ -58,7 +59,7 @@ export default function Signup() {
 
   // const checkEmail = async (email: string) => {
   //   try {
-  //     const response = await axios.get(`https://gongbang.sigongan-ai.shop/user/check/email/${email}`);
+  //     const response = await axios.get(API_ROUTE.GET_EMAIL);
   //     if (!response.data.result.isPossible) {
   //       setErrorMessage('이미 사용 중인 이메일입니다.');
   //     } else {
@@ -95,7 +96,7 @@ export default function Signup() {
     }
 
     try {
-      const response = await axios.post('https://gongbang.sigongan-ai.shop/user/signup', {
+      const response = await axios.post(API_ROUTE.SIGN_UP, {
         clientId: formData.clientId,
         password: formData.password,
         name: formData.name,
@@ -109,7 +110,7 @@ export default function Signup() {
       localStorage.setItem('token', response.data.result.token);
       alert('회원가입 성공!');
       console.log('회원가입 성공:', response.data);
-      router.push('/login'); // Redirect to login page
+      router.push(PATH.LOGIN); // Redirect to login page
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const axiosError = error as AxiosError<ErrorResponse>;

@@ -49,8 +49,8 @@ const HomeMain = () => {
               </div>
             <Image
               src="/images/landing_main.png"
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{objectFit:"cover"}}
               alt="노트북 측면과 노트북을 타이핑하고 있는 손 이미지"
             />
           </div>
@@ -236,8 +236,8 @@ const HomeMain = () => {
             </div>
             <Image
               src="/images/laptop.png"
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{objectFit:"cover"}}
               alt="노트북 이미지"
             />
           </div>

@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 
-export default function Modal({ onClose }) {
+export default function Modal({ onClose }: { onClose: () => void }){
   return createPortal(
     <div
       onClick={onClose}
