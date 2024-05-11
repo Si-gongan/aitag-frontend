@@ -7,6 +7,7 @@ import { DashbaordSortType, GetPostResponseType } from '@/types/common';
 import { DASHBOARD_LIMIT } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 

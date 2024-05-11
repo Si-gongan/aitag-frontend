@@ -78,35 +78,35 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-63px)] bg-[#FAFBFC] px-6">
+    <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] px-6">
       <div className="w-full h-3/5 max-w-4xl">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-15">로그인</h1>
-        <h1 className='text-xl text-center text-gray-600 mb-40'>맞춤형 대체텍스트 제작소, 글공방에 오신 것을 환영합니다!</h1>
+        <h1 className="text-32 font-bold text-center text-gray-800 mb-10">로그인</h1>
+        <h1 className='text-16 text-center text-gray-600 mb-100'>맞춤형 대체텍스트 제작소, 글공방에 오신 것을 환영합니다!</h1>
         {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
-        <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-          <div className="mb-10">
-            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="clientId" type= "text" placeholder="ID" value={loginData.clientId} onChange={handleChange} />
+        <form className="px-8" onSubmit={handleSubmit}>
+          <div className="mb-20">
+            <input className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16" id="clientId" type= "text" placeholder="ID" value={loginData.clientId} onChange={handleChange} />
           </div>
-          <div className="mb-15 mx-auto relative">
-            <input className="border rounded-lg w-full py-10 px-15 text-gray-700 focus:outline-none" id="password" type={showPwd ? "text" : 'password'} placeholder="PW" value={loginData.password} onChange={handleChange}/>
-            <button onClick = {e=>pressShow(e)} className='absolute bottom-15 right-15 text-gray-700'>
+          <div className="mb-20 mx-auto relative">
+            <input className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16" id="password" type={showPwd ? "text" : 'password'} placeholder="PW" value={loginData.password} onChange={handleChange}/>
+            <button onClick = {e=>pressShow(e)} className='absolute bottom-20 right-15 text-gray-700'>
               {showPwd ? <FiEye /> : <FiEyeOff /> }
             </button>
           </div>
-          <div className="flex items-center justify-end mb-15">
-            <Link className="inline-block align-baseline text-xl text-blue-500 hover:text-blue-800" href="/findID">
+          <div className="flex items-center justify-end mb-30">
+            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/find/client-id">
               아이디 찾기
             </Link>
             <h1 className="px-20 text-xl text-blue-500">|</h1>
-            <a className="inline-block align-baseline text-xl text-blue-500 hover:text-blue-800" href="#">
+            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/find/password">
               비밀번호 찾기
-            </a>
+            </Link>
           </div>
-          <button className="w-full bg-blue-500 hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none" type="submit">
-              로그인
-            </button>
+          <button className="w-full h-53 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none text-16 mb-30" type="submit">
+            로그인
+          </button>
           <div className="text-center mt-15">
-            <a className="inline-block align-baseline text-xl text-blue-500 hover:text-blue-800" href="/signup">
+            <a className="inline-block align-baseline text-16 text-blue-500 hover:text-blue-800" href="/signup">
               아직 계정이 없으신가요?
             </a>
           </div>
