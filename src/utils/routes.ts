@@ -4,6 +4,9 @@ export const PATH = {
   HOME: '/',
   LOGIN: '/login',
   SIGNUP: '/signup',
+  FIND_CLIENT:'/find/client-id',
+  FIND_PWD:'/find/password',
+  CHANGE_FIND_PWD:'change/findPassword',
   DASHBOARD: '/dashboard',
   CREATE_URL: '/create/url',
   CREATE_IMAGE: '/create/image',
@@ -32,4 +35,7 @@ export const API_ROUTE = {
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/check/client-id/${clientId}`,
   GET_EMAIL: (email: string) => 
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/check/email/${email}`,
+  FIND_ID: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/find/client-id`,
+  FIND_PWD: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/find/password`,
+  CHANGE_PWD: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/change/password`,
 };

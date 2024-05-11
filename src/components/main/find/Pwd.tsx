@@ -3,6 +3,7 @@
 import React from 'react'
 import Link from 'next/link';
 import { useState } from 'react';
+import { API_ROUTE, PATH } from '@/utils/routes';
 
 interface FormData {
   clientId: string;
@@ -37,7 +38,7 @@ export default function Pwd() {
     }
 
     try {
-      const response = await fetch('https://gongbang.sigongan-ai.shop/user/find/password', {
+      const response = await fetch(API_ROUTE.FIND_PWD, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -85,8 +86,8 @@ export default function Pwd() {
               <p>스펨메일함을 확인해보시거나 이메일을 다시 받아보세요.</p>
             </div>
             {/* <button className="w-full h-53 text_16 bg-[#4C80F1] text-white py-8 rounded-lg focus:outline-none mb-30" onClick={() => setEmail(null)}>이메일 재전송</button> */}
-            <Link href="/changePwd">
-              <button className="w-full h-53 text_16 bg-[#CED3D6] text-[#4D5256] py-8 rounded-lg focus:outline-none">비밀번호 변경하기</button>
+            <Link href={PATH.CHANGE_FIND_PWD}>
+              <button className="border w-full h-53 text_16 text-[#4D5256] py-8 rounded-lg focus:outline-none">비밀번호 변경하기</button>
             </Link>
           </div>
         )}       

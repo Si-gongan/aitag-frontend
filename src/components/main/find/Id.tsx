@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link';
+import { API_ROUTE, PATH } from '@/utils/routes';
 import { useState } from 'react';
 
 interface FormData {
@@ -37,7 +38,7 @@ export default function Id() {
     }
 
     try {
-      const response = await fetch('https://gongbang.sigongan-ai.shop/user/find/client-id', {
+      const response = await fetch(API_ROUTE.FIND_ID, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -78,8 +79,8 @@ export default function Id() {
               <p>해당 계정의 아이디는 {ClientId} 입니다.</p>
             </div>
             <button className="w-full h-53 text_16 bg-[#4C80F1] text-white py-8 rounded-lg focus:outline-none mb-30" onClick={() => setClientId(null)}>확인</button>
-            <Link href="/login">
-              <button className="w-full h-53 text_16 bg-[#CED3D6] text-[#4D5256] py-8 rounded-lg focus:outline-none">로그인으로 돌아가기</button>
+            <Link href={PATH.LOGIN}>
+              <button className="border w-full h-53 text_16 text-[#4D5256] py-8 rounded-lg focus:outline-none">로그인으로 돌아가기</button>
             </Link>
           </div>
         )}       

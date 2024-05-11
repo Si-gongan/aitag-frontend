@@ -94,11 +94,11 @@ export default function Login() {
             </button>
           </div>
           <div className="flex items-center justify-end mb-30">
-            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/find/client-id">
+            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href={PATH.FIND_CLIENT}>
               아이디 찾기
             </Link>
             <h1 className="px-20 text-xl text-blue-500">|</h1>
-            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/find/password">
+            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href={PATH.FIND_PWD}>
               비밀번호 찾기
             </Link>
           </div>
@@ -106,7 +106,7 @@ export default function Login() {
             로그인
           </button>
           <div className="text-center mt-15">
-            <a className="inline-block align-baseline text-16 text-blue-500 hover:text-blue-800" href="/signup">
+            <a className="inline-block align-baseline text-16 text-blue-500 hover:text-blue-800" href={PATH.SIGNUP}>
               아직 계정이 없으신가요?
             </a>
           </div>

@@ -1,10 +1,10 @@
 // src/app/signup/page.tsx
 'use client';
-import {API_ROUTE, PATH} from '@/utils/routes';
+import { API_ROUTE, PATH } from '@/utils/routes';
 import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
-import axios, {AxiosError} from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import {FiEyeOff, FiEye} from 'react-icons/fi';
+import { FiEyeOff, FiEye } from 'react-icons/fi';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 

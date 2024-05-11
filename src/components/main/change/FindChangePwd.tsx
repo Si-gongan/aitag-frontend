@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { MouseEvent } from 'react';
 import { FiEyeOff, FiEye } from 'react-icons/fi'
+import { API_ROUTE, PATH } from '@/utils/routes';
+import Image from 'next/image';
 
 interface FormData {
     currentPassword: string;
@@ -40,14 +42,14 @@ export default function FindChangePwd() {
         e.preventDefault();
         setError('');
 
-        if (!formData.currentPassword || !formData.newPassword) {
-            setError('모든 필드를 채워주세요.');
-            return;
-        }
-        if (formData.newPassword.length < 8){
-            setError('비밀번호가 8자리 이상이 아닙니다.')
-            return;
-        }
+        // if (!formData.currentPassword || !formData.newPassword) {
+        //     setError('모든 필드를 채워주세요.');
+        //     return;
+        // }
+        // if (formData.newPassword.length < 8){
+        //     setError('비밀번호가 8자리 이상이 아닙니다.')
+        //     return;
+        // }
         if (formData.newPassword !== pwdCheck) {
             setError('비밀번호가 일치하지 않습니다.');
             return;
@@ -58,7 +60,7 @@ export default function FindChangePwd() {
             if (!token) {
                 throw new Error('토큰이 유효하지 않습니다.');
             }
-            const response = await fetch('https://gongbang.sigongan-ai.shop/user/change/password', {
+            const response = await fetch(API_ROUTE.CHANGE_PWD, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json' ,
@@ -73,12 +75,6 @@ export default function FindChangePwd() {
         }
         const data: ApiResponse = await response.json();
         setMessage('비밀번호가 성공적으로 변경되었습니다.');
-
-        // if (data.statusCode === 200) {
-        //     setMessage('성공');
-        // } else {
-        //     throw new Error('실패');
-        // }
         } catch (error: any) {
         setError(error.message || '비밀번호를 변경할 수 없습니다.');
         }
@@ -116,16 +112,19 @@ export default function FindChangePwd() {
             <button className="w-full h-53 text_16 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none mb-30" type="submit">
                 비밀번호 변경하기
             </button>
-            <Link href="/login">
-                <button className="w-full h-53 text_16 bg-[#CED3D6] text-[#4D5256] py-8 rounded-lg focus:outline-none">로그인으로 돌아가기</button>
+            <Link href={PATH.LOGIN}>
+                <button className="border w-full h-53 text_16 text-[#4D5256] py-8 rounded-lg focus:outline-none">로그인으로 돌아가기</button>
             </Link>
             </form>
         ) : (
             <div>
-                <div className='text-20 text-center text-gray-600 mt-60 mb-100'>
+                <div className='flex justify-center items-center h-full'>
+                    <Image src="/images/icon-check.svg" alt="체크 아이콘" width={100} height={100} />
+                </div>
+                <div className='text-20 text-center text-[#4D5256] mt-20 mb-100'>
                     <p>비밀번호를 성공적으로 변경하였습니다.</p>
                 </div>
-                <Link href="/login">
+                <Link href={PATH.LOGIN}>
                     <button className="w-full h-53 text_16 bg-[#4C80F1] text-white py-8 rounded-lg focus:outline-none mb-30">로그인</button>
                 </Link>
             </div>
