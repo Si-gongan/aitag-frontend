@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface FormData {
   name: string;
@@ -16,10 +16,11 @@ interface ApiResponse {
   }
 }
 
-export default function findId() {
+export default function Id() {
   const [formData, setFormData] = useState<FormData>({ name: '', email: '' });
   const [ClientId, setClientId] = useState<string | null>(null);
   const [error, setError] = useState<string>('');
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -28,6 +29,13 @@ export default function findId() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+
+    if (!formData.name || !formData.email) {
+        setError('모든 필드를 채워주세요.');
+        return;
+    }
+
     try {
       const response = await fetch('https://gongbang.sigongan-ai.shop/user/find/client-id', {
         method: 'POST',
@@ -79,4 +87,3 @@ export default function findId() {
     </div>
   )
 }
-

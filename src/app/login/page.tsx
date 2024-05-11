@@ -88,16 +88,16 @@ export default function Login() {
           </div>
           <div className="mb-20 mx-auto relative">
             <input className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16" id="password" type={showPwd ? "text" : 'password'} placeholder="PW" value={loginData.password} onChange={handleChange}/>
-            <button onClick = {e=>pressShow(e)} className='absolute bottom-15 right-15 text-gray-700'>
+            <button onClick = {e=>pressShow(e)} className='absolute bottom-20 right-15 text-gray-700'>
               {showPwd ? <FiEye /> : <FiEyeOff /> }
             </button>
           </div>
           <div className="flex items-center justify-end mb-30">
-            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/findId">
+            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/find/client-id">
               아이디 찾기
             </Link>
             <h1 className="px-20 text-xl text-blue-500">|</h1>
-            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/findPwd">
+            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/find/password">
               비밀번호 찾기
             </Link>
           </div>
