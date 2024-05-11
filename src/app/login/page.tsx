@@ -93,13 +93,13 @@ export default function Login() {
             </button>
           </div>
           <div className="flex items-center justify-end mb-30">
-            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/findID">
+            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/findId">
               아이디 찾기
             </Link>
             <h1 className="px-20 text-xl text-blue-500">|</h1>
-            <a className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="#">
+            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href="/findPwd">
               비밀번호 찾기
-            </a>
+            </Link>
           </div>
           <button className="w-full h-53 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none text-16 mb-30" type="submit">
             로그인

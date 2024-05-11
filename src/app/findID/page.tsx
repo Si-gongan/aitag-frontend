@@ -3,8 +3,6 @@
 import React from 'react'
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, MouseEvent } from 'react';
 
 interface FormData {
   name: string;
@@ -18,7 +16,7 @@ interface ApiResponse {
   }
 }
 
-export default function findID() {
+export default function findId() {
   const [formData, setFormData] = useState<FormData>({ name: '', email: '' });
   const [ClientId, setClientId] = useState<string | null>(null);
   const [error, setError] = useState<string>('');
@@ -47,7 +45,7 @@ export default function findID() {
   };
 
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-63px)] bg-[#FAFBFC] px-6">
+    <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] px-6">
       <div className="w-full h-3/5 max-w-4xl">
         <h1 className="text-32 font-bold text-center text-gray-800 mb-15">아이디 찾기</h1>
         {!ClientId ?( 
