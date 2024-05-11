@@ -124,3 +124,8 @@ export const FAQ_HEADER = [
   { text: '작성자', value: 'writer' },
   { text: '작성일', value: 'createdAt' },
 ];
+
+export const NOTICE_HEADER = [
+  { text: '작성일', value: 'createdAt' },
+  { text: '제목', value: 'title' },
+];

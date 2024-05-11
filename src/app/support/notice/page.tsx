@@ -1,5 +1,7 @@
 'use client';
 
+import PagenationButton from '@/components/common/button/PaginationButton';
+import NoticeTable from '@/components/main/support/NoticeTable';
 import { GetSupportFaqResponseType } from '@/types/common';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
@@ -12,6 +14,13 @@ export default function NoticePage() {
   const { notices, totalPages, hasNextPage } = noticeList || { notices: [], totalPages: 0, hasNextPage: false };
 
   const [pagination, setPagination] = useState({ start: 1, click: 1, total: totalPages });
+
+  const handleClickPagination = (num: number) => {
+    setPagination((prevPagination) => ({
+      ...prevPagination,
+      click: num,
+    }));
+  };
 
   const getNoticeList = async () => {
     const options = { method: 'GET' };
@@ -44,6 +53,12 @@ export default function NoticePage() {
       <div className="flex flex-col items-center gap-16">
         <span className="text-18 text-[#B2B0B3]">NOTICE</span>
         <h1 className="text-36 text-grey/7 font-bold">공지사항</h1>
+      </div>
+      <div className="flex flex-col gap-48">
+        <NoticeTable notices={notices} />
+        {/* <NoticeTable /> */}
+        <PagenationButton pagination={pagination} onClick={handleClickPagination} />
+        {/* <PagenationButton pagination={{ start: 1, click: 1, total: 1 }} onClick={handleClickPagination} /> */}
       </div>
     </section>
   );

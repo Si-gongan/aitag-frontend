@@ -1,6 +1,5 @@
 import { FaqItemType, PaginationType, SupportType } from '@/types/common';
 import { FAQ_HEADER } from '@/utils/constants';
-import { mockData } from './mock';
 import { formattedDateV2 } from '@/utils/formattedDate';
 import PagenationButton from '@/components/common/button/PaginationButton';
 import ActionButtonSkyBlue from '@/components/common/button/ActionButtonSkyBlue';
@@ -8,12 +7,12 @@ import { useState } from 'react';
 import ModalSupport from '@/components/common/modal/ModalSupport';
 
 interface FaqTableProps {
-  faqs?: SupportType[];
+  faqs: SupportType[];
   pagination: PaginationType;
   setPagination: React.Dispatch<React.SetStateAction<PaginationType>>;
 }
 
-export default function FaqTable({ faqs = mockData, pagination, setPagination }: FaqTableProps) {
+export default function FaqTable({ faqs, pagination, setPagination }: FaqTableProps) {
   const [showModalSupport, setShowModalSupport] = useState<boolean>(false);
 
   const items: FaqItemType[] =
