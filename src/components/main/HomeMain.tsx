@@ -1,7 +1,6 @@
 import React from 'react';
 import MainLayout from '../layout/MainLayout';
 
-// import ActionButton from '../common/button/ActionButton';
 import TextFieldWhite from '../common/text/TextFieldWhite';
 import ActionButtonBlack from '../common/button/ActionButtonBlack';
 import IntroFirstCard from '../../../public/images/intro-first-card.svg';
@@ -43,13 +42,15 @@ const HomeMain = () => {
                   />
                 </div>
                 <div className="mt-40">
-                  <ActionButtonBlack text="시작하기" size="w-130 h-35" />
+                  <Link href="/login">
+                    <ActionButtonBlack text="시작하기" size="w-130 h-35" />
+                  </Link>
                 </div>
               </div>
             <Image
               src="/images/landing_main.png"
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{objectFit:"cover"}}
               alt="노트북 측면과 노트북을 타이핑하고 있는 손 이미지"
             />
           </div>
@@ -229,14 +230,14 @@ const HomeMain = () => {
               <div className="mt-20">
                 <TextFieldWhite
                   text={'본 홈페이지에는 글공방이 작성한 대체텍스트가 포함되어 있습니다.'}
-                  style={'text-16 font-Noto Sans KR '}
+                  style={'text-16 font-Noto Sans KR'}
                 />
               </div>
             </div>
             <Image
               src="/images/laptop.png"
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{objectFit:"cover"}}
               alt="노트북 이미지"
             />
           </div>
