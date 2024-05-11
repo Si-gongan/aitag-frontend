@@ -3,7 +3,7 @@ import SectionLayout from './SectionLayout';
 import React, { useState } from 'react';
 import ActionButton from '@/components/common/button/ActionButton';
 import { PreviewImageItemType } from '@/types/common';
-import { ExportRequestFormFormat } from '@/utils/constants';
+import { ExpertRequestFormFormat } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
 import ModalConfirm from '@/components/common/modal/ModalConfirm';
@@ -47,10 +47,10 @@ export default function RequestForExpert({ type = 'url', selectedImages, setProg
 
     setLoading(true);
 
-    const ExportRequestForm = { ...ExportRequestFormFormat, works: selectedImagesWorks, detail: value };
+    const ExpertRequestForm = { ...ExpertRequestFormFormat, works: selectedImagesWorks, detail: value };
     const options = {
       method: 'POST',
-      body: JSON.stringify(ExportRequestForm),
+      body: JSON.stringify(ExpertRequestForm),
     };
 
     try {

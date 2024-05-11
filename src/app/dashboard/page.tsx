@@ -32,8 +32,6 @@ export default function Dashbaord() {
   };
 
   const getResultItem = async () => {
-    setLoading(true);
-
     const options = { method: 'GET' };
     const DEFAULT_PARAMS = {
       search: searchValue,
@@ -42,6 +40,8 @@ export default function Dashbaord() {
     };
 
     try {
+      setLoading(true);
+
       if (sort.id === 'inspect') {
         const response = await fetchWithInterceptor(API_ROUTE.GET_INSPECT(DEFAULT_PARAMS), options);
         const result = await response.json();

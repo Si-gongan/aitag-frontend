@@ -50,7 +50,7 @@ export const WorkItemFormFormat = {
   keywords: [],
 };
 
-export const ExportRequestFormFormat = {
+export const ExpertRequestFormFormat = {
   title: '해설진 생성 요청',
   target: 'comment',
   works: [
@@ -73,6 +73,13 @@ export const AiRequestFormFormat = {
       keywords: [],
     },
   ],
+};
+
+export const OpinionFormFormat = {
+  clientId: '',
+  email: '',
+  content: '',
+  files: [],
 };
 
 export const ERROR_MESSAGE = {
@@ -98,3 +105,22 @@ export const DOWNLOAD_SORT = [
 ];
 
 export const DASHBOARD_LIMIT = '10';
+
+export const SUPPORT_TAB = [
+  { id: 'notice', text: '공지사항' },
+  { id: 'faq', text: 'FAQ' },
+];
+
+export const FAQ_TAB = [
+  { id: 'all', text: '전체' },
+  { id: 'payment', text: '결제' },
+  { id: 'feature', text: '서비스 기능' },
+  { id: 'usage', text: '사용 방법' },
+];
+
+export const FAQ_HEADER = [
+  { text: 'No.', value: 'index' },
+  { text: '제목', value: 'title' },
+  { text: '작성자', value: 'writer' },
+  { text: '작성일', value: 'createdAt' },
+];
