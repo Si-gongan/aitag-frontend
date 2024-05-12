@@ -10,11 +10,6 @@ import 'react-phone-input-2/lib/style.css'
 
 export default function Signup() {
 
-  // 에러 메시지
-  interface ErrorResponse {
-    message: string; 
-  }
-
   const[formData, setFormData] = useState({
     clientId: '',
     password: '',
@@ -23,15 +18,11 @@ export default function Signup() {
     phone: ''
   })
 
-  const[showPwd, setShowPwd] = useState(false)
+  const [showPwd, setShowPwd] = useState(false)
+  const [showPwdCheck, setShowPwdCheck] = useState(false);
   const [pwdCheck, setPwdCheck] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
-  
-  const pressShow = (e: MouseEvent) => {
-    e.preventDefault();
-    setShowPwd(!showPwd)
-  }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -78,6 +69,7 @@ export default function Signup() {
   //   checkEmail(formData.email);
   // };
 
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage(''); // Reset error message
@@ -96,36 +88,33 @@ export default function Signup() {
     }
 
     try {
-      const response = await axios.post(API_ROUTE.SIGN_UP, {
-        clientId: formData.clientId,
-        password: formData.password,
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone
-      }, {
+      const response = await fetch(API_ROUTE.SIGN_UP, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({
+          clientId: formData.clientId,
+          password: formData.password,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone
+        })
       });
-      localStorage.setItem('token', response.data.result.token);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || '서버 오류로 회원가입에 실패했습니다.');
+        return;
+      }
+
+      const data = await response.json();
+      localStorage.setItem('token', data.result.token);
       alert('회원가입 성공!');
-      console.log('회원가입 성공:', response.data);
       router.push(PATH.LOGIN); // Redirect to login page
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        const axiosError = error as AxiosError<ErrorResponse>;
-        if (axiosError.response?.data?.message) {
-          setErrorMessage(axiosError.response.data.message);
-        } else {
-          console.error('회원가입 실패:', axiosError.response?.data);
-          const serverError = error.response.data.result.message || '회원가입에 실패했습니다.';
-          setErrorMessage(serverError);
-          // setErrorMessage('회원가입에 실패했습니다.');
-        }
-      } else {
-        console.error('회원가입 실패:', (error as Error).message);
-        setErrorMessage((error as Error).message);
-      }
+      console.error('회원가입 실패:', error);
+      setErrorMessage('네트워크 오류 또는 서버 접속이 불가능합니다.');
     }
   };
 
@@ -151,15 +140,15 @@ export default function Signup() {
           <div className="mb-20 mx-auto relative">
             <h1 className='text-14 font-bold text-left mb-3'>비밀번호</h1>
             <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="password" type={showPwd ? "text" : 'password'} placeholder="비밀번호를 입력해주세요" onChange={handleChange}/>
-            <button onClick = {pressShow} className='absolute bottom-15 right-15 text-gray-700'>
+            <button onClick={() => setShowPwd(!showPwd)} className='absolute bottom-15 right-15 text-gray-700'>
               {showPwd ? <FiEye /> : <FiEyeOff /> }
             </button>
           </div>
           <div className="mb-20 mx-auto relative">
             <h1 className='text-14 font-bold text-left mb-3'>비밀번호 확인</h1>
-            <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16focus:outline-none" id="pwdcheck" type={showPwd ? "text" : 'password'} placeholder="비밀번호를 다시 입력해주세요" onChange={(e) => setPwdCheck(e.target.value)}/>
-            <button onClick = {pressShow} className='absolute bottom-15 right-15 text-gray-700'>
-              {showPwd ? <FiEye /> : <FiEyeOff /> }
+            <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16focus:outline-none" id="pwdcheck" type={showPwdCheck ? "text" : 'password'} placeholder="비밀번호를 다시 입력해주세요" onChange={(e) => setPwdCheck(e.target.value)}/>
+            <button onClick={() => setShowPwdCheck(!showPwdCheck)} className='absolute bottom-15 right-15 text-gray-700'>
+              {showPwdCheck ? <FiEye /> : <FiEyeOff /> }
             </button>
           </div>
           <div className="mb-30">
@@ -174,7 +163,7 @@ export default function Signup() {
           </div>
           <button className="w-full h-53 text-16 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none mb-50" type="submit">
               회원가입하기
-            </button>
+          </button>
         </form>
       </div>
     </div>

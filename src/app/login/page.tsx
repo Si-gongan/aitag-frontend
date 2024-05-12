@@ -17,7 +17,7 @@ interface User {
 
 export default function Login() {
 
-  const[showPwd, setShowPwd] = useState(false)
+  const [showPwd, setShowPwd] = useState(false)
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
   const [loginData, setLoginData] = useState({
@@ -33,12 +33,6 @@ export default function Login() {
       router.replace(PATH.DASHBOARD); // 로그인 상태일 때 대시보드로 리디렉션
     }
   }, [router]);
-
-  const pressShow = (e: MouseEvent) => {
-    e.preventDefault();
-    setShowPwd(!showPwd)
-  }
-
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -89,7 +83,7 @@ export default function Login() {
           </div>
           <div className="mb-20 mx-auto relative">
             <input className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16" id="password" type={showPwd ? "text" : 'password'} placeholder="PW" value={loginData.password} onChange={handleChange}/>
-            <button onClick = {e=>pressShow(e)} className='absolute bottom-20 right-15 text-gray-700'>
+            <button onClick={() => setShowPwd(!showPwd)} className='absolute bottom-20 right-15 text-gray-700'>
               {showPwd ? <FiEye /> : <FiEyeOff /> }
             </button>
           </div>

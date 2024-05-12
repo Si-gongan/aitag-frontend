@@ -23,7 +23,9 @@ interface ApiResponse {
 export default function FindChangePwd() {
 
     const [formData, setFormData] = useState<FormData>({ currentPassword: '', newPassword: '' });
+    const [currShowPwd, setCurrShowPwd] = useState(false)
     const [showPwd, setShowPwd] = useState(false)
+    const [showPwdCheck, setShowPwdCheck] = useState(false);
     const [pwdCheck, setPwdCheck] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState<string>('');
@@ -33,23 +35,18 @@ export default function FindChangePwd() {
         setFormData(prev => ({ ...prev, [id]: value }));
     };
 
-    const pressShow = (e: MouseEvent) => {
-        e.preventDefault();
-        setShowPwd(!showPwd)
-      }
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
 
-        // if (!formData.currentPassword || !formData.newPassword) {
-        //     setError('모든 필드를 채워주세요.');
-        //     return;
-        // }
-        // if (formData.newPassword.length < 8){
-        //     setError('비밀번호가 8자리 이상이 아닙니다.')
-        //     return;
-        // }
+        if (!formData.currentPassword || !formData.newPassword) {
+            setError('모든 필드를 채워주세요.');
+            return;
+        }
+        if (formData.newPassword.length < 8){
+            setError('비밀번호가 8자리 이상이 아닙니다.')
+            return;
+        }
         if (formData.newPassword !== pwdCheck) {
             setError('비밀번호가 일치하지 않습니다.');
             return;
@@ -91,22 +88,22 @@ export default function FindChangePwd() {
             <div className="mb-30 mx-auto relative">
                 <h1 className='text-14 font-bold text-left mb-3'>현재 비밀번호</h1>
                 <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="currentPassword" type={showPwd ? "text" : 'password'} placeholder="현재 비밀번호를 입력해주세요" onChange={handleChange}/>
-                <button onClick = {e=>pressShow(e)} className='absolute bottom-20 right-15 text-gray-700'>
-                    {showPwd ? <FiEye /> : <FiEyeOff /> }
+                <button onClick={() => setCurrShowPwd(!currShowPwd)} className='absolute bottom-20 right-15 text-gray-700'>
+                    {currShowPwd ? <FiEye /> : <FiEyeOff /> }
                 </button>
             </div>
             <div className="mb-30 mx-auto relative">
                 <h1 className='text-14 font-bold text-left mb-3'>새 비밀번호</h1>
                 <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="newPassword" type={showPwd ? "text" : 'password'} placeholder="새 비밀번호를 입력해주세요" onChange={handleChange}/>
-                <button onClick = {e=>pressShow(e)} className='absolute bottom-20 right-15 text-gray-700'>
+                <button onClick={() => setShowPwd(!showPwd)} className='absolute bottom-20 right-15 text-gray-700'>
                     {showPwd ? <FiEye /> : <FiEyeOff /> }
                 </button>
             </div>
             <div className="mb-30 mx-auto relative">
                 <h1 className='text-14 font-bold text-left mb-3'>새 비밀번호 확인</h1>
                 <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16focus:outline-none" id="pwdcheck" type={showPwd ? "text" : 'password'} placeholder="새 비밀번호를 다시 입력해주세요" onChange={(e) => setPwdCheck(e.target.value)}/>
-                <button onClick = {pressShow} className='absolute bottom-15 right-15 text-gray-700'>
-                    {showPwd ? <FiEye /> : <FiEyeOff /> }
+                <button onClick={() => setShowPwdCheck(!showPwdCheck)} className='absolute bottom-15 right-15 text-gray-700'>
+                    {showPwdCheck ? <FiEye /> : <FiEyeOff /> }
                 </button>
             </div>
             <button className="w-full h-53 text_16 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none mb-30" type="submit">
