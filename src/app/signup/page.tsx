@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import AlertDanger from '@/components/common/alert/AlertDanger';
 
 export default function Signup() {
 
@@ -33,46 +34,13 @@ export default function Signup() {
     setFormData(prev => ({ ...prev, phone }));
   };
 
-
-  // checkId
-  // const checkClientId = async (clientId: string) => {
-  //   try {
-  //     const response = await axios.get(API_ROUTE.GET_CLIENT_ID);
-  //     if (!response.data.result.isPossible) {
-  //       setErrorMessage('이미 사용 중인 아이디입니다.');
-  //     } else {
-  //       setErrorMessage('');
-  //     }
-  //   } catch (error) {
-  //     console.error('아이디 중복 확인 실패:', error);
-  //   }
-  // };
-
-  // const checkEmail = async (email: string) => {
-  //   try {
-  //     const response = await axios.get(API_ROUTE.GET_EMAIL);
-  //     if (!response.data.result.isPossible) {
-  //       setErrorMessage('이미 사용 중인 이메일입니다.');
-  //     } else {
-  //       setErrorMessage('');
-  //     }
-  //   } catch (error) {
-  //     console.error('이메일 중복 확인 실패:', error);
-  //   }
-  // };
-
-  // const handleBlurClientId = () => {
-  //   checkClientId(formData.clientId);
-  // };
-
-  // const handleBlurEmail = () => {
-  //   checkEmail(formData.email);
-  // };
-
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage(''); // Reset error message
+    if (!formData.clientId || !formData.password || !formData.name || !formData.email) {
+      setErrorMessage('모든 필수 필드를 채워주세요.');
+      return;
+    }
     if (formData.password !== pwdCheck) {
       setErrorMessage('비밀번호가 일치하지 않습니다.');
       return;
@@ -80,10 +48,6 @@ export default function Signup() {
     //비밀번호 조건 추후 추가
     if (formData.password.length < 8){
       setErrorMessage('비밀번호가 8자리 이상이 아닙니다.')
-      return;
-    }
-    if (!formData.clientId || !formData.password || !formData.name || !formData.email) {
-      setErrorMessage('모든 필수 필드를 채워주세요.');
       return;
     }
 
@@ -102,28 +66,33 @@ export default function Signup() {
         })
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        setErrorMessage(errorData.message || '서버 오류로 회원가입에 실패했습니다.');
-        return;
+        throw new Error(data.result?.message);
       }
 
-      const data = await response.json();
       localStorage.setItem('token', data.result.token);
       alert('회원가입 성공!');
       router.push(PATH.LOGIN); // Redirect to login page
-    } catch (error) {
-      console.error('회원가입 실패:', error);
-      setErrorMessage('네트워크 오류 또는 서버 접속이 불가능합니다.');
+    } catch (error: unknown) {
+      //checkID 및 checkEmail api 사용 불필요
+      if(error instanceof Error ){
+        console.error('회원가입 실패:', error.message);
+        setErrorMessage(error.message);
+      }else{
+        console.error('알 수 없는 오류가 발생했습니다.', error);
+        setErrorMessage('알 수 없는 오류가 발생했습니다.');
+      } 
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] bg-[#FAFBFC] px-6">
+    <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] px-6 ">
       <div className="w-full h-3/5 max-w-4xl">
         <h1 className="text-32 font-bold text-center text-gray-800 mt-50 mb-10">회원가입</h1>
         <h1 className='text-16 text-center text-gray-600 mb-50'>회원가입을 위해 아래의 정보를 입력해주세요</h1>
-        {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
+        <AlertDanger message={errorMessage} />
         <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
           <div className="mb-20">
             <h1 className='text-14 font-bold text-left mb-3'>이름 / 기업명</h1>

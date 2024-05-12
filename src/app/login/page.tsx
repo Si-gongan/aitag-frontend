@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, MouseEvent } from 'react';
 import { FiEyeOff, FiEye } from 'react-icons/fi'
+import AlertDanger from '@/components/common/alert/AlertDanger';
 
 interface ErrorResponse {
   message: string; 
@@ -75,8 +76,8 @@ export default function Login() {
     <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] px-6">
       <div className="w-full h-3/5 max-w-4xl">
         <h1 className="text-32 font-bold text-center text-gray-800 mb-10">로그인</h1>
-        <h1 className='text-16 text-center text-gray-600 mb-100'>맞춤형 대체텍스트 제작소, 글공방에 오신 것을 환영합니다!</h1>
-        {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
+        <h1 className='text-16 text-center text-gray-600 mb-70'>맞춤형 대체텍스트 제작소, 글공방에 오신 것을 환영합니다!</h1>
+        <AlertDanger message={errorMessage} />
         <form className="px-8" onSubmit={handleSubmit}>
           <div className="mb-20">
             <input className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16" id="clientId" type= "text" placeholder="ID" value={loginData.clientId} onChange={handleChange} />
