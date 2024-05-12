@@ -1,6 +1,5 @@
 import React from 'react';
 import MainLayout from '../layout/MainLayout';
-
 import TextFieldWhite from '../common/text/TextFieldWhite';
 import ActionButtonBlack from '../common/button/ActionButtonBlack';
 import IntroFirstCard from '../../../public/images/intro-first-card.svg';
