@@ -89,7 +89,7 @@ export default function Header() {
                 onClick={toggleDropdown}
                 className="flex items-center justify-center w-20 h-20 text-13 font-bold ml-8 text-gray bg-[#F9FAFB] rounded-[0.25rem]">
                 <Image
-                  src="/images/arrow-line-s.svg"
+                  src={isOpen ? '/images/arrow-line-s-t.svg' : '/images/arrow-line-s.svg'}
                   alt="화살표 모양의 유저 프로필 드롭다운 버튼"
                   width={16}
                   height={16}

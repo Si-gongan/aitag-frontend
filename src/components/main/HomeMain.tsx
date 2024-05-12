@@ -101,7 +101,7 @@ const HomeMain = () => {
             <TextTitleField text={'모두를 위한 정보 접근성'} />
             <p className="text-32 font-bold grid items-end text-primary-500">,</p>
           </div>
-          <div className="grid mb-10 items-center text-center mb-60">
+          <div className="grid items-center text-center mb-60">
             <TextTitleField text={'글공방으로 실천하세요'} />
           </div>
           <div className="w-1000 flex items-center justify-between mx-auto mb-60">
