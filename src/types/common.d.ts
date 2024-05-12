@@ -243,3 +243,16 @@ export interface OpinionRequestType {
   content: string;
   files: string[];
 }
+
+// GET_USER_INFO 응답
+export interface GetUserInfoType {
+  id: string;
+  clientId: string;
+  name: string;
+  email: string;
+  phone: string;
+  rate: string;
+  credit: number;
+  profileImgUrl?: string;
+  createdAt: string;
+}
