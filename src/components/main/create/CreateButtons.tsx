@@ -4,7 +4,6 @@ import ModalChoose from '@/components/common/modal/ModalChoose';
 import { PreviewImageItemType } from '@/types/common';
 import { AiRequestFormFormat } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
-import { getToken } from '@/utils/getToken';
 import { API_ROUTE, PATH } from '@/utils/routes';
 import uploadImage from '@/utils/uploadImage';
 import { useRouter } from 'next/navigation';

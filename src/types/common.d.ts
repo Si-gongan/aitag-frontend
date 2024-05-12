@@ -144,6 +144,27 @@ export interface PostType {
   detail?: string;
 }
 
+export interface SupportTabType {
+  id: string;
+  text: string;
+}
+
+export interface SupportType {
+  type: string;
+  title: string;
+  content: string;
+  writer: string;
+  createdAt: string;
+}
+
+export interface FaqItemType {
+  index: number;
+  title: string;
+  writer: string;
+  createdAt: string;
+  [key: string]: string | number;
+}
+
 // 서버 요청 및 리스폰스 데이터 타입
 
 // options
@@ -170,7 +191,7 @@ export interface ScrapImagesResponseType {
   height: number;
 }
 
-// GET_POST 요청시 prams
+// GET_POST 요청시 params
 export interface GetPostRequestParamType {
   // target: 'comment' | 'ai';
   target?: string;
@@ -192,4 +213,33 @@ export interface GetPostResponseType {
   prevPage: null | number;
   totalDocs: number;
   totalPages: number;
+}
+
+// GET_SUPPORT_FAQ 요청시 params
+export interface GetSupportFaqParamType {
+  type?: string;
+  limit: string;
+  page: string;
+}
+
+// GET_SUPPORT_FAQ 응답
+export interface GetSupportFaqResponseType {
+  faqs?: SupportType[];
+  notices?: SupportType[];
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  limit: number;
+  nextPage: null | number;
+  page: number;
+  pagingCounter: number;
+  prevPage: null | number;
+  totalDocs: number;
+  totalPages: number;
+}
+
+export interface OpinionRequestType {
+  clientId?: string;
+  email: string;
+  content: string;
+  files: string[];
 }
