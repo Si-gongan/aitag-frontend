@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import ActionButton from '../common/button/ActionButton';
 import { HEADER_MENU } from '@/utils/routes';
@@ -8,13 +8,14 @@ import Link from 'next/link';
 
 interface User {
   name: string;
+  profileImgUrl?: string;
   // 필요한 다른 속성들을 추가 가능
 }
 
 export default function Header() {
-
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function Header() {
     } else {
       fetchUserInfo(token);
     }
-  }, [router]);
+  }, [pathname]);
 
   const fetchUserInfo = async (token: string) => {
     try {
@@ -33,8 +34,8 @@ export default function Header() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
       const data = await response.json();
       if (response.ok) {
@@ -52,7 +53,7 @@ export default function Header() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userInfo');
-    setUser(null)
+    setUser(null);
     router.push('/login');
   };
 
@@ -69,29 +70,39 @@ export default function Header() {
           <ul className="flex items-center h-28 text-bold text-[#4D4D4D]">
             {HEADER_MENU.map((menu, index) => (
               <li key={index} className="px-16">
-                <Link href={menu.path}>
-                  {menu.title}
-                </Link>
+                <Link href={menu.path}>{menu.title}</Link>
                 {index !== last_menu_num && <span className="h-14 w-1 bg-[#212121]" />}
               </li>
             ))}
           </ul>
           {user ? (
-            <div className="flex items-center h-28">
-              <Image width={30} height={30} src="" alt=""/>
-              <div className="ml-5">
-                <p className='text-10'>어서오세요!</p>
-                {user.name} 님
+            <div className="flex items-center gap-4 h-28 pl-20">
+              <div className="relative w-35 h-35 rounded-4 overflow-hidden">
+                <Image
+                  fill
+                  src={user.profileImgUrl ? user.profileImgUrl : '/images/default-profile.jpeg'}
+                  alt="유저 프로필 이미지"
+                />
               </div>
-              <button onClick={toggleDropdown} className= "flex items-center justify-center w-20 h-20 text-13 font-bold ml-8 text-gray bg-[#F9FAFB] rounded-[0.25rem]">  
-              ▽
+              <div className="ml-5">{user.name} 님</div>
+              <button
+                onClick={toggleDropdown}
+                className="flex items-center justify-center w-20 h-20 text-13 font-bold ml-8 text-gray bg-[#F9FAFB] rounded-[0.25rem]">
+                <Image
+                  src="/images/arrow-line-s.svg"
+                  alt="화살표 모양의 유저 프로필 드롭다운 버튼"
+                  width={16}
+                  height={16}
+                />
               </button>
               {isOpen && (
                 <div className="absolute top-60 mt-2 py-2 w-117 bg-white shadow-xl rounded z-50">
                   <Link href="/mypage" className="block px-4 py-10 text-13 text-gray-700 hover:bg-gray-100">
                     마이페이지
                   </Link>
-                  <button onClick={handleLogout} className="w-full text-left px-4 py-10 text-13 text-gray-700 hover:bg-gray-100">
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-10 text-13 text-gray-700 hover:bg-gray-100">
                     로그아웃
                   </button>
                 </div>
