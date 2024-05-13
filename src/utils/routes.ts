@@ -12,11 +12,13 @@ export const PATH = {
   CREATE_IMAGE: '/create/image',
   SUPPORT_NOTICE: '/support/notice',
   SUPPORT_FAQ: '/support/faq',
+  MY_PAGE: '/mypage',
+  PLANS: '/plans',
 };
 
 export const HEADER_MENU = [
   { title: '워크스페이스', path: '/dashboard' },
-  { title: '요금제', path: '/plan' },
+  { title: '요금제', path: '/plans' },
   { title: '고객센터', path: '/support/notice' },
 ];
 
