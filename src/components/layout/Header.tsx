@@ -17,7 +17,7 @@ export default function Header() {
     PATH.DASHBOARD,
     PATH.CREATE_URL,
     PATH.CREATE_IMAGE,
-    PATH.MY_PAGE,
+    PATH.MYPAGE,
     PATH.SUPPORT_FAQ,
     PATH.SUPPORT_NOTICE,
   ];
