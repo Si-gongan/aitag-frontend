@@ -88,7 +88,7 @@ export default function Header() {
               </button>
               {isOpen && (
                 <div className="absolute top-60 mt-2 py-2 w-117 bg-white shadow-xl rounded z-50">
-                  <Link href="/mypage" className="block px-4 py-10 text-13 text-gray-700 hover:bg-gray-100">
+                  <Link href="/my-page/info" className="block px-4 py-10 text-13 text-gray-700 hover:bg-gray-100">
                     마이페이지
                   </Link>
                   <button onClick={handleLogout} className="w-full text-left px-4 py-10 text-13 text-gray-700 hover:bg-gray-100">

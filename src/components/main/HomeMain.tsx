@@ -11,12 +11,12 @@ import gongbangSecondCard from '../../../public/images/intro-gongbang-second-car
 import gongbangThirdCard from '../../../public/images/intro-gongbang-third-card.svg';
 import SoultionFirst from '../../../public/images/solution-first.svg';
 import SoultionSecond from '../../../public/images/solution-second.svg';
-import IntroCompany from '../../assets/intro-company.svg';
 import Image from 'next/image';
 import TextTitleField from '../common/text/TextTitleField';
 import TextFieldContent from '../common/text/TextFieldContent';
 import TextSubTitleField from '../common/text/TextSubTitleField';
 import Link from 'next/link';
+import { API_ROUTE, PATH } from '@/utils/routes';
 
 const HomeMain = () => {
   return (
@@ -42,7 +42,7 @@ const HomeMain = () => {
                   />
                 </div>
                 <div className="mt-40">
-                  <Link href="/login">
+                  <Link href={PATH.LOGIN}>
                     <ActionButtonBlack text="시작하기" size="w-130 h-35" />
                   </Link>
                 </div>
@@ -223,7 +223,7 @@ const HomeMain = () => {
                 <TextFieldWhite text={'모두를 위한 정보접근성을 실천하세요.'} style={'text-20 font-medium text-[#F8FAFB]'} />
               </div>
               <div className="mt-20">
-                <Link href="/login">
+                <Link href={PATH.LOGIN}>
                   <ActionButtonBlack text="시작하기" size="w-129 h-47 rounded-lg" />
                 </Link>
               </div>

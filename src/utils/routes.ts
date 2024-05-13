@@ -6,10 +6,12 @@ export const PATH = {
   SIGNUP: '/signup',
   FIND_CLIENT:'/find/client-id',
   FIND_PWD:'/find/password',
-  CHANGE_FIND_PWD:'change/findPassword',
+  CHANGE_FIND_PWD:'/change/findPassword',
   DASHBOARD: '/dashboard',
   CREATE_URL: '/create/url',
   CREATE_IMAGE: '/create/image',
+  MY_PAGE:'/my-page/info',
+  My_PAGE_PAY:'my-page/payment'
 };
 
 export const HEADER_MENU = [
