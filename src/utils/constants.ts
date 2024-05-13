@@ -129,3 +129,10 @@ export const NOTICE_HEADER = [
   { text: '작성일', value: 'createdAt' },
   { text: '제목', value: 'title' },
 ];
+
+export const PLANS_INFO = [
+  { title: 'BASIC', credits: '100 credits', rate: '₩ 3,990원', period: '/ 1달', recommend: false },
+  { title: 'STANDARD', credits: '300 credits', rate: '₩ 9,900원', period: '/ 1달', recommend: true },
+  { title: 'PREMIUM', credits: '500 credits', rate: '₩ 14,990원', period: '/ 1달', recommend: false },
+  { title: '개별 Credit 구매하기', credits: '20 credits', rate: '₩ 990원', period: '', recommend: false },
+];

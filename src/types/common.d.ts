@@ -165,6 +165,14 @@ export interface FaqItemType {
   [key: string]: string | number;
 }
 
+export interface PlansInfoType {
+  title: string;
+  credits: string;
+  rate: string;
+  period: string;
+  recommend: boolean;
+}
+
 // 서버 요청 및 리스폰스 데이터 타입
 
 // options
