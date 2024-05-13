@@ -13,15 +13,22 @@ export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const loginRequiredPage = PATH.DASHBOARD || PATH.CREATE_URL || PATH.CREATE_IMAGE;
-  // 추후 마이페이지도 추가하기
+  const loginRequiredPages = [
+    PATH.DASHBOARD,
+    PATH.CREATE_URL,
+    PATH.CREATE_IMAGE,
+    PATH.MY_PAGE,
+    PATH.SUPPORT_FAQ,
+    PATH.SUPPORT_NOTICE,
+  ];
+  // 추후 고객센터 공개 사용자 범위 확인 후 수정할 예정
 
   useEffect(() => {
-    const token = localStorage.getItem('token') as string;
+    const token = localStorage.getItem('token');
 
-    if (!token && pathname === loginRequiredPage) {
+    if (!token && loginRequiredPages.includes(pathname)) {
       router.push(PATH.LOGIN);
-    } else {
+    } else if (token && loginRequiredPages.includes(pathname)) {
       fetchUserInfo(token);
     }
   }, [pathname]);
