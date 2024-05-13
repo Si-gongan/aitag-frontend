@@ -47,7 +47,7 @@ export default function SupportImageSection() {
   // const parts = pathname.split('/');
   const parts = pathname.split('/');
   const currentPage = parts[parts.length - 1];
-  console.log(currentPage);
+  // console.log(currentPage);
 
   const initialPage = currentPage === 'notice' ? { id: 'notice', text: '공지사항' } : { id: 'faq', text: 'FAQ' };
 
