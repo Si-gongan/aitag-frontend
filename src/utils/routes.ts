@@ -40,6 +40,7 @@ export const API_ROUTE = {
   FIND_ID: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/find/client-id`,
   FIND_PWD: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/find/password`,
   CHANGE_PWD: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/change/password`,
+  GET_USER_INFO: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/info`,
   GET_SUPPORT_FAQ: ({ type, limit, page }: GetSupportFaqParamType) =>
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/support/faq?type=${type}&limit=${limit}&page=${page}`,
   GET_SUPPORT_NOTICE: ({ limit, page }: GetSupportFaqParamType) =>
