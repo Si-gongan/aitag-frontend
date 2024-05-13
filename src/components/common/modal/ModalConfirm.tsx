@@ -16,7 +16,7 @@ export default function ModalConfirm({ title, description, style, buttonText, on
       onClick={onClose}
       className="fixed inset-0 flex justify-center items-center h-full w-full bg-overlay z-overlay">
       <div
-        className={`flex flex-col items-center pt-70 pb-60 gap-40 z-modal bg-white shadow-2xl rounded-4 ${
+        className={`relative flex flex-col items-center pt-70 pb-60 gap-40 z-modal bg-white shadow-2xl rounded-4 ${
           style ? style : 'w-700'
         }`}>
         <Image src="/images/icon-check.svg" alt="체크 아이콘" width={100} height={100} />
@@ -25,6 +25,9 @@ export default function ModalConfirm({ title, description, style, buttonText, on
           {description}
         </div>
         <ActionButtonGray text={buttonText ? buttonText : '확인'} size="w-275 h-70 text-17" />
+        <button className="absolute -right-52 top-0 w-48 h-48" onClick={onClose}>
+          <Image fill src="/images/modal-close.svg" alt="모달창 닫기 버튼" />
+        </button>
       </div>
     </div>,
     document.body

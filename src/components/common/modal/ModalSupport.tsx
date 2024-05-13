@@ -10,6 +10,7 @@ import ModalConfirm from './ModalConfirm';
 import SupportFileFiled from '@/components/main/support/SupportFileFiled';
 import ActionButtonSkyBlue from '../button/ActionButtonSkyBlue';
 import ActionButton from '../button/ActionButton';
+import Image from 'next/image';
 
 interface ModalSupportProps {
   onClose: () => void;
@@ -85,7 +86,7 @@ export default function ModalSupport({ onClose }: ModalSupportProps) {
     <div
       onClick={handleClose}
       className="fixed inset-0 flex justify-center items-center h-full w-full bg-overlay z-overlay">
-      <div className="flex flex-col items-center justify-center p-60 w-702 gap-40 z-modal bg-white shadow-2xl rounded-4">
+      <div className="relative flex flex-col items-center justify-center p-60 w-702 gap-40 z-modal bg-white shadow-2xl rounded-4">
         <h1 className="text-22 font-bold text-grey/7">고객센터 문의하기</h1>
         <TextInputField name="clientId" label="아이디" onChange={handleChange} />
         <TextInputField name="email" label="이메일" onChange={handleChange} />
@@ -106,6 +107,9 @@ export default function ModalSupport({ onClose }: ModalSupportProps) {
           <ActionButtonSkyBlue text="취소" size="w-130 h-50" onClick={onClose} />
           <ActionButton text="전송하기" size="w-130 h-50" onClick={handleSubmit} />
         </div>
+        <button className="absolute -right-52 top-0 w-48 h-48" onClick={onClose}>
+          <Image fill src="/images/modal-close.svg" alt="모달창 닫기 버튼" />
+        </button>
       </div>
       {showModalConfirm && (
         <ModalConfirm
