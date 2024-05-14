@@ -21,7 +21,7 @@ export default function Header() {
 
     if (!token && loginRequiredPages.includes(pathname)) {
       router.push(PATH.LOGIN);
-    } else if (token && loginRequiredPages.includes(pathname)) {
+    } else if (token) {
       fetchUserInfo(token);
     }
   }, [pathname]);
