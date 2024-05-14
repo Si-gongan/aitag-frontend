@@ -173,6 +173,15 @@ export interface PlansInfoType {
   recommend: boolean;
 }
 
+export interface PaymentItemType {
+  index: number;
+  rate: string;
+  createdAt: string;
+  amount: string | number;
+  method: string;
+  [key: string]: number | string;
+}
+
 // 서버 요청 및 리스폰스 데이터 타입
 
 // options

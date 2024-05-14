@@ -18,6 +18,7 @@ export default function Header() {
     PATH.CREATE_URL,
     PATH.CREATE_IMAGE,
     PATH.MYPAGE,
+    PATH.MYPAGE_PAYMENT,
     PATH.SUPPORT_FAQ,
     PATH.SUPPORT_NOTICE,
   ];

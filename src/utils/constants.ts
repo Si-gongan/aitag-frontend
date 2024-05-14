@@ -132,6 +132,14 @@ export const NOTICE_HEADER = [
   { text: '제목', value: 'title' },
 ];
 
+export const PAYMENT_HEADER = [
+  { text: '번호', value: 'index' },
+  { text: '요금제 종류', value: 'rate' },
+  { text: '결제일', value: 'createdAt' },
+  { text: '결제금액', value: 'amount' },
+  { text: '결제방법', value: 'method' },
+];
+
 export const PLANS_INFO = [
   { title: 'BASIC', credits: '100 credits', rate: '₩ 3,990원', period: '/ 1달', recommend: false },
   { title: 'STANDARD', credits: '300 credits', rate: '₩ 9,900원', period: '/ 1달', recommend: true },
