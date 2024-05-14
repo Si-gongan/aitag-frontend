@@ -81,7 +81,6 @@ export const usePayment = (customerKey?: string) => {
         }
 
         const { paymentKey } = data;
-        console.log('paymentKey: ', paymentKey);
 
         const res = await fetchWithInterceptor(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/confirm`, {
           method: 'POST',
