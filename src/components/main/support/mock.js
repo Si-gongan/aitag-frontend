@@ -63,3 +63,28 @@ export const mockData = [
   //   createdAt: '2024-04-30T16:40:00.000Z',
   // },
 ];
+
+export const ReteMock = {
+  id: 'sampleid',
+  clientId: 'sampleid',
+  name: '유저 요금제 정보 샘플',
+  email: 'user@naver.com',
+  phone: '82-10-9299-4816',
+  rate: 'basic',
+  credit: 34,
+  profileImgUrl: '',
+  createdAt: '',
+};
+
+export const PaymentMockData = [
+  { rate: 'basic', createdAt: '2024-05-06T12:00:00.000Z', amount: 3990, method: '신용카드' },
+  { rate: 'standard', createdAt: '2024-05-06T12:00:00.000Z', amount: 9900, method: '신용카드' },
+  { rate: 'premium', createdAt: '2024-05-06T12:00:00.000Z', amount: 14990, method: '신용카드' },
+  { rate: 'none', createdAt: '2024-05-06T12:00:00.000Z', amount: 0, method: '신용카드' },
+  { rate: 'basic', createdAt: '2024-05-06T12:00:00.000Z', amount: 3990, method: '신용카드' },
+  { rate: 'standard', createdAt: '2024-05-06T12:00:00.000Z', amount: 9900, method: '신용카드' },
+  { rate: 'premium', createdAt: '2024-05-06T12:00:00.000Z', amount: 14990, method: '신용카드' },
+  { rate: 'none', createdAt: '2024-05-06T12:00:00.000Z', amount: 0, method: '신용카드' },
+  { rate: 'basic', createdAt: '2024-05-06T12:00:00.000Z', amount: 3990, method: '신용카드' },
+  { rate: 'standard', createdAt: '2024-05-06T12:00:00.000Z', amount: 9900, method: '신용카드' },
+];

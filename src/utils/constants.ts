@@ -1,3 +1,5 @@
+import { PATH } from './routes';
+
 export const CREATE_TABS = [
   { title: 'URL 입력', id: 'url' },
   { title: '이미지 업로드', id: 'image' },
@@ -130,9 +132,28 @@ export const NOTICE_HEADER = [
   { text: '제목', value: 'title' },
 ];
 
+export const PAYMENT_HEADER = [
+  { text: '번호', value: 'index' },
+  { text: '요금제 종류', value: 'rate' },
+  { text: '결제일', value: 'createdAt' },
+  { text: '결제금액', value: 'amount' },
+  { text: '결제방법', value: 'method' },
+];
+
 export const PLANS_INFO = [
   { title: 'BASIC', credits: '100 credits', rate: '₩ 3,990원', period: '/ 1달', recommend: false },
   { title: 'STANDARD', credits: '300 credits', rate: '₩ 9,900원', period: '/ 1달', recommend: true },
   { title: 'PREMIUM', credits: '500 credits', rate: '₩ 14,990원', period: '/ 1달', recommend: false },
   { title: '개별 Credit 구매하기', credits: '20 credits', rate: '₩ 990원', period: '', recommend: false },
+];
+
+export const MYPAGE_SIDEMENU = [
+  { url: PATH.MYPAGE, text: '개인정보 수정' },
+  { url: PATH.MYPAGE_PAYMENT, text: '결제 정보' },
+];
+
+export const TOAST_INFO = [
+  { type: 'info', imageUrl: '', style: 'bg-grey/3 text-grey7' },
+  { type: 'success', imageUrl: '/images/toast-check.svg', style: 'bg-sub/green-0 text-white' },
+  { type: 'danger', imageUrl: '/images/toast-alert.svg', style: 'bg-sub/red-0 text-white' },
 ];

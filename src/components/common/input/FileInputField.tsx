@@ -1,14 +1,20 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { PreviewImageItemType, PreviewInfoItemType } from '@/types/common';
+import { PreviewImageItemType } from '@/types/common';
 
 interface FileInputFieldProps {
   previewImages: PreviewImageItemType[];
   setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
   setUploading: React.Dispatch<React.SetStateAction<boolean>>;
+  setToastMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function FileInputField({ previewImages, setPreviewImages, setUploading }: FileInputFieldProps) {
+export default function FileInputField({
+  previewImages,
+  setPreviewImages,
+  setUploading,
+  setToastMessage,
+}: FileInputFieldProps) {
   const [isActive, setIsActive] = useState(false);
 
   const handleDragStart = () => setIsActive(true); // 드래그 할때
@@ -21,6 +27,7 @@ export default function FileInputField({ previewImages, setPreviewImages, setUpl
     event.preventDefault();
     setIsActive(false);
     setUploading(true);
+    setToastMessage('');
 
     const files = 'dataTransfer' in event ? event.dataTransfer.files : event.target.files;
     if (!files || files.length === 0) {
@@ -38,13 +45,13 @@ export default function FileInputField({ previewImages, setPreviewImages, setUpl
 
       if (!alloewedImageTypes.includes(type)) {
         setUploading(false);
-        alert('파일 형식은  JPEF, PNG, GIP, WEBP만 가능합니다.');
+        setToastMessage('파일 형식은  JPEF, PNG, GIP, WEBP만 가능합니다.');
         return;
       }
 
       if (byteSize > 50 * 1024 * 1024) {
         setUploading(false);
-        alert('파일 크기가 50MB를 초과합니다.');
+        setToastMessage('파일 크기가 50MB를 초과합니다.');
         return;
       }
 

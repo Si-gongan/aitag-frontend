@@ -12,7 +12,8 @@ export const PATH = {
   CREATE_IMAGE: '/create/image',
   SUPPORT_NOTICE: '/support/notice',
   SUPPORT_FAQ: '/support/faq',
-  MY_PAGE: '/mypage',
+  MYPAGE: '/mypage',
+  MYPAGE_PAYMENT: '/mypage/payment',
   PLANS: '/plans',
 };
 
