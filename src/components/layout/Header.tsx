@@ -13,15 +13,7 @@ export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const loginRequiredPages = [
-    PATH.DASHBOARD,
-    PATH.CREATE_URL,
-    PATH.CREATE_IMAGE,
-    PATH.MYPAGE,
-    PATH.MYPAGE_PAYMENT,
-    PATH.SUPPORT_FAQ,
-    PATH.SUPPORT_NOTICE,
-  ];
+  const loginRequiredPages = [PATH.DASHBOARD, PATH.CREATE_URL, PATH.CREATE_IMAGE, PATH.MYPAGE, PATH.MYPAGE_PAYMENT];
   // 추후 고객센터 공개 사용자 범위 확인 후 수정할 예정
 
   useEffect(() => {
