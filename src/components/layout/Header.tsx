@@ -7,6 +7,7 @@ import { HEADER_MENU, PATH } from '@/utils/routes';
 import Link from 'next/link';
 import ProfileDropDown from './ProfileDropDown';
 import { GetUserInfoType } from '@/types/common';
+import { API_ROUTE } from '@/utils/routes';
 
 export default function Header() {
   const [user, setUser] = useState<GetUserInfoType | null>(null);
@@ -36,7 +37,7 @@ export default function Header() {
 
   const fetchUserInfo = async (token: string) => {
     try {
-      const response = await fetch('https://gongbang.sigongan-ai.shop/user/info', {
+      const response = await fetch(API_ROUTE.GET_USER_INFO, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

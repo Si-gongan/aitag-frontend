@@ -47,4 +47,6 @@ export const API_ROUTE = {
   GET_SUPPORT_NOTICE: ({ limit, page }: GetSupportFaqParamType) =>
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/support/notice?limit=${limit}&page=${page}}`,
   OPINION: `${process.env.NEXT_PUBLIC_API_BASE_URL}/opinion`,
+  GET_PAYMENT: `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment`,
+  GET_PAYMENT_DETAIL: (paymentId: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/detail/${paymentId}`,
 };

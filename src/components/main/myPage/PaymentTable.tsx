@@ -1,24 +1,21 @@
 import { formattedDateV2 } from '@/utils/formattedDate';
-import { PaymentItemType } from '@/types/common';
-import { PaymentMockData } from '../support/mock';
+import { GetPaymentType, PaymentItemType } from '@/types/common';
 import { PAYMENT_HEADER } from '@/utils/constants';
 
-export default function PaymentTable({ datas = PaymentMockData }) {
+export default function PaymentTable({ payments }: { payments: GetPaymentType[] }) {
   const headerKey = PAYMENT_HEADER.map((header) => header.value);
 
   // tbody에 맞춰 데이터들을 만드는 것
-  const items: PaymentItemType[] =
-    datas &&
-    datas.map((data, index) => {
-      const formattedData = formattedDateV2(data.createdAt);
-      return {
-        index: index + 1,
-        rate: data.rate.toUpperCase(),
-        createdAt: formattedData,
-        amount: data.amount + ' 원',
-        method: data.method,
-      };
-    });
+  const items: PaymentItemType[] = payments.map((data, index) => {
+    const formattedData = formattedDateV2(data.createdAt);
+    return {
+      index: index + 1,
+      rate: data.rate.toUpperCase(),
+      createdAt: formattedData,
+      amount: data.amount + ' 원',
+      method: data.method,
+    };
+  });
 
   return (
     <table className="w-full">
