@@ -50,7 +50,7 @@ export default function faqPage() {
         <h1 className="text-36 text-grey/7 font-bold tracking-[3.6px]">FAQ</h1>
       </div>
       <FaqTab tab={tab} setTab={setTab} />
-      <FaqTable faqs={faqs} pagination={pagination} setPagination={setPagination} />
+      <FaqTable faqs={faqs || []} pagination={pagination} setPagination={setPagination} />
       {/* <FaqTable pagination={{ start: 1, click: 1, total: 2 }} setPagination={setPagination} /> */}
     </section>
   );

@@ -5,6 +5,7 @@ import PagenationButton from '@/components/common/button/PaginationButton';
 import ActionButtonSkyBlue from '@/components/common/button/ActionButtonSkyBlue';
 import { useState } from 'react';
 import ModalSupport from '@/components/common/modal/ModalSupport';
+import { getToken } from '@/utils/getToken';
 
 interface FaqTableProps {
   faqs: SupportType[];
@@ -34,6 +35,15 @@ export default function FaqTable({ faqs, pagination, setPagination }: FaqTablePr
       ...prevPagination,
       click: num,
     }));
+  };
+
+  const handleClick = async () => {
+    const token = await getToken();
+    if (!token) {
+      alert('로그인이 필요합니다!');
+    } else {
+      setShowModalSupport(true);
+    }
   };
 
   return (
@@ -71,7 +81,7 @@ export default function FaqTable({ faqs, pagination, setPagination }: FaqTablePr
       </table>
       <PagenationButton pagination={pagination} onClick={handleClickPagination} />
       <div className="flex justify-end">
-        <ActionButtonSkyBlue text="고객센터 문의하기" size="w-150 h-54" onClick={() => setShowModalSupport(true)} />
+        <ActionButtonSkyBlue text="고객센터 문의하기" size="w-150 h-54" onClick={handleClick} />
       </div>
       {showModalSupport && <ModalSupport onClose={() => setShowModalSupport(false)} />}
     </div>
