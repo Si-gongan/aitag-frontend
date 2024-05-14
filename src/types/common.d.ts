@@ -1,4 +1,5 @@
 import React, { MouseEvent } from 'react';
+import type { BrandPayInstance } from '@tosspayments/brandpay-sdk';
 
 export type MainLayoutType = {
   children: ReactNode;
@@ -182,6 +183,8 @@ export interface PaymentItemType {
   [key: string]: number | string;
 }
 
+export type CardType = Awaited<ReturnType<BrandPayInstance['getPaymentMethods']>>['cards'][0];
+
 // 서버 요청 및 리스폰스 데이터 타입
 
 // options
@@ -272,4 +275,13 @@ export interface GetUserInfoType {
   credit: number;
   profileImgUrl?: string;
   createdAt: string;
+}
+
+// GET_PAYMENT 응답
+export interface GetPaymentType {
+  amount: number;
+  credit: number;
+  createdAt: string;
+  method: string;
+  rate: 'none' | 'basic' | 'standard' | 'premium';
 }
