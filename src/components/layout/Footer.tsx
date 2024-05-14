@@ -6,8 +6,8 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="w-full relative bg-[#2E2E2E] h-[227px]">
-      <div className="flex justify-between items-center px-100 py-30 max-w-screen-lg mx-auto">
+    <footer className="w-full relative bg-[#2E2E2E] pb-24">
+      <div className="flex justify-between items-center px-100 pt-24 pb-8 max-w-screen-lg mx-auto">
         <div className="flex items-center">
           <Image src="/images/gongbang_logo.png" width={100} height={20} alt="글공방 로고" />
           <TextFieldWhite text={'글공방'} style={'ml-40 text-lg font-Pretendard'} />
@@ -32,7 +32,13 @@ const Footer = () => {
       </div>
       <div className="relative justify-between items-center px-100 max-w-screen-lg mx-auto">
         <div className="max-w-screen-lg mx-auto border-t border-[#919191] mb-10"></div>
-        <TextFieldGray text={'개인정보처리방침 | 이용약관 | 문의메일'} />
+        <div className="flex items-center gap-12 text-white text-12">
+          <Link href="/">개인정보처리방침</Link>
+          <hr className="h-12 border-1 border-[#919191]" />
+          <Link href="/">이용약관</Link>
+          <hr className="h-12 border-1 border-[#919191]" />
+          <Link href="/">문의메일</Link>
+        </div>
         <TextFieldGray text={'Copyright ⓒ 2023. 시(視)공간. All rights reserved.'} />
       </div>
     </footer>
