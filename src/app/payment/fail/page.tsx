@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
-export default function Fail() {
+function Fail() {
   const params = useSearchParams();
   const reason = params.get('reason');
 
@@ -16,4 +17,12 @@ export default function Fail() {
       <span className="text-grey/7 mt-[20px]">이유: {reason ?? '알 수 없는 오류'}</span>
     </div>
   );
+}
+
+export default function Wrapper() {
+  return (
+    <Suspense>
+      <Fail />
+    </Suspense>
+  )
 }
