@@ -6,9 +6,9 @@ import { formattedDate } from '@/utils/formattedDate';
 import { API_ROUTE } from '@/utils/routes';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
-export default function Success() {
+function Success() {
   const params = useSearchParams();
   const paymentId = params.get('paymentId');
 
@@ -80,5 +80,13 @@ export default function Success() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Wrapper() {
+  return (
+    <Suspense>
+      <Success />
+    </Suspense>
   );
 }
