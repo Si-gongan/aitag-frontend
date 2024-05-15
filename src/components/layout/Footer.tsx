@@ -13,7 +13,7 @@ const Footer = () => {
           <TextFieldWhite text={'글공방'} style={'ml-40 text-lg font-Pretendard'} />
         </div>
         <div className="flex justify-between items-center gap-12">
-          <Link href="https://instagram.com/si_gongan?igshid=MTIzZWMxMTBkOA==" target="_blank">
+          <Link href="https://www.instagram.com/sigongan.official?igsh=MzRlODBiNWFlZA==" target="_blank">
             <Image src="/images/instagram.svg" width={44} height={44} alt="글공방 페이스북" />
           </Link>
           <Link href="https://www.facebook.com/profile.php?id=100089078353915" target="_blank">

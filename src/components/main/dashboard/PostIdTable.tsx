@@ -217,7 +217,7 @@ export default function PostIdTable({
           ))}
         </tr>
       </thead>
-      <tbody className={`block ${tbodyHeight ? tbodyHeight : 'max-h-265'} overflow-y-auto`}>
+      <tbody className={`block ${tbodyHeight ? tbodyHeight : 'max-h-265'} overflow-y-auto scroll-block`}>
         {items.map((item, index) => (
           <tr
             key={index}
