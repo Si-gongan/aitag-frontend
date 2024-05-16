@@ -72,6 +72,11 @@ export default function Login() {
     }
   };
 
+  const togglePasswordVisibility = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setShowPwd(!showPwd);
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] px-6">
       <div className="w-full h-3/5 max-w-4xl">
@@ -84,9 +89,9 @@ export default function Login() {
           </div>
           <div className="mb-20 mx-auto relative">
             <input className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16" id="password" type={showPwd ? "text" : 'password'} placeholder="PW" value={loginData.password} onChange={handleChange}/>
-            <button onClick={() => setShowPwd(!showPwd)} className='absolute bottom-20 right-15 text-gray-700'>
+            <div onClick={togglePasswordVisibility} className='absolute bottom-20 right-15 text-gray-700'>
               {showPwd ? <FiEye /> : <FiEyeOff /> }
-            </button>
+            </div>
           </div>
           <div className="flex items-center justify-end mb-30">
             <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href={PATH.FIND_CLIENT}>

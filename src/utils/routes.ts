@@ -10,8 +10,8 @@ export const PATH = {
   DASHBOARD: '/dashboard',
   CREATE_URL: '/create/url',
   CREATE_IMAGE: '/create/image',
-  MY_PAGE:'/my-page/info',
-  My_PAGE_PAY:'my-page/payment'
+  MY_PAGE:'/mypage/info',
+  My_PAGE_PAY:'mypage/payment'
 };
 
 export const HEADER_MENU = [
@@ -37,7 +37,10 @@ export const API_ROUTE = {
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/check/client-id/${clientId}`,
   GET_EMAIL: (email: string) => 
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/check/email/${email}`,
+  GET_USER_INFO: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/info`,
   FIND_ID: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/find/client-id`,
   FIND_PWD: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/find/password`,
   CHANGE_PWD: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/change/password`,
+  CHANGE_INFO: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/change/info`,
+  DELETE_IMG: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/img`,
 };
