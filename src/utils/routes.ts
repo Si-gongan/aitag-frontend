@@ -44,7 +44,6 @@ export const API_ROUTE = {
   CHANGE_PWD: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/change/password`,
   CHANGE_INFO: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/change/info`,
   DELETE_IMG: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/img`,
-  GET_USER_INFO: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/info`,
   GET_SUPPORT_FAQ: ({ type, limit, page }: GetSupportFaqParamType) =>
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/support/faq?type=${type}&limit=${limit}&page=${page}`,
   GET_SUPPORT_NOTICE: ({ limit, page }: GetSupportFaqParamType) =>

@@ -81,8 +81,10 @@ export default function Login() {
     <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] px-6">
       <div className="w-full h-3/5 max-w-4xl">
         <h1 className="text-32 font-bold text-center text-gray-800 mb-10">로그인</h1>
-        <h1 className='text-16 text-center text-gray-600 mb-70'>맞춤형 대체텍스트 제작소, 글공방에 오신 것을 환영합니다!</h1>
-        <AlertDanger message={errorMessage} />
+        <div className='mb-60'>
+          <h1 className='text-16 text-center text-gray-600'>맞춤형 대체텍스트 제작소, 글공방에 오신 것을 환영합니다!</h1>
+          <AlertDanger message={errorMessage} />
+        </div>
         <form className="px-8" onSubmit={handleSubmit}>
           <div className="mb-20">
             <input

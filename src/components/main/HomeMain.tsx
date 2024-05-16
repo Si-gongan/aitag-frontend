@@ -115,7 +115,7 @@ const HomeMain = () => {
               <Image src="/images/icon01.png" width={300} height={300} alt="수첩과 돋보기 이미지" />
             </div>
           </div>
-          <div className="w-1000 flex items-center justify-between mx-auto">
+          <div className="w-1000 flex items-center justify-between mx-auto mb-60">
             <div>
               <Image src="/images/icon02.png" width={300} height={300} alt="블럭 이미지" />
             </div>
@@ -126,7 +126,7 @@ const HomeMain = () => {
               <TextFieldContent text={'나만의 맞춤형 대체텍스트를 만나보세요.'} />
             </div>
           </div>
-          <div className="w-1000 flex items-center justify-between mx-auto mb-50">
+          <div className="w-1000 flex items-center justify-between mx-auto mb-60">
             <div>
               <TextSubTitleField text={'AI와 전문 해설진, '} style={''} />
               <TextSubTitleField text={'원하는 서비스를 한번에'} style={'mb-20'} />

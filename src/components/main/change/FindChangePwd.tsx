@@ -82,34 +82,49 @@ export default function FindChangePwd() {
         }
     };
 
+    const togglePasswordVisibility = (e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setCurrShowPwd(!currShowPwd);
+      };
+      const togglePasswordVisibility1 = (e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setShowPwd(!showPwd);
+      };
+      const togglePasswordVisibility2 = (e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setShowPwdCheck(!showPwdCheck);
+      };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] px-6">
       <div className="w-full h-3/5 max-w-4xl">
         {!message ?( 
             <form onSubmit={handleSubmit}>
             <h1 className="text-32 font-bold text-center text-gray-800 mb-15">비밀번호 변경</h1>
-            <h1 className='text-16 text-center text-gray-600 mb-100'>가입된 계정의 새로운 비밀번호를 입력해주세요.</h1>
-            <AlertDanger message={error} />
+            <div className='mb-60'>
+                <h1 className='text-16 text-center text-gray-600'>가입된 계정의 새로운 비밀번호를 입력해주세요.</h1>
+                <AlertDanger message={error} />
+            </div>
             <div className="mb-30 mx-auto relative px-8">
                 <h1 className='text-14 font-bold text-left mb-3'>현재 비밀번호</h1>
                 <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="currentPassword" type={showPwd ? "text" : 'password'} placeholder="현재 비밀번호를 입력해주세요" onChange={handleChange}/>
-                <button onClick={() => setCurrShowPwd(!currShowPwd)} className='absolute bottom-20 right-15 text-gray-700'>
+                <div onClick={togglePasswordVisibility} className='absolute bottom-20 right-15 text-gray-700'>
                     {currShowPwd ? <FiEye /> : <FiEyeOff /> }
-                </button>
+                </div>
             </div>
             <div className="mb-30 mx-auto relative px-8">
                 <h1 className='text-14 font-bold text-left mb-3'>새 비밀번호</h1>
                 <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="newPassword" type={showPwd ? "text" : 'password'} placeholder="새 비밀번호를 입력해주세요" onChange={handleChange}/>
-                <button onClick={() => setShowPwd(!showPwd)} className='absolute bottom-20 right-15 text-gray-700'>
+                <div onClick={togglePasswordVisibility1} className='absolute bottom-20 right-15 text-gray-700'>
                     {showPwd ? <FiEye /> : <FiEyeOff /> }
-                </button>
+                </div>
             </div>
             <div className="mb-30 mx-auto relative px-8">
                 <h1 className='text-14 font-bold text-left mb-3'>새 비밀번호 확인</h1>
                 <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16focus:outline-none" id="pwdcheck" type={showPwd ? "text" : 'password'} placeholder="새 비밀번호를 다시 입력해주세요" onChange={(e) => setPwdCheck(e.target.value)}/>
-                <button onClick={() => setShowPwdCheck(!showPwdCheck)} className='absolute bottom-15 right-15 text-gray-700'>
+                <div onClick={togglePasswordVisibility2} className='absolute bottom-15 right-15 text-gray-700'>
                     {showPwdCheck ? <FiEye /> : <FiEyeOff /> }
-                </button>
+                </div>
             </div>
             <div className = 'px-8'>
                 <button className="w-full h-53 text_16 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none mb-30" type="submit">

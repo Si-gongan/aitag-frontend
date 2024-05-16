@@ -2,6 +2,7 @@ import { GetUserInfoType } from '@/types/common';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { Path } from 'react-router-dom';
 
 interface ProfileDropDownProps {
   user: GetUserInfoType;

@@ -70,8 +70,10 @@ export default function Id() {
         <h1 className="text-32 font-bold text-center text-gray-800 mb-15">아이디 찾기</h1>
         {!ClientId ?( 
           <form onSubmit={handleSubmit}>
-          <h1 className='text-16 text-center text-gray-600 mb-100'>가입된 계정 정보를 입력해주세요.</h1>
-          <AlertDanger message={error} />
+          <div className='mb-60'>
+            <h1 className='text-16 text-center text-gray-600'>가입된 계정 정보를 입력해주세요.</h1>
+            <AlertDanger message={error} />
+          </div>
           <div className="mb-30 px-8">
             <h1 className='text-14 font-bold text-left mb-3'>이름 / 기업명</h1>
             <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="name" type= "text" placeholder="이름 혹은 기업명을 입력해주세요" onChange={handleChange}/>

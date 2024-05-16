@@ -86,12 +86,23 @@ export default function Signup() {
     }
   };
 
+  const togglePasswordVisibility1 = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setShowPwd(!showPwd);
+  };
+  const togglePasswordVisibility2 = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setShowPwdCheck(!showPwdCheck);
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] px-6 ">
       <div className="w-full h-3/5 max-w-4xl">
         <h1 className="text-32 font-bold text-center text-gray-800 mt-50 mb-10">회원가입</h1>
-        <h1 className='text-16 text-center text-gray-600 mb-50'>회원가입을 위해 아래의 정보를 입력해주세요</h1>
-        <AlertDanger message={errorMessage} />
+        <div className='mb-50'>
+          <h1 className='text-16 text-center text-gray-600'>회원가입을 위해 아래의 정보를 입력해주세요</h1>
+          <AlertDanger message={errorMessage} />
+        </div>
         <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
           <div className="mb-20">
             <h1 className='text-14 font-bold text-left mb-3'>이름 / 기업명</h1>
@@ -108,16 +119,16 @@ export default function Signup() {
           <div className="mb-20 mx-auto relative">
             <h1 className='text-14 font-bold text-left mb-3'>비밀번호</h1>
             <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="password" type={showPwd ? "text" : 'password'} placeholder="비밀번호를 입력해주세요" onChange={handleChange}/>
-            <button onClick={() => setShowPwd(!showPwd)} className='absolute bottom-15 right-15 text-gray-700'>
+            <div onClick={togglePasswordVisibility1} className='absolute bottom-15 right-15 text-gray-700'>
               {showPwd ? <FiEye /> : <FiEyeOff /> }
-            </button>
+            </div>
           </div>
           <div className="mb-20 mx-auto relative">
             <h1 className='text-14 font-bold text-left mb-3'>비밀번호 확인</h1>
-            <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16focus:outline-none" id="pwdcheck" type={showPwdCheck ? "text" : 'password'} placeholder="비밀번호를 다시 입력해주세요" onChange={(e) => setPwdCheck(e.target.value)}/>
-            <button onClick={() => setShowPwdCheck(!showPwdCheck)} className='absolute bottom-15 right-15 text-gray-700'>
+            <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="pwdcheck" type={showPwdCheck ? "text" : 'password'} placeholder="비밀번호를 다시 입력해주세요" onChange={(e) => setPwdCheck(e.target.value)}/>
+            <div onClick={togglePasswordVisibility2} className='absolute bottom-15 right-15 text-gray-700'>
               {showPwdCheck ? <FiEye /> : <FiEyeOff /> }
-            </button>
+            </div>
           </div>
           <div className="mb-30">
             <h1 className='text-l4 font-bold text-left mb-3'>전화번호 (선택)</h1>

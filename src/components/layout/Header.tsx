@@ -51,7 +51,7 @@ export default function Header() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setUser(null);
-    router.push('/login');
+    router.push(PATH.LOGIN);
   };
 
   const last_menu_num = HEADER_MENU.length - 1;
@@ -74,7 +74,7 @@ export default function Header() {
           {user ? (
             <ProfileDropDown user={user} handleLogout={handleLogout} />
           ) : (
-            <Link href="/login">
+            <Link href={PATH.LOGIN}>
               <ActionButton text="시작하기" size="w-117 h-35 text-13 font-bold ml-20" />
             </Link>
           )}
