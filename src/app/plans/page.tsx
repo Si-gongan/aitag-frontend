@@ -3,40 +3,12 @@
 import PlanCard from '@/components/main/plans/PlanCard';
 import { usePayment } from '@/hooks/usePayment';
 import { GetUserInfoType } from '@/types/common';
+import { TEMP_PLANS_INFO } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { getToken } from '@/utils/getToken';
 import { API_ROUTE } from '@/utils/routes';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
-const TEMP_PLANS_INFO = [
-  {
-    credits: '100 credits',
-    rate: '₩ 3,990원',
-    amount: 3990,
-    recommend: false,
-    title: '',
-    period: '',
-  },
-
-  {
-    credits: '300 credits',
-    rate: '₩ 9,990원',
-    amount: 9990,
-    recommend: true,
-    title: '',
-    period: '',
-  },
-
-  {
-    credits: '500 credits',
-    rate: '₩ 14,990원',
-    amount: 14990,
-    recommend: false,
-    title: '',
-    period: '',
-  },
-];
 
 export default function Plans() {
   const router = useRouter();
@@ -87,7 +59,7 @@ export default function Plans() {
 
       <div className="w-full flex justify-center items-center gap-36">
         {TEMP_PLANS_INFO.map((plan, i) => (
-          <PlanCard plan={plan} onClick={() => handleClick(i)} />
+          <PlanCard key={i} plan={plan} onClick={() => handleClick(i)} />
         ))}
       </div>
     </section>

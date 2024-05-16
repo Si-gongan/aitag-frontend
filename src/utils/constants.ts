@@ -157,3 +157,32 @@ export const TOAST_INFO = [
   { type: 'success', imageUrl: '/images/toast-check.svg', style: 'bg-sub/green-0 text-white' },
   { type: 'danger', imageUrl: '/images/toast-alert.svg', style: 'bg-sub/red-0 text-white' },
 ];
+
+export const TEMP_PLANS_INFO = [
+  {
+    credits: '100 credits',
+    rate: '₩ 3,990원',
+    amount: 3990,
+    recommend: false,
+    title: '',
+    period: '',
+  },
+
+  {
+    credits: '300 credits',
+    rate: '₩ 9,990원',
+    amount: 9990,
+    recommend: true,
+    title: '',
+    period: '',
+  },
+
+  {
+    credits: '500 credits',
+    rate: '₩ 14,990원',
+    amount: 14990,
+    recommend: false,
+    title: '',
+    period: '',
+  },
+];
