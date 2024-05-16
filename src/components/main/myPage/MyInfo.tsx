@@ -166,8 +166,8 @@ export default function MyInfo() {
     <div className="flex w-full h-full bg-[#FAFBFC]">
         <div className='flex w-full mt-30 mb-30'>
             <div className='relative flex flex-col items-center w-[262px] h-[878px] bg-[#FFFFFF] mr-30'>
-               <ActionButtonMyPage href={PATH.MY_PAGE} text="개인정보 수정" size="w-[200px] h-[54px] mt-[64px] " />
-               <ActionButtonMyPage href={PATH.My_PAGE_PAY} text="결제정보" size="w-[200px] h-[54px] mt-[32px] " />
+               <ActionButtonMyPage href={PATH.MYPAGE} text="개인정보 수정" size="w-[200px] h-[54px] mt-[64px] " />
+               <ActionButtonMyPage href={PATH.MYPAGE_PAYMENT} text="결제정보" size="w-[200px] h-[54px] mt-[32px] " />
             </div>
             <div className='w-[1136px] justify-center h-[878px] bg-[#FFFFFF]'>
                 <div className='mt-[41px] w-[996px]'>
