@@ -17,7 +17,7 @@ export default function ListSection({ items, sortId, pagination, setPagination }
 
   const getWorkfirstImage = (works: WorkType[]) => {
     const firstImage = works[0].image;
-    const thumbnail = firstImage.startsWith('data:image') ? '/images/thumb_default.svg' : firstImage;
+    const thumbnail = firstImage.startsWith('data:image') ? '/images/dashboard-default-icon.svg' : firstImage;
 
     return thumbnail;
   };
