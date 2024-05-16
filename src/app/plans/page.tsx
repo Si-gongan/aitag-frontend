@@ -74,7 +74,7 @@ export default function Plans() {
   };
 
   return (
-    <section className="flex items-center justify-between w-1302 my-60">
+    <section className="flex items-center justify-between w-full my-60">
       {/* <div className="flex items-center gap-16">
         {PLANS_INFO.slice(0, 3).map((plan, index) => (
           <PlanCard key={index} plan={plan} onClick={() => handleClick(plan.title)} />
