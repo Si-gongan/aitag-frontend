@@ -15,7 +15,7 @@ import TextTitleField from '../common/text/TextTitleField';
 import TextFieldContent from '../common/text/TextFieldContent';
 import TextSubTitleField from '../common/text/TextSubTitleField';
 import Link from 'next/link';
-import { PATH } from '@/utils/routes';
+import { API_ROUTE, PATH } from '@/utils/routes';
 
 const HomeMain = () => {
   return (
@@ -197,7 +197,7 @@ const HomeMain = () => {
                 />
               </div>
               <div className="mt-20">
-                <Link href="/login">
+                <Link href={PATH.LOGIN}>
                   <ActionButtonBlack text="시작하기" size="w-129 h-47 rounded-lg" />
                 </Link>
               </div>

@@ -26,6 +26,15 @@ export interface ActionButtonType {
   disabled?: boolean;
 }
 
+export interface ActionButtonMyPageType {
+  href: string;
+  text: string;
+  size: string;
+  type?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+}
+
 export interface ActionButtonSkyBlueType {
   text: string;
   size?: string;

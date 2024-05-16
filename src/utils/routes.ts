@@ -38,9 +38,12 @@ export const API_ROUTE = {
   SIGN_UP: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/signup`,
   GET_CLIENT_ID: (clientId: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/check/client-id/${clientId}`,
   GET_EMAIL: (email: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/check/email/${email}`,
+  GET_USER_INFO: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/info`,
   FIND_ID: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/find/client-id`,
   FIND_PWD: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/find/password`,
   CHANGE_PWD: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/change/password`,
+  CHANGE_INFO: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/change/info`,
+  DELETE_IMG: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/img`,
   GET_USER_INFO: `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/info`,
   GET_SUPPORT_FAQ: ({ type, limit, page }: GetSupportFaqParamType) =>
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/support/faq?type=${type}&limit=${limit}&page=${page}`,
@@ -49,4 +52,5 @@ export const API_ROUTE = {
   OPINION: `${process.env.NEXT_PUBLIC_API_BASE_URL}/opinion`,
   GET_PAYMENT: `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment`,
   GET_PAYMENT_DETAIL: (paymentId: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/detail/${paymentId}`,
+
 };

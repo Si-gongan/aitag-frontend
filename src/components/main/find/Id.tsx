@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link';
 import { API_ROUTE, PATH } from '@/utils/routes';
 import { useState } from 'react';
+import AlertDanger from '@/components/common/alert/AlertDanger';
 
 interface FormData {
   name: string;
@@ -14,6 +15,7 @@ interface ApiResponse {
   statusCode: number;
   result: {
     clientId: string;
+    message: string;
   }
 }
 
@@ -43,13 +45,22 @@ export default function Id() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      if (!response.ok) {
-        throw new Error('서버오류');
-      }
+
       const data: ApiResponse = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.result?.message);
+      }
+      
       setClientId(data.result.clientId); // 마스킹된 아이디
-    } catch (error: any) {
-      setError('아이디가 존재하지 않습니다. 계정 정보를 다시 입력해주세요.');
+    } catch (error: unknown) {
+      if(error instanceof Error ){
+        console.error(error.message);
+        setError(error.message);
+      }else{
+        console.error('알 수 없는 오류가 발생했습니다.', error);
+        setError('알 수 없는 오류가 발생했습니다.');
+      } 
     }
   };
 
@@ -58,18 +69,18 @@ export default function Id() {
       <div className="w-full h-3/5 max-w-4xl">
         <h1 className="text-32 font-bold text-center text-gray-800 mb-15">아이디 찾기</h1>
         {!ClientId ?( 
-          <form className="px-8" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
           <h1 className='text-16 text-center text-gray-600 mb-100'>가입된 계정 정보를 입력해주세요.</h1>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          <div className="mb-30">
+          <AlertDanger message={error} />
+          <div className="mb-30 px-8">
             <h1 className='text-14 font-bold text-left mb-3'>이름 / 기업명</h1>
             <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="name" type= "text" placeholder="이름 혹은 기업명을 입력해주세요" onChange={handleChange}/>
           </div>
-          <div className="mb-30">
+          <div className="mb-30 px-8">
             <h1 className='text-14 font-bold text-left mb-3'>이메일</h1>
             <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="email" type= "email" placeholder="이메일을 입력해주세요" onChange={handleChange}/>
           </div>
-          <button className="w-full h-53 text_16 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none" type="submit">
+          <button className="px-8 w-full h-53 text_16 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none" type="submit">
               확인
           </button>
         </form>
