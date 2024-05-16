@@ -1,6 +1,6 @@
 import PagenationButton from '@/components/common/button/PaginationButton';
 import { PaginationType, PostType, WorkType } from '@/types/common';
-import formattedDate from '@/utils/formattedDate';
+import { formattedDate } from '@/utils/formattedDate';
 import { getStatusText } from '@/utils/getStatusText';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -17,7 +17,7 @@ export default function ListSection({ items, sortId, pagination, setPagination }
 
   const getWorkfirstImage = (works: WorkType[]) => {
     const firstImage = works[0].image;
-    const thumbnail = firstImage.startsWith('data:image') ? '/images/thumb_default.svg' : firstImage;
+    const thumbnail = firstImage.startsWith('data:image') ? '/images/dashboard-default-icon.svg' : firstImage;
 
     return thumbnail;
   };
@@ -55,7 +55,6 @@ export default function ListSection({ items, sortId, pagination, setPagination }
                 decoding="async"
                 loading="lazy"
               />
-
               <div
                 className={`flex flex-col justify-between h-120 pt-18 pb-17 px-10  bg-grey/1 ${
                   item.target && item.target === 'ai' && item.isComplete === false ? 'text-grey/6' : 'text-grey/7'

@@ -1,13 +1,13 @@
 import ActionButtonSkyBlue from '../button/ActionButtonSkyBlue';
 
-interface TextInputFieldProps {
+interface UrlInputFieldProps {
   name: string;
   placeholder: string;
   buttonText: string;
   loading: boolean;
 }
 
-export default function TextInputField({ name, placeholder, buttonText, loading }: TextInputFieldProps) {
+export default function UrlInputField({ name, placeholder, buttonText, loading }: UrlInputFieldProps) {
   return (
     <div className="flex flex-col gap-20">
       <label htmlFor={name} className="text-18 font-bold text-grey/7">
@@ -22,7 +22,7 @@ export default function TextInputField({ name, placeholder, buttonText, loading 
           text-grey/7 placeholder-text-grey/5 ${loading ? 'bg-grey/0' : ''}`}
           disabled={loading}
         />
-        <ActionButtonSkyBlue text={buttonText} size="h-54 w-150" />
+        {buttonText && <ActionButtonSkyBlue text={buttonText} size="h-54 w-150" />}
       </div>
     </div>
   );

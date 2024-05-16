@@ -13,10 +13,8 @@ export default function PostId() {
   const [loading, setLoading] = useState<boolean>(false);
   const [post, setPost] = useState<PostType>();
   const [selectedWorks, setSelectedWorks] = useState<WorkType[]>([]);
-  const [sort, setSort] = useState<DashbaordSortType>({ id: 'inspect', name: '해설진 검수' });
   const [requestExpertPage, setRequestExpertPage] = useState(false); // ai 대체텍스트 생성 결과 확인에서 '검수요청'시 보여지는 '해설진 검수 세부 요청서'페이지
 
-  const router = useRouter();
   const pathname = usePathname();
   const parts = pathname.split('/');
   const postId = parts[2];
@@ -53,6 +51,7 @@ export default function PostId() {
         requestExpertPage={requestExpertPage}
         setRequestExpertPage={setRequestExpertPage}
         selectedTotal={selectedTotal}
+        selectedWorks={selectedWorks}
       />
       {requestExpertPage ? (
         <RequestExpertForm selectedWorks={selectedWorks} setRequestExpertPage={setRequestExpertPage} />

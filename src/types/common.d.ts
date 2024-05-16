@@ -1,4 +1,5 @@
 import React, { MouseEvent } from 'react';
+import type { BrandPayInstance } from '@tosspayments/brandpay-sdk';
 
 export type MainLayoutType = {
   children: ReactNode;
@@ -153,6 +154,46 @@ export interface PostType {
   detail?: string;
 }
 
+export interface SupportTabType {
+  id: string;
+  text: string;
+}
+
+export interface SupportType {
+  type: string;
+  title: string;
+  content: string;
+  writer: string;
+  createdAt: string;
+}
+
+export interface FaqItemType {
+  index: number;
+  title: string;
+  writer: string;
+  createdAt: string;
+  [key: string]: string | number;
+}
+
+export interface PlansInfoType {
+  title: string;
+  credits: string;
+  rate: string;
+  period: string;
+  recommend: boolean;
+}
+
+export interface PaymentItemType {
+  index: number;
+  rate: string;
+  createdAt: string;
+  amount: string | number;
+  method: string;
+  [key: string]: number | string;
+}
+
+export type CardType = Awaited<ReturnType<BrandPayInstance['getPaymentMethods']>>['cards'][0];
+
 // 서버 요청 및 리스폰스 데이터 타입
 
 // options
@@ -179,7 +220,7 @@ export interface ScrapImagesResponseType {
   height: number;
 }
 
-// GET_POST 요청시 prams
+// GET_POST 요청시 params
 export interface GetPostRequestParamType {
   // target: 'comment' | 'ai';
   target?: string;
@@ -201,4 +242,55 @@ export interface GetPostResponseType {
   prevPage: null | number;
   totalDocs: number;
   totalPages: number;
+}
+
+// GET_SUPPORT_FAQ 요청시 params
+export interface GetSupportFaqParamType {
+  type?: string;
+  limit: string;
+  page: string;
+}
+
+// GET_SUPPORT_FAQ 응답
+export interface GetSupportFaqResponseType {
+  faqs?: SupportType[];
+  notices?: SupportType[];
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  limit: number;
+  nextPage: null | number;
+  page: number;
+  pagingCounter: number;
+  prevPage: null | number;
+  totalDocs: number;
+  totalPages: number;
+}
+
+export interface OpinionRequestType {
+  clientId?: string;
+  email: string;
+  content: string;
+  files: string[];
+}
+
+// GET_USER_INFO 응답
+export interface GetUserInfoType {
+  id: string;
+  clientId: string;
+  name: string;
+  email: string;
+  phone: string;
+  rate: string;
+  credit: number;
+  profileImgUrl?: string;
+  createdAt: string;
+}
+
+// GET_PAYMENT 응답
+export interface GetPaymentType {
+  amount: number;
+  credit: number;
+  createdAt: string;
+  method: string;
+  rate: 'none' | 'basic' | 'standard' | 'premium';
 }

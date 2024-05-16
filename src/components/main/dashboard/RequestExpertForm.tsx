@@ -2,7 +2,7 @@ import ActionButton from '@/components/common/button/ActionButton';
 import ActionButtonGray from '@/components/common/button/ActionButtonGray';
 import ModalConfirm from '@/components/common/modal/ModalConfirm';
 import { WorkType } from '@/types/common';
-import { ExportRequestFormFormat } from '@/utils/constants';
+import { ExpertRequestFormFormat } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
 import { useRouter } from 'next/navigation';
@@ -31,10 +31,10 @@ export default function RequestExpertForm({ selectedWorks, setRequestExpertPage 
 
     setLoading(true);
 
-    const ExportRequestForm = { ...ExportRequestFormFormat, works: worksForm, detail: value };
+    const ExpertRequestForm = { ...ExpertRequestFormFormat, works: worksForm, detail: value };
     const options = {
       method: 'POST',
-      body: JSON.stringify(ExportRequestForm),
+      body: JSON.stringify(ExpertRequestForm),
     };
 
     try {

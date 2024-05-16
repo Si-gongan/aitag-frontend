@@ -1,6 +1,5 @@
 'use client';
 
-import TextInputField from '@/components/common/input/TextInputField';
 import { useEffect, useState } from 'react';
 import SectionLayout from './SectionLayout';
 import ImageListTable from './ImageListTable';
@@ -11,6 +10,7 @@ import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import ModalLoading from '@/components/common/modal/ModalLoading';
 import CreateButtons from './CreateButtons';
 import RequestForExpert from './RequestForExpert';
+import UrlInputField from '@/components/common/input/UrlInputField';
 
 export default function TabUrlSection() {
   const [urls, setUrls] = useState<string[]>([]);
@@ -73,7 +73,7 @@ export default function TabUrlSection() {
           {loading && <ModalLoading>이미지 미리보기를 불러오는 중입니다!</ModalLoading>}
           <SectionLayout>
             <form onSubmit={handleSubmitUrl}>
-              <TextInputField name="url" placeholder="웹 URL 주소를 입력해주세요" buttonText="확인" loading={loading} />
+              <UrlInputField name="url" placeholder="웹 URL 주소를 입력해주세요" buttonText="확인" loading={loading} />
             </form>
           </SectionLayout>
           <SectionLayout title="URL 리스트" description="대체텍스트 생성이 진행될 URL 리스트입니다.">

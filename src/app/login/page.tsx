@@ -7,8 +7,9 @@ import { ChangeEvent, FormEvent, MouseEvent } from 'react';
 import { FiEyeOff, FiEye } from 'react-icons/fi'
 import AlertDanger from '@/components/common/alert/AlertDanger';
 
+
 interface ErrorResponse {
-  message: string; 
+  message: string;
 }
 
 interface User {
@@ -17,13 +18,12 @@ interface User {
 }
 
 export default function Login() {
-
-  const [showPwd, setShowPwd] = useState(false)
+  const [showPwd, setShowPwd] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
   const [loginData, setLoginData] = useState({
     clientId: '',
-    password: ''
+    password: '',
   });
   const [user, setUser] = useState<User | null>(null);
 
@@ -34,10 +34,10 @@ export default function Login() {
       router.replace(PATH.DASHBOARD); // 로그인 상태일 때 대시보드로 리디렉션
     }
   }, [router]);
-
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setLoginData(prev => ({ ...prev, [id]: value }));
+    setLoginData((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -46,26 +46,26 @@ export default function Login() {
       const response = await fetch(API_ROUTE.LOGIN, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           clientId: loginData.clientId,
-          password: loginData.password
-        })
+          password: loginData.password,
+        }),
       });
 
       const result = await response.json();
 
       if (!response.ok) {
         const errorInfo: ErrorResponse = result as ErrorResponse;
-        throw new Error(errorInfo.message || '로그인에 실패했습니다.' );
+        throw new Error(errorInfo.message || '로그인에 실패했습니다.');
       }
 
       localStorage.setItem('token', result.result.token); // 토큰 저장
       setUser(result.result.user);
       router.replace('/dashboard'); // 성공 시 대시보드로 리디렉션
     } catch (error) {
-      const serverError = error instanceof Error ? error.message : "알 수 없는 에러가 발생했습니다."
+      const serverError = error instanceof Error ? error.message : '알 수 없는 에러가 발생했습니다.';
       console.error('로그인 실패:', serverError);
       setUser(null);
       setErrorMessage(serverError);
@@ -85,7 +85,14 @@ export default function Login() {
         <AlertDanger message={errorMessage} />
         <form className="px-8" onSubmit={handleSubmit}>
           <div className="mb-20">
-            <input className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16" id="clientId" type= "text" placeholder="ID" value={loginData.clientId} onChange={handleChange} />
+            <input
+              className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16"
+              id="clientId"
+              type="text"
+              placeholder="ID"
+              value={loginData.clientId}
+              onChange={handleChange}
+            />
           </div>
           <div className="mb-20 mx-auto relative">
             <input className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16" id="password" type={showPwd ? "text" : 'password'} placeholder="PW" value={loginData.password} onChange={handleChange}/>
@@ -94,15 +101,21 @@ export default function Login() {
             </div>
           </div>
           <div className="flex items-center justify-end mb-30">
-            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href={PATH.FIND_CLIENT}>
+            <Link
+              className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800"
+              href={PATH.FIND_CLIENT}>
               아이디 찾기
             </Link>
             <h1 className="px-20 text-xl text-blue-500">|</h1>
-            <Link className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800" href={PATH.FIND_PWD}>
+            <Link
+              className="inline-block align-baseline text-14 text-blue-500 hover:text-blue-800"
+              href={PATH.FIND_PWD}>
               비밀번호 찾기
             </Link>
           </div>
-          <button className="w-full h-53 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none text-16 mb-30" type="submit">
+          <button
+            className="w-full h-53 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none text-16 mb-30"
+            type="submit">
             로그인
           </button>
           <div className="text-center mt-15">

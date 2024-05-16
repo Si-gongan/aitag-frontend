@@ -1,0 +1,90 @@
+export const mockData = [
+  {
+    type: 'type1',
+    title: '과금 정책이 궁금해요',
+    content: '정말 정말 과금 정책이 궁금해요',
+    writer: '김밥무',
+    createdAt: '2024-05-07T05:21:52.429Z',
+  },
+  {
+    type: 'type2',
+    title: '중간에 구독하고 있던 요금제를 해지할 수 있나요?',
+    content: '제가 급하게 결제해버려서.. 중간에 구독하고 있던 요금제를 해지할 수 있나요? 부탁합니다.',
+    writer: '김연아',
+    createdAt: '2024-05-06T12:00:00.000Z',
+  },
+  {
+    type: 'type3',
+    title: '요긂제를 해지하면 과거 이용내역이 사라지나요?',
+    content: '궁금한게 있는데, 요긂제를 해지하면 과거 이용내역이 사라지나요?',
+    writer: '작성자 3',
+    createdAt: '2024-04-07T05:21:52.429Z',
+  },
+  {
+    type: 'type1',
+    title: '서비스 이용 방법에 대해 문의드립니다.',
+    content: '서비스 이용 방법이 어렵습니다. 도와주세요!',
+    writer: '홍길동',
+    createdAt: '2024-05-05T10:15:00.000Z',
+  },
+  {
+    type: 'type2',
+    title: '결제 수단은 무엇이 있나요?',
+    content: '결제 수단을 알려주세요.',
+    writer: '이순신',
+    createdAt: '2024-05-04T15:30:00.000Z',
+  },
+  // {
+  //   type: 'type3',
+  //   title: '문의 사항이 있습니다.',
+  //   content: '문의 사항이 있어서 연락드립니다.',
+  //   writer: '유관순',
+  //   createdAt: '2024-05-03T09:45:00.000Z',
+  // },
+  // {
+  //   type: 'type1',
+  //   title: '서비스 이용 관련해서 문의드립니다.',
+  //   content: '서비스 이용에 대한 문의가 있습니다.',
+  //   writer: '강감찬',
+  //   createdAt: '2024-05-02T14:20:00.000Z',
+  // },
+  // {
+  //   type: 'type2',
+  //   title: '결제 오류가 발생했습니다.',
+  //   content: '결제 오류가 발생했습니다. 어떻게 해결해야 하나요?',
+  //   writer: '을지문덕',
+  //   createdAt: '2024-05-01T08:00:00.000Z',
+  // },
+  // {
+  //   type: 'type3',
+  //   title: '서비스 이용 방법에 대한 안내 부탁드립니다.',
+  //   content: '서비스 이용 방법에 대해 자세히 알고 싶습니다.',
+  //   writer: '신사임당',
+  //   createdAt: '2024-04-30T16:40:00.000Z',
+  // },
+];
+
+export const ReteMock = {
+  id: 'sampleid',
+  clientId: 'sampleid',
+  name: '유저 요금제 정보 샘플',
+  email: 'user@naver.com',
+  phone: '82-10-9299-4816',
+  rate: 'basic',
+  credit: 34,
+  profileImgUrl: '',
+  createdAt: '',
+};
+
+export const PaymentMockData = [
+  { rate: 'basic', createdAt: '2024-05-06T12:00:00.000Z', amount: 3990, method: '신용카드' },
+  { rate: 'standard', createdAt: '2024-05-06T12:00:00.000Z', amount: 9900, method: '신용카드' },
+  { rate: 'premium', createdAt: '2024-05-06T12:00:00.000Z', amount: 14990, method: '신용카드' },
+  { rate: 'none', createdAt: '2024-05-06T12:00:00.000Z', amount: 0, method: '신용카드' },
+  { rate: 'basic', createdAt: '2024-05-06T12:00:00.000Z', amount: 3990, method: '신용카드' },
+  { rate: 'standard', createdAt: '2024-05-06T12:00:00.000Z', amount: 9900, method: '신용카드' },
+  { rate: 'premium', createdAt: '2024-05-06T12:00:00.000Z', amount: 14990, method: '신용카드' },
+  { rate: 'none', createdAt: '2024-05-06T12:00:00.000Z', amount: 0, method: '신용카드' },
+  { rate: 'basic', createdAt: '2024-05-06T12:00:00.000Z', amount: 3990, method: '신용카드' },
+  { rate: 'standard', createdAt: '2024-05-06T12:00:00.000Z', amount: 9900, method: '신용카드' },
+];

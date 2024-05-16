@@ -3,8 +3,7 @@ import ActionButtonGray from '@/components/common/button/ActionButtonGray';
 import { getResultDetailTitle } from '@/utils/getResultDetailTitle';
 import { useRouter } from 'next/navigation';
 import SortDropdown from './SortDropdown';
-import { useState } from 'react';
-import { DashbaordSortType } from '@/types/common';
+import { DashbaordSortType, WorkType } from '@/types/common';
 import DownloadDropdown from './DownloadDropdown';
 
 interface PostIdTitleProps {
@@ -15,6 +14,7 @@ interface PostIdTitleProps {
   selectedTotal?: number;
   tableSort?: DashbaordSortType;
   setTableSort?: React.Dispatch<React.SetStateAction<DashbaordSortType>>;
+  selectedWorks: WorkType[];
 }
 
 export default function PostIdTitle({
@@ -25,6 +25,7 @@ export default function PostIdTitle({
   selectedTotal,
   tableSort,
   setTableSort,
+  selectedWorks,
 }: PostIdTitleProps) {
   const router = useRouter();
 
@@ -60,8 +61,7 @@ export default function PostIdTitle({
               onClick={() => setRequestExpertPage && setRequestExpertPage(true)}
               disabled={selectedTotal === 0}
             />
-            {/* <ActionButton text="다운로드" size="w-144 h-54" /> */}
-            <DownloadDropdown />
+            <DownloadDropdown selectedWorks={selectedWorks} disabled={selectedTotal === 0} />
           </div>
         ) : inspectCompletedPage ? (
           <div className="flex gap-8">
