@@ -5,7 +5,6 @@ import ActionButtonSkyBlue from '@/components/common/button/ActionButtonSkyBlue'
 import { MYPAGE_SIDEMENU } from '@/utils/constants';
 import { PATH } from '@/utils/routes';
 import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 export default function MypageSidemenu() {
   const pathname = usePathname();

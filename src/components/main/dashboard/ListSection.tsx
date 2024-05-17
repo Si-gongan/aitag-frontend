@@ -10,9 +10,10 @@ interface ListSectionProps {
   sortId: string;
   pagination: PaginationType;
   setPagination: React.Dispatch<React.SetStateAction<PaginationType>>;
+  totalPages: number;
 }
 
-export default function ListSection({ items, sortId, pagination, setPagination }: ListSectionProps) {
+export default function ListSection({ items, sortId, pagination, setPagination, totalPages }: ListSectionProps) {
   const router = useRouter();
 
   const getWorkfirstImage = (works: WorkType[]) => {
@@ -77,19 +78,7 @@ export default function ListSection({ items, sortId, pagination, setPagination }
           );
         })}
       </div>
-      <PagenationButton pagination={pagination} onClick={handleClickPagination} />
+      <PagenationButton pagination={pagination} onClick={handleClickPagination} totalPages={totalPages} />
     </section>
   );
 }
-
-// const getWorkfirstImage = (works: WorkType[]) => {
-//   const firstImage = works[0].image;
-//   const workAnswer = works[0].answer;
-//   const thumbnail =
-//     firstImage.startsWith('https://gongbang') && workAnswer !== 'ERROR!'
-//       ? firstImage
-//       : '/images/dashboard-default-image.png';
-//   // const thumbnail = firstImage.includes('data:') ? '/images/dashboard-default-image.png' : firstImage;
-
-//   return thumbnail;
-// };

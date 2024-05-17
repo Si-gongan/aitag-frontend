@@ -4,11 +4,12 @@ import { PaginationType } from '@/types/common';
 
 interface PagenationButtonProps {
   pagination: PaginationType;
+  totalPages: number;
   onClick: (num: number) => void;
 }
 
-export default function PagenationButton({ pagination, onClick }: PagenationButtonProps) {
-  const numbers = Array.from({ length: pagination.total }, (_, index) => index + 1);
+export default function PagenationButton({ pagination, totalPages, onClick }: PagenationButtonProps) {
+  const numbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   const handleClick = (num: number) => {
     onClick(num);
