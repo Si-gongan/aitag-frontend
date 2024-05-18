@@ -12,9 +12,9 @@ export default function faqPage() {
   const [faqList, setFaqList] = useState<GetSupportFaqResponseType>();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { faqs, totalPages, hasNextPage } = faqList || { faqs: [], totalPages: 0, hasNextPage: false };
+  const { faqs, totalPages } = faqList || { faqs: [], totalPages: 0 };
 
-  const [pagination, setPagination] = useState({ start: 1, click: 1, total: totalPages });
+  const [pagination, setPagination] = useState({ start: 1, click: 1 });
 
   const getFaqList = async () => {
     const options = { method: 'GET' };
@@ -50,8 +50,7 @@ export default function faqPage() {
         <h1 className="text-36 text-grey/7 font-bold tracking-[3.6px]">FAQ</h1>
       </div>
       <FaqTab tab={tab} setTab={setTab} />
-      <FaqTable faqs={faqs || []} pagination={pagination} setPagination={setPagination} />
-      {/* <FaqTable pagination={{ start: 1, click: 1, total: 2 }} setPagination={setPagination} /> */}
+      <FaqTable faqs={faqs || []} pagination={pagination} setPagination={setPagination} totalPages={totalPages} />
     </section>
   );
 }

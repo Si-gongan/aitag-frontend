@@ -116,7 +116,6 @@ export interface PreviewImageItemType {
 export interface PaginationType {
   start: number;
   click: number;
-  // total: number;
 }
 
 export interface PreviewInfoItemType {

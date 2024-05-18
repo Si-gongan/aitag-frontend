@@ -11,9 +11,9 @@ export default function NoticePage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [noticeList, setNoticeList] = useState<GetSupportFaqResponseType>();
 
-  const { notices, totalPages, hasNextPage } = noticeList || { notices: [], totalPages: 0, hasNextPage: false };
+  const { notices, totalPages } = noticeList || { notices: [], totalPages: 0, hasNextPage: false };
 
-  const [pagination, setPagination] = useState({ start: 1, click: 1, total: totalPages });
+  const [pagination, setPagination] = useState({ start: 1, click: 1 });
 
   const handleClickPagination = (num: number) => {
     setPagination((prevPagination) => ({
@@ -57,8 +57,12 @@ export default function NoticePage() {
       <div className="flex flex-col gap-48">
         <NoticeTable notices={notices} />
         {/* <NoticeTable /> */}
-        <PagenationButton pagination={pagination} onClick={handleClickPagination} />
-        {/* <PagenationButton pagination={{ start: 1, click: 1, total: 1 }} onClick={handleClickPagination} /> */}
+        <PagenationButton
+          pagination={pagination}
+          setPagination={setPagination}
+          totalPages={totalPages}
+          onClick={handleClickPagination}
+        />
       </div>
     </section>
   );

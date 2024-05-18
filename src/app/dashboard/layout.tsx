@@ -1,12 +1,12 @@
 'use client';
 
-import { DashbaordSortType } from '@/types/common';
+import { DashbaordSortType, PaginationType } from '@/types/common';
 import { createContext, useState } from 'react';
 
 interface DashboardContextType {
   sort: DashbaordSortType;
   setSort: React.Dispatch<React.SetStateAction<DashbaordSortType>>;
-  pagination: { start: number; click: number };
+  pagination: PaginationType;
   setPagination: React.Dispatch<React.SetStateAction<{ start: number; click: number }>>;
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
