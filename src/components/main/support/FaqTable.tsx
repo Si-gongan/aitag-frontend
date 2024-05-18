@@ -11,9 +11,10 @@ interface FaqTableProps {
   faqs: SupportType[];
   pagination: PaginationType;
   setPagination: React.Dispatch<React.SetStateAction<PaginationType>>;
+  totalPages: number;
 }
 
-export default function FaqTable({ faqs, pagination, setPagination }: FaqTableProps) {
+export default function FaqTable({ faqs, pagination, setPagination, totalPages }: FaqTableProps) {
   const [showModalSupport, setShowModalSupport] = useState<boolean>(false);
 
   const items: FaqItemType[] =
@@ -79,7 +80,12 @@ export default function FaqTable({ faqs, pagination, setPagination }: FaqTablePr
             ))}
         </tbody>
       </table>
-      <PagenationButton pagination={pagination} onClick={handleClickPagination} />
+      <PagenationButton
+        pagination={pagination}
+        setPagination={setPagination}
+        totalPages={totalPages}
+        onClick={handleClickPagination}
+      />
       <div className="flex justify-end">
         <ActionButtonSkyBlue text="고객센터 문의하기" size="w-150 h-54" onClick={handleClick} />
       </div>

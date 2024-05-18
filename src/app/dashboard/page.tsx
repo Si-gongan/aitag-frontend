@@ -24,12 +24,6 @@ export default function Dashbaord() {
 
   const items = (resultData && (resultData.hasOwnProperty('posts') ? resultData.posts : resultData?.inspects)) || [];
 
-  const { hasPrevPage, hasNextPage, totalPages } = resultData || {
-    hasPrevPage: false,
-    hasNextPage: false,
-    totalPages: 0,
-  };
-
   const handleSubmitSearch = (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -112,7 +106,7 @@ export default function Dashbaord() {
           대체텍스트 생성결과가 없습니다.
         </section>
       ) : (
-        <ListSection items={items} totalPages={totalPages} />
+        <ListSection items={items} totalPages={resultData?.totalPages || 1} />
       )}
     </div>
   );

@@ -5,7 +5,7 @@ import PagenationButton from '@/components/common/button/PaginationButton';
 import Checkbox from '@/components/common/input/Checkbox';
 import { PreviewImageItemType } from '@/types/common';
 import { IMAGE_TABLE_HEADER } from '@/utils/constants';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface ImageListTableProps {
   type?: string;
@@ -22,7 +22,8 @@ export default function ImageListTable({
   selectedUrls,
   selectedImages,
 }: ImageListTableProps) {
-  const [pagination, setPagination] = useState({ start: 1, click: 1, total: 1 });
+  const [pagination, setPagination] = useState({ start: 1, click: 1 });
+  const totalPages = Math.ceil(previewImages.length / 5);
 
   const startIndex = (pagination.click - 1) * 5;
   const endIndex = pagination.click * 5;
@@ -44,13 +45,6 @@ export default function ImageListTable({
     }));
   };
 
-  useEffect(() => {
-    setPagination((prevPagination) => ({
-      ...prevPagination,
-      total: Math.ceil(previewImages.length / 5),
-    }));
-  }, [previewImages]);
-
   return (
     <>
       <table className="border-1 border-#B0BAC9 text-grey/7">
@@ -66,10 +60,10 @@ export default function ImageListTable({
                   header.value === 'image'
                     ? 'w-80'
                     : header.value === 'language'
-                    ? 'w-176'
-                    : header.value === 'keyword'
-                    ? 'w-161'
-                    : ''
+                      ? 'w-176'
+                      : header.value === 'keyword'
+                        ? 'w-161'
+                        : ''
                 }`}>
                 {header.text}
               </th>
@@ -96,7 +90,7 @@ export default function ImageListTable({
                     {tableHeaderKey.map((key) => (
                       <td key={key + index}>
                         {key === 'image' ? (
-                          <div className="flex justify-center items-center">
+                          <div className="flex justify-center items-center h-40 w-40 overflow-hidden">
                             <img
                               src={item.image}
                               alt={`이미지 미리보기 썸네일 ${index}`}
@@ -135,7 +129,12 @@ export default function ImageListTable({
             })}
         </tbody>
       </table>
-      <PagenationButton pagination={pagination} onClick={handleClickPagination} />
+      <PagenationButton
+        pagination={pagination}
+        setPagination={setPagination}
+        totalPages={totalPages}
+        onClick={handleClickPagination}
+      />
     </>
   );
 }

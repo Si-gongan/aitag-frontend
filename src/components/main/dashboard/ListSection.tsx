@@ -89,7 +89,12 @@ export default function ListSection({ items, totalPages }: ListSectionProps) {
           );
         })}
       </div>
-      <PagenationButton pagination={pagination} onClick={handleClickPagination} totalPages={totalPages} />
+      <PagenationButton
+        onClick={handleClickPagination}
+        pagination={pagination}
+        setPagination={setPagination}
+        totalPages={totalPages}
+      />
     </section>
   );
 }
