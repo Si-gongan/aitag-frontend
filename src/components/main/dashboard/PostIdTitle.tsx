@@ -1,10 +1,13 @@
 import ActionButton from '@/components/common/button/ActionButton';
 import ActionButtonGray from '@/components/common/button/ActionButtonGray';
 import { getResultDetailTitle } from '@/utils/getResultDetailTitle';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import SortDropdown from './SortDropdown';
 import { DashbaordSortType, WorkType } from '@/types/common';
 import DownloadDropdown from './DownloadDropdown';
+import { useContext } from 'react';
+import { DashboardContext } from '@/app/dashboard/layout';
+import { PATH } from '@/utils/routes';
 
 interface PostIdTitleProps {
   target: string;
@@ -27,14 +30,22 @@ export default function PostIdTitle({
   setTableSort,
   selectedWorks,
 }: PostIdTitleProps) {
-  const router = useRouter();
+  const { replace } = useRouter();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+
+  let { sort, setSort, pagination, setPagination, searchValue, setSearchValue } = useContext(DashboardContext);
 
   const aiCompletedPage = target === 'ai';
   const inspectCompletedPage = target === 'inspect' && isComplete;
   const titleDescription = getResultDetailTitle(target, isComplete, requestExpertPage);
 
   const goBack = () => {
-    router.back();
+    params.set('sort', sort.id);
+    params.set('search', searchValue);
+    params.set('page', String(pagination.click));
+
+    replace(`${PATH.DASHBOARD}?${params.toString()}`);
   };
 
   const handleClickSort = (selectedSort: DashbaordSortType) => {

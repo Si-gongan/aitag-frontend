@@ -1,19 +1,24 @@
+import { DashboardContext } from '@/app/dashboard/layout';
 import PagenationButton from '@/components/common/button/PaginationButton';
-import { PaginationType, PostType, WorkType } from '@/types/common';
+import { PostType, WorkType } from '@/types/common';
 import { formattedDate } from '@/utils/formattedDate';
 import { getStatusText } from '@/utils/getStatusText';
+import { PATH } from '@/utils/routes';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useContext } from 'react';
 
 interface ListSectionProps {
   items: PostType[];
-  sortId: string;
-  pagination: PaginationType;
-  setPagination: React.Dispatch<React.SetStateAction<PaginationType>>;
+  totalPages: number;
 }
 
-export default function ListSection({ items, sortId, pagination, setPagination }: ListSectionProps) {
-  const router = useRouter();
+export default function ListSection({ items, totalPages }: ListSectionProps) {
+  const { replace } = useRouter();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+
+  let { sort, pagination, setPagination, searchValue } = useContext(DashboardContext);
 
   const getWorkfirstImage = (works: WorkType[]) => {
     const firstImage = works[0].image;
@@ -23,17 +28,24 @@ export default function ListSection({ items, sortId, pagination, setPagination }
   };
 
   const handleClickPagination = (num: number) => {
-    setPagination((prevPagination) => ({
-      ...prevPagination,
+    params.set('sort', sort.id);
+    if (searchValue) {
+      params.set('search', searchValue);
+    }
+    params.set('page', String(num));
+
+    replace(`${PATH.DASHBOARD}?${params.toString()}`);
+    setPagination((prev) => ({
+      ...prev,
       click: num,
     }));
   };
 
   const handleClickToLink = (postId: string, sortId: string) => {
     if (sortId === 'inspect') {
-      router.push(`/dashboard/${postId}/inspect`);
+      replace(`/dashboard/${postId}/inspect`);
     } else {
-      router.push(`/dashboard/${postId}`);
+      replace(`/dashboard/${postId}`);
     }
   };
 
@@ -42,12 +54,12 @@ export default function ListSection({ items, sortId, pagination, setPagination }
       <div className="flex w-full flex-wrap gap-32 min-h-642">
         {items.map((item) => {
           const thumbnail = getWorkfirstImage(item.works);
-          const isClickable = sortId === 'ai' && !item.isComplete;
+          const isClickable = sort.id === 'ai' && !item.isComplete;
           return (
             <div
               key={item.id}
               className="flex flex-col w-183 rounded-10 border-1 border-grey/1 overflow-hidden"
-              onClick={isClickable ? undefined : () => handleClickToLink(item.id, sortId)}>
+              onClick={isClickable ? undefined : () => handleClickToLink(item.id, sort.id)}>
               <img
                 src={thumbnail}
                 alt="생성결과의 썸네일 이미지"
@@ -64,7 +76,7 @@ export default function ListSection({ items, sortId, pagination, setPagination }
                   생성일자 : {formattedDate(item.createdAt)}
                 </div>
                 <div className="flex justify-between items-center">
-                  {getStatusText(item.isComplete, sortId)}
+                  {getStatusText(item.isComplete, sort.id)}
                   <Image
                     src={item.isComplete ? '/images/tabler_download.svg' : '/images/dashboard-loading.gif'}
                     alt="진행 상태 아이콘"
@@ -77,19 +89,7 @@ export default function ListSection({ items, sortId, pagination, setPagination }
           );
         })}
       </div>
-      <PagenationButton pagination={pagination} onClick={handleClickPagination} />
+      <PagenationButton pagination={pagination} onClick={handleClickPagination} totalPages={totalPages} />
     </section>
   );
 }
-
-// const getWorkfirstImage = (works: WorkType[]) => {
-//   const firstImage = works[0].image;
-//   const workAnswer = works[0].answer;
-//   const thumbnail =
-//     firstImage.startsWith('https://gongbang') && workAnswer !== 'ERROR!'
-//       ? firstImage
-//       : '/images/dashboard-default-image.png';
-//   // const thumbnail = firstImage.includes('data:') ? '/images/dashboard-default-image.png' : firstImage;
-
-//   return thumbnail;
-// };

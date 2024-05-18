@@ -6,29 +6,56 @@ import SortDropdown from '@/components/main/dashboard/SortDropdown';
 import { DashbaordSortType, GetPostResponseType } from '@/types/common';
 import { DASHBOARD_LIMIT } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
-import { API_ROUTE } from '@/utils/routes';
-import React, { useEffect, useState } from 'react';
+import { initUrlParams } from '@/utils/initUrlParams';
+import { API_ROUTE, PATH } from '@/utils/routes';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useContext, useEffect, useState } from 'react';
+import { DashboardContext } from './layout';
 
 export default function Dashbaord() {
-  const [sort, setSort] = useState<DashbaordSortType>({ id: 'ai', name: 'AI 생성' });
-  const [searchValue, setSearchValue] = useState<string>('');
   const [resultData, setResultData] = useState<GetPostResponseType>();
-  const [pagination, setPagination] = useState({ start: 1, click: 1, total: 1 });
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { hasPrevPage, hasNextPage, totalPages, posts } = resultData
-    ? resultData
-    : { hasPrevPage: false, hasNextPage: false, totalPages: 0, posts: [] };
+  let { sort, setSort, pagination, setPagination, searchValue, setSearchValue } = useContext(DashboardContext);
+
+  const { replace } = useRouter();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
 
   const items = (resultData && (resultData.hasOwnProperty('posts') ? resultData.posts : resultData?.inspects)) || [];
 
+  const { hasPrevPage, hasNextPage, totalPages } = resultData || {
+    hasPrevPage: false,
+    hasNextPage: false,
+    totalPages: 0,
+  };
+
   const handleSubmitSearch = (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const params = new URLSearchParams(searchParams);
+    if (searchValue) {
+      params.set('sort', sort.id);
+      params.set('search', searchValue);
+      params.delete('page');
+
+      replace(`${PATH.DASHBOARD}?${params.toString()}`);
+    } else {
+      params.delete('search');
+      replace(`${PATH.DASHBOARD}?${params.toString()}`);
+    }
     getResultItem();
   };
 
   const handleClickSort = (selectedSort: DashbaordSortType) => {
+    params.set('sort', selectedSort.id);
+    params.delete('page');
+    params.delete('search');
+
     setSort(selectedSort);
+    setPagination((prev) => ({ ...prev, click: 1 }));
+    setSearchValue('');
+    replace(`${PATH.DASHBOARD}?${params.toString()}`);
   };
 
   const getResultItem = async () => {
@@ -60,17 +87,13 @@ export default function Dashbaord() {
   };
 
   useEffect(() => {
+    initUrlParams({ params, setSort, setSearchValue, setPagination });
     getResultItem();
-    setPagination((prev) => ({ ...prev, start: 1, click: 1 }));
-  }, [sort]);
+  }, []);
 
   useEffect(() => {
     getResultItem();
-  }, [pagination.click]);
-
-  useEffect(() => {
-    setPagination((prev) => ({ ...prev, total: totalPages }));
-  }, [totalPages]);
+  }, [sort, pagination.click]);
 
   return (
     <div className="flex flex-col w-1075 pt-80 pb-64 px-16 gap-48">
@@ -89,7 +112,7 @@ export default function Dashbaord() {
           대체텍스트 생성결과가 없습니다.
         </section>
       ) : (
-        <ListSection items={items} sortId={sort.id} pagination={pagination} setPagination={setPagination} />
+        <ListSection items={items} totalPages={totalPages} />
       )}
     </div>
   );
