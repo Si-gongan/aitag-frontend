@@ -54,6 +54,14 @@ export default function Header() {
     router.push(PATH.LOGIN);
   };
 
+  const handleClick = (path: string) => {
+    if (path === PATH.DASHBOARD && pathname === PATH.DASHBOARD) {
+      window.location.reload();
+    } else {
+      router.replace(path);
+    }
+  };
+
   const last_menu_num = HEADER_MENU.length - 1;
 
   return (
@@ -66,7 +74,8 @@ export default function Header() {
           <ul className="flex items-center h-28 text-bold text-[#4D4D4D]">
             {HEADER_MENU.map((menu, index) => (
               <li key={index} className="px-16">
-                <Link href={menu.path}>{menu.title}</Link>
+                {/* <Link href={menu.path}>{menu.title}</Link> */}
+                <div onClick={() => handleClick(menu.path)}>{menu.title}</div>
                 {index !== last_menu_num && <span className="h-14 w-1 bg-[#212121]" />}
               </li>
             ))}

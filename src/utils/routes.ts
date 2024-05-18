@@ -51,5 +51,4 @@ export const API_ROUTE = {
   OPINION: `${process.env.NEXT_PUBLIC_API_BASE_URL}/opinion`,
   GET_PAYMENT: `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment`,
   GET_PAYMENT_DETAIL: (paymentId: string) => `${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/detail/${paymentId}`,
-
 };
