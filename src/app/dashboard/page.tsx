@@ -11,6 +11,7 @@ import { API_ROUTE, PATH } from '@/utils/routes';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
 import { DashboardContext } from './layout';
+import ListSectionSkeletone from '@/components/main/dashboard/ListSectionSkeleton';
 
 export default function Dashbaord() {
   const [resultData, setResultData] = useState<GetPostResponseType>();
@@ -101,7 +102,9 @@ export default function Dashbaord() {
           <SortDropdown sort={sort} onClick={handleClickSort} />
         </form>
       </section>
-      {items && items.length === 0 ? (
+      {loading ? (
+        <ListSectionSkeletone />
+      ) : items && items.length === 0 ? (
         <section className="flex w-full h-full min-h-600 items-center justify-center text-grey/5">
           대체텍스트 생성결과가 없습니다.
         </section>
