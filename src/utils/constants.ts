@@ -152,12 +152,6 @@ export const MYPAGE_SIDEMENU = [
   { url: PATH.MYPAGE_PAYMENT, text: '결제 정보' },
 ];
 
-export const TOAST_INFO = [
-  { type: 'info', imageUrl: '', style: 'bg-grey/3 text-grey7' },
-  { type: 'success', imageUrl: '/images/toast-check.svg', style: 'bg-sub/green-0 text-white' },
-  { type: 'danger', imageUrl: '/images/toast-alert.svg', style: 'bg-sub/red-0 text-white' },
-];
-
 export const TEMP_PLANS_INFO = [
   {
     credits: '100 credits',

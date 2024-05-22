@@ -12,6 +12,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
 import { DashboardContext } from './layout';
 import ListSectionSkeletone from '@/components/main/dashboard/ListSectionSkeleton';
+import Toast from '@/components/common/toast/Toast';
 
 export default function Dashbaord() {
   const [resultData, setResultData] = useState<GetPostResponseType>();
