@@ -7,10 +7,10 @@ import UrlListTable from './UrlListTable';
 import { PreviewImageItemType, ScrapImagesResponseType } from '@/types/common';
 import { API_ROUTE } from '@/utils/routes';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
-import ModalLoading from '@/components/common/modal/ModalLoading';
 import CreateButtons from './CreateButtons';
 import RequestForExpert from './RequestForExpert';
 import UrlInputField from '@/components/common/input/UrlInputField';
+import Toast from '@/components/common/toast/Toast';
 
 export default function TabUrlSection() {
   const [urls, setUrls] = useState<string[]>([]);
@@ -70,7 +70,6 @@ export default function TabUrlSection() {
     <>
       {progressStage === 'one' ? (
         <div className="flex flex-col mt-40 items-center w-980 gap-100 mb-136">
-          {loading && <ModalLoading>이미지 미리보기를 불러오는 중입니다!</ModalLoading>}
           <SectionLayout>
             <form onSubmit={handleSubmitUrl}>
               <UrlInputField name="url" placeholder="웹 URL 주소를 입력해주세요" buttonText="확인" loading={loading} />
@@ -80,6 +79,13 @@ export default function TabUrlSection() {
             <UrlListTable urls={urls} setUrls={setUrls} selectedUrls={selectedUrls} setSelectedUrls={setSelectedUrls} />
           </SectionLayout>
           <SectionLayout title="이미지 미리보기" description="대체텍스트 생성할 이미지를 선택해주세요.">
+            {loading && (
+              <Toast
+                type="danger"
+                text="이미지를 불러오는 중입니다. 잠시만 기다려주세요."
+                size="absolute top-2 right-0 h-53 w-710"
+              />
+            )}
             <ImageListTable
               previewImages={previewImages}
               setPreviewImages={setPreviewImages}
