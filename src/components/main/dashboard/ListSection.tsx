@@ -1,4 +1,3 @@
-import { DashboardContext } from '@/app/dashboard/layout';
 import PagenationButton from '@/components/common/button/PaginationButton';
 import { PostType, WorkType } from '@/types/common';
 import { formattedDate } from '@/utils/formattedDate';
@@ -7,6 +6,7 @@ import { PATH } from '@/utils/routes';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useContext } from 'react';
+import { DashboardContext } from './DashboradContextMain';
 
 interface ListSectionProps {
   items: PostType[];

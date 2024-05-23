@@ -9,10 +9,10 @@ import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { initUrlParams } from '@/utils/initUrlParams';
 import { API_ROUTE, PATH } from '@/utils/routes';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useContext, useEffect, useState } from 'react';
-import { DashboardContext } from './layout';
+import React, { Suspense, useContext, useEffect, useState } from 'react';
 import ListSectionSkeletone from '@/components/main/dashboard/ListSectionSkeleton';
-import Toast from '@/components/common/toast/Toast';
+import { DashboardContext } from '@/components/main/dashboard/DashboradContextMain';
+import PageLoading from '@/components/common/animation/PageLoading';
 
 export default function Dashbaord() {
   const [resultData, setResultData] = useState<GetPostResponseType>();
@@ -92,6 +92,7 @@ export default function Dashbaord() {
   }, [sort, pagination.click]);
 
   return (
+    <Suspense fallback={<PageLoading />}>
     <div className="flex flex-col w-1075 pt-80 pb-64 px-16 gap-48">
       <section className="flex justify-between items-center">
         <div className="flex flex-col gap-10">
@@ -112,6 +113,6 @@ export default function Dashbaord() {
       ) : (
         <ListSection items={items} totalPages={resultData?.totalPages || 1} />
       )}
-    </div>
+    </div></Suspense>
   );
 }
