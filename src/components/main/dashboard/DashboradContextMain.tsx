@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { DashbaordSortType, PaginationType } from '@/types/common';
 import { createContext, useState } from 'react';
