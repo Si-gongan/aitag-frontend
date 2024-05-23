@@ -21,7 +21,7 @@ export const DashboardContext = createContext<DashboardContextType>({
   setSearchValue: () => {},
 });
 
-export default function DashboardLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sort, setSort] = useState<DashbaordSortType>({ id: 'ai', name: 'AI 생성' });
   const [searchValue, setSearchValue] = useState<string>('');
   const [pagination, setPagination] = useState({ start: 1, click: 1 });
