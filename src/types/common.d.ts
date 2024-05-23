@@ -203,6 +203,7 @@ export interface OptionsType {
     authorization?: string;
   };
   // body?: string | FormData;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   body?: any;
 }
 

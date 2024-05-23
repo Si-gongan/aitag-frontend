@@ -23,7 +23,8 @@ export default function DashboardContent() {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
-  const items = (resultData && (resultData.hasOwnProperty('posts') ? resultData.posts : resultData?.inspects)) || [];
+  // const items = (resultData && (resultData.hasOwnProperty('posts') ? resultData.posts : resultData?.inspects)) || [];
+  const items = (resultData && ('posts' in resultData ? resultData.posts : resultData?.inspects)) || [];
 
   const handleSubmitSearch = (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -7,7 +7,7 @@ import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
 import { useEffect, useState } from 'react';
 
-export default function faqPage() {
+export default function FaqPage() {
   const [tab, setTab] = useState<SupportTabType>({ id: 'all', text: '전체' });
   const [faqList, setFaqList] = useState<GetSupportFaqResponseType>();
   const [loading, setLoading] = useState<boolean>(false);
