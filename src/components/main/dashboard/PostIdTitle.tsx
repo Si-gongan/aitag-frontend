@@ -6,8 +6,8 @@ import SortDropdown from './SortDropdown';
 import { DashbaordSortType, WorkType } from '@/types/common';
 import DownloadDropdown from './DownloadDropdown';
 import { useContext } from 'react';
-import { DashboardContext } from '@/app/dashboard/layout';
 import { PATH } from '@/utils/routes';
+import { DashboardContext } from './DashboradContextMain';
 
 interface PostIdTitleProps {
   target: string;
@@ -17,7 +17,7 @@ interface PostIdTitleProps {
   selectedTotal?: number;
   tableSort?: DashbaordSortType;
   setTableSort?: React.Dispatch<React.SetStateAction<DashbaordSortType>>;
-  selectedWorks: WorkType[];
+  selectedWorks?: WorkType[];
 }
 
 export default function PostIdTitle({
@@ -63,7 +63,7 @@ export default function PostIdTitle({
       <hr className="border-1 border-grey/3" />
       <div className="flex justify-between items-center">
         <ActionButtonGray text="뒤로가기" size="w-144 h-54" type="back" onClick={goBack} />
-        {aiCompletedPage ? (
+        {aiCompletedPage && selectedWorks ? (
           <div className="flex gap-8">
             <ActionButtonGray
               text="검수 요청"

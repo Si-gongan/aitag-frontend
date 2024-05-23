@@ -94,6 +94,7 @@ export const usePayment = (customerKey?: string) => {
         const paymentId = json.result.payment.id;
 
         router.push(`/payment/success?paymentId=${paymentId}`);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
         const reason = e?.code;
 
