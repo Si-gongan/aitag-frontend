@@ -9,7 +9,7 @@ interface NoticeTableProps {
 export default function NoticeTable({ notices }: NoticeTableProps) {
   const items =
     notices &&
-    notices.map((notice) => {
+    notices.map((notice, index) => {
       const formattedDate = formattedDateV3(notice.createdAt);
 
       return {
