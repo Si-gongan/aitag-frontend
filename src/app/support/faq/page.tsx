@@ -9,10 +9,10 @@ import { useEffect, useState } from 'react';
 
 export default function FaqPage() {
   const [tab, setTab] = useState<SupportTabType>({ id: 'all', text: '전체' });
-  const [faqList, setFaqList] = useState<GetSupportFaqResponseType>();
+  const [faqData, setFaqData] = useState<GetSupportFaqResponseType>();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { faqs, totalPages } = faqList || { faqs: [], totalPages: 0 };
+  const { faqs, totalPages } = faqData || { faqs: [], totalPages: 0 };
 
   const [pagination, setPagination] = useState({ start: 1, click: 1 });
 
@@ -31,7 +31,7 @@ export default function FaqPage() {
       const result = await response.json();
       const data = result.result;
 
-      setFaqList(data);
+      setFaqData(data);
     } catch (error) {
       console.error('고객센터 FAQ 데이터를 가져오는데 실패했습니다.', error);
     } finally {

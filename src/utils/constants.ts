@@ -121,10 +121,8 @@ export const FAQ_TAB = [
 ];
 
 export const FAQ_HEADER = [
-  { text: 'No.', value: 'index' },
-  { text: '제목', value: 'title' },
-  { text: '작성자', value: 'writer' },
-  { text: '작성일', value: 'createdAt' },
+  { text: '질문', value: 'title' },
+  { text: '답변', value: 'content' },
 ];
 
 export const NOTICE_HEADER = [

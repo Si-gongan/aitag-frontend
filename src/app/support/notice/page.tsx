@@ -6,12 +6,13 @@ import { GetSupportFaqResponseType } from '@/types/common';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
 import { useEffect, useState } from 'react';
+import { NoticeMockData } from '../../../components/main/support/mock';
 
 export default function NoticePage() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [noticeList, setNoticeList] = useState<GetSupportFaqResponseType>();
+  const [noticeData, setNoticeData] = useState<GetSupportFaqResponseType>();
 
-  const { notices, totalPages } = noticeList || { notices: [], totalPages: 0, hasNextPage: false };
+  const { notices, totalPages } = noticeData || { notices: [], totalPages: 0, hasNextPage: false };
 
   const [pagination, setPagination] = useState({ start: 1, click: 1 });
 
@@ -36,7 +37,7 @@ export default function NoticePage() {
       const result = await response.json();
       const data = result.result;
 
-      setNoticeList(data);
+      setNoticeData(data);
     } catch (error) {
       console.error('고객센터 공지사항 데이터를 가져오는 데 실패했습니다.', error);
     } finally {
@@ -49,21 +50,15 @@ export default function NoticePage() {
   }, []);
 
   return (
-    <section className="flex flex-col items-center w-980 pt-40 gap-100 mb-125">
-      <div className="flex flex-col items-center gap-16">
-        <span className="text-18 text-[#B2B0B3]">NOTICE</span>
-        <h1 className="text-36 text-grey/7 font-bold">공지사항</h1>
-      </div>
-      <div className="flex flex-col gap-48">
-        <NoticeTable notices={notices} />
-        {/* <NoticeTable /> */}
-        <PagenationButton
-          pagination={pagination}
-          setPagination={setPagination}
-          totalPages={totalPages}
-          onClick={handleClickPagination}
-        />
-      </div>
-    </section>
+    <div className="flex flex-col gap-48">
+      {/* <NoticeTable notices={notices} /> */}
+      <NoticeTable notices={NoticeMockData} />
+      <PagenationButton
+        pagination={pagination}
+        setPagination={setPagination}
+        totalPages={totalPages}
+        onClick={handleClickPagination}
+      />
+    </div>
   );
 }

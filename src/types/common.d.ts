@@ -167,10 +167,8 @@ export interface SupportType {
 }
 
 export interface FaqItemType {
-  index: number;
   title: string;
-  writer: string;
-  createdAt: string;
+  content: string;
   [key: string]: string | number;
 }
 
