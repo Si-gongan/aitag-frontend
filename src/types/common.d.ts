@@ -153,23 +153,31 @@ export interface PostType {
   detail?: string;
 }
 
+export interface FaqContentType {
+  _id: string;
+  data: string;
+  isPhoto: boolean;
+}
+
+export interface FaqItemType {
+  title: string;
+  content: FaqContentType[];
+  [key: string]: string | number | FaqContentType[];
+}
+
 export interface SupportTabType {
   id: string;
   text: string;
 }
 
 export interface SupportType {
+  id: string;
   type: string;
   title: string;
-  content: string;
+  // content: string;
+  content: FaqContentType[];
   writer: string;
   createdAt: string;
-}
-
-export interface FaqItemType {
-  title: string;
-  content: string;
-  [key: string]: string | number;
 }
 
 export interface PlansInfoType {

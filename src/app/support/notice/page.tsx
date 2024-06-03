@@ -51,8 +51,8 @@ export default function NoticePage() {
 
   return (
     <div className="flex flex-col gap-48">
-      {/* <NoticeTable notices={notices} /> */}
-      <NoticeTable notices={NoticeMockData} />
+      <NoticeTable notices={notices} />
+      {/* <NoticeTable notices={NoticeMockData} /> */}
       <PagenationButton
         pagination={pagination}
         setPagination={setPagination}

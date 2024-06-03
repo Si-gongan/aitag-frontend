@@ -41,7 +41,7 @@ export default function FaqPage() {
 
   useEffect(() => {
     getFaqList();
-  }, [tab]);
+  }, [tab, pagination.click]);
 
   return (
     <section className="flex flex-col items-center w-980 pt-40 gap-100 mb-125">

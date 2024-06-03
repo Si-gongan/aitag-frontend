@@ -115,9 +115,10 @@ export const SUPPORT_TAB = [
 
 export const FAQ_TAB = [
   { id: 'all', text: '전체' },
-  { id: 'payment', text: '결제' },
-  { id: 'feature', text: '서비스 기능' },
-  { id: 'usage', text: '사용 방법' },
+  { id: 'service', text: '서비스 설명' },
+  { id: 'usage', text: '홈페이지 사용방법' },
+  { id: 'payment', text: '결제 및 요금제' },
+  { id: 'etc', text: '기타' },
 ];
 
 export const FAQ_HEADER = [
