@@ -1,4 +1,4 @@
-import { FaqItemType, PaginationType, SupportType } from '@/types/common';
+import { FaqContentType, FaqItemType, PaginationType, SupportType } from '@/types/common';
 import PagenationButton from '@/components/common/button/PaginationButton';
 import ActionButtonSkyBlue from '@/components/common/button/ActionButtonSkyBlue';
 import { useState } from 'react';
@@ -21,7 +21,7 @@ export default function FaqTable({ faqs, pagination, setPagination, totalPages }
     faqs.map((faq) => {
       return {
         title: faq.title,
-        content: faq.content,
+        content: faq.content as FaqContentType[],
       };
     });
 

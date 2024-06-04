@@ -1,6 +1,8 @@
 import { SupportType } from '@/types/common';
 import { formattedDateV3 } from '@/utils/formattedDate';
 import { NOTICE_HEADER } from '@/utils/constants';
+import Link from 'next/link';
+import { PATH } from '@/utils/routes';
 
 interface NoticeTableProps {
   notices?: SupportType[];
@@ -13,6 +15,7 @@ export default function NoticeTable({ notices }: NoticeTableProps) {
       const formattedDate = formattedDateV3(notice.createdAt);
 
       return {
+        id: notice.id,
         createdAt: formattedDate,
         title: notice.title,
       };
@@ -43,7 +46,9 @@ export default function NoticeTable({ notices }: NoticeTableProps) {
                       <p className="text-grey/6 font-medium">{item.createdAt.yearmonth}</p>
                     </div>
                   ) : (
-                    <p className="pl-30 pr-16 border-l-1 border-l-grey/4 grow text-18">{item.title}</p>
+                    <Link href={`${PATH.SUPPORT_NOTICE}/${item.id}`}>
+                      <p className="pl-30 pr-16 border-l-1 border-l-grey/4 grow text-18">{item.title}</p>
+                    </Link>
                   )}
                 </td>
               ))}

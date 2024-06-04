@@ -1,6 +1,7 @@
-import { FaqItemType } from '@/types/common';
+import { FaqContentType, FaqItemType } from '@/types/common';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { renderFaqContent } from '@/utils/renderFaqContent';
 
 interface FaqTableItemProps {
   item: FaqItemType;
@@ -9,11 +10,15 @@ interface FaqTableItemProps {
 export default function FaqTableItem({ item }: FaqTableItemProps) {
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
+  useEffect(() => {
+    setIsClicked(false);
+  }, [item]);
+
   return (
-    <td
-      className={`flex flex-col w-full ${isClicked ? 'bg-grey/0 opacity-100' : 'h-82 opacity-65'}`}
-      onClick={() => setIsClicked((prev) => !prev)}>
-      <div className="flex items-center justify-between gap-16 w-full py-16 pl-40">
+    <td className={`flex flex-col w-full ${isClicked ? 'bg-grey/0 opacity-100' : 'h-82 opacity-65'}`}>
+      <div
+        className="flex items-center justify-between gap-16 w-full py-16 pl-40"
+        onClick={() => setIsClicked((prev) => !prev)}>
         <div className="flex items-center justify-center w-40 h-40 bg-[#2062D1] rounded-full opacity-70">
           <Image src="/images/question-icon.svg" alt="대문자 Q 모양의 질문 아이콘" width={14} height={17} />
         </div>
@@ -22,7 +27,11 @@ export default function FaqTableItem({ item }: FaqTableItemProps) {
           <Image src="/images/chevron-down.svg" alt="열고 닫는 위아래 화살표 아이콘" width={50} height={50} />
         </div>
       </div>
-      {isClicked && <div className="flex pl-96 pr-50 pb-26 text-grey/7 text-16">{item.content}</div>}
+      {isClicked && (
+        <div className="flex flex-col gap-8 pl-96 pr-50 pb-26">
+          {renderFaqContent(item.content as FaqContentType[])}
+        </div>
+      )}
     </td>
   );
 }

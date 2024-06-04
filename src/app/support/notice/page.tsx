@@ -6,7 +6,6 @@ import { GetSupportFaqResponseType } from '@/types/common';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
 import { useEffect, useState } from 'react';
-import { NoticeMockData } from '../../../components/main/support/mock';
 
 export default function NoticePage() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -51,8 +50,7 @@ export default function NoticePage() {
 
   return (
     <div className="flex flex-col gap-48">
-      {/* <NoticeTable notices={notices} /> */}
-      <NoticeTable notices={NoticeMockData} />
+      <NoticeTable notices={notices} />
       <PagenationButton
         pagination={pagination}
         setPagination={setPagination}
