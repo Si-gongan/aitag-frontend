@@ -6,9 +6,10 @@ interface CheckboxProps {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   checked?: boolean;
   disabled?: boolean;
+  size?: number;
 }
 
-export default function Checkbox({ value, checked, onChange, disabled }: CheckboxProps) {
+export default function Checkbox({ value, checked, onChange, disabled, size = 24 }: CheckboxProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +42,8 @@ export default function Checkbox({ value, checked, onChange, disabled }: Checkbo
       <Image
         src={isChecked ? '/images/checkbox_checked.svg' : '/images/checkbox.svg'}
         alt="체크박스 아이콘"
-        width={24}
-        height={24}
+        width={size}
+        height={size}
       />
     </label>
   );

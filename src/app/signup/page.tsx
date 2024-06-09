@@ -7,6 +7,8 @@ import { FiEyeOff, FiEye } from 'react-icons/fi';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import AlertDanger from '@/components/common/alert/AlertDanger';
+import Checkbox from '@/components/common/input/Checkbox';
+import ModalTerm from '@/components/common/modal/ModalTerm';
 
 export default function Signup() {
 
@@ -22,6 +24,11 @@ export default function Signup() {
   const [showPwdCheck, setShowPwdCheck] = useState(false);
   const [pwdCheck, setPwdCheck] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
+  const [serviceTermsAccepted, setServiceTermsAccepted] = useState(false);
+  const [personalInfoAccepted, setPersonalInfoAccepted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -94,6 +101,28 @@ export default function Signup() {
     e.preventDefault();
     setShowPwdCheck(!showPwdCheck);
   };
+  const handleTermsChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target;
+    setTermsAccepted(checked);
+    setAgeConfirmed(checked);
+    setServiceTermsAccepted(checked);
+    setPersonalInfoAccepted(checked);
+  };
+  const handleAgeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setAgeConfirmed(event.target.checked);
+  };
+  const handleServiceTermsChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setServiceTermsAccepted(event.target.checked);
+  };
+  const handlePersonalInfoChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPersonalInfoAccepted(event.target.checked);
+  }
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+  const handleModalOpen = () => {
+    setShowModal(true);
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] px-6 ">
@@ -101,11 +130,13 @@ export default function Signup() {
         <h1 className="text-32 font-bold text-center text-gray-800 mt-50 mb-10">회원가입</h1>
         <div className='mb-50'>
           <h1 className='text-16 text-center text-gray-600'>회원가입을 위해 아래의 정보를 입력해주세요</h1>
-          <AlertDanger message={errorMessage} />
+            {errorMessage !== '비밀번호가 일치하지 않습니다.' && (
+              <AlertDanger message={errorMessage} />
+            )}
         </div>
         <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
           <div className="mb-20">
-            <h1 className='text-14 font-bold text-left mb-3'>이름 / 기업명</h1>
+            <h1 className='text-14 font-bold text-left mb-3'>이름 / 기업명 </h1>
             <input className="border h-53 rounded-lg w-full py-10 px-15 text-gray-700 text-16 focus:outline-none" id="name" type= "text" placeholder="이름 혹은 기업명을 입력해주세요" onChange={handleChange}/>
           </div>
           <div className="mb-20">
@@ -130,7 +161,10 @@ export default function Signup() {
               {showPwdCheck ? <FiEye /> : <FiEyeOff /> }
             </div>
           </div>
-          <div className="mb-30">
+          {errorMessage === '비밀번호가 일치하지 않습니다.' && (
+              <AlertDanger message={errorMessage} />
+          )}
+          <div className="mb-36">
             <h1 className='text-l4 font-bold text-left mb-3'>전화번호 (선택)</h1>
             <PhoneInput 
                 country={'kr'}
@@ -140,10 +174,27 @@ export default function Signup() {
                 inputStyle = {{height:'50px', width: '100%'}}
               />
           </div>
-          <button className="w-full h-53 text-16 bg-[#4C80F1] hover:bg-blue-700 text-white py-8 rounded-lg focus:outline-none mb-50" type="submit">
-              회원가입하기
+          <div className="flex items-center mb-16">
+            <Checkbox value="allTerms" checked={termsAccepted} onChange={handleTermsChange} size={40} />
+            <span className="ml-10 text-16 text-gray-700">전체 약관에 동의합니다</span>
+          </div>
+          <div className="flex items-center mb-16">
+            <Checkbox value="ageTerm" checked={ageConfirmed} onChange={handleAgeChange} size={40} />
+            <span className="ml-10 text-16 text-gray-700">만 14세 이상입니다</span>
+          </div>
+          <div className="flex items-center mb-16">
+            <Checkbox value="service" checked={serviceTermsAccepted} onChange={handleServiceTermsChange} size={40} />
+            <span className="ml-10 text-16 text-gray-700">(필수) 에이택 웹사이트 이용약관 <button type="button" className="text-blue-500 hover:underline ml-10" onClick={handleModalOpen}>보기</button></span>
+          </div>
+          <div className="flex items-center mb-16">
+            <Checkbox value="personal" checked={personalInfoAccepted} onChange={handlePersonalInfoChange} size={40} />
+            <span className="ml-10 text-16 text-gray-700">(필수) 에이택 웹사이트 개인정보 처리방침 <button type="button" className="text-blue-500 hover:underline ml-10" onClick={handleModalOpen}>보기</button></span>
+          </div>
+          <button className={`w-full h-53 text-16 py-8 rounded-lg focus:outline-none mb-50 ${termsAccepted && ageConfirmed && serviceTermsAccepted && personalInfoAccepted ? 'bg-[#4C80F1] hover:bg-blue-700 text-white' : 'bg-gray-400 text-gray-700 cursor-not-allowed'}`} type="submit" disabled={!termsAccepted || !ageConfirmed || !serviceTermsAccepted || !personalInfoAccepted}>
+              가입하기
           </button>
         </form>
+        {showModal && <ModalTerm onClose={handleModalClose} />}
       </div>
     </div>
   );

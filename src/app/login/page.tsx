@@ -58,7 +58,7 @@ export default function Login() {
 
       if (!response.ok) {
         const errorInfo: ErrorResponse = result as ErrorResponse;
-        throw new Error(errorInfo.message || '로그인에 실패했습니다.');
+        throw new Error(errorInfo.message || '아이디 혹은 비밀번호가 잘못 되었습니다.');
       }
 
       localStorage.setItem('token', result.result.token); // 토큰 저장
