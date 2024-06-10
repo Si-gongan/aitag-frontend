@@ -6,6 +6,7 @@ import Checkbox from '@/components/common/input/Checkbox';
 import { PreviewImageItemType } from '@/types/common';
 import { IMAGE_TABLE_HEADER } from '@/utils/constants';
 import { useState } from 'react';
+import ToneDropdown from './ToneDropdown';
 
 interface ImageListTableProps {
   type?: string;
@@ -59,7 +60,7 @@ export default function ImageListTable({
                 className={`px-12 ${
                   header.value === 'image'
                     ? 'w-80'
-                    : header.value === 'language'
+                    : header.value === 'tone'
                       ? 'w-176'
                       : header.value === 'keyword'
                         ? 'w-161'
@@ -90,25 +91,19 @@ export default function ImageListTable({
                     {tableHeaderKey.map((key) => (
                       <td key={key + index}>
                         {key === 'image' ? (
-                          <div className="flex justify-center items-center h-40 w-40 overflow-hidden">
+                          <div className="flex justify-center items-center h-40 w-80 overflow-hidden">
                             <img
                               src={item.image}
                               alt={`이미지 미리보기 썸네일 ${index}`}
-                              width={40}
-                              height={40}
-                              style={{
-                                objectFit: 'cover',
-                                overflow: 'hidden',
-                                borderRadius: '2px',
-                                border: 'border-grey/4',
-                              }}
+                              className="w-40 h-40 overflow-hidden border-1 rounded-2 border-grey/4"
                             />
                           </div>
                         ) : key === 'alt' ? (
                           <span className="p-12">{item.alt ? item.alt : '없음'}</span>
-                        ) : key === 'language' ? (
-                          <span className="flex justify-center">한국어</span>
-                        ) : key === 'keyword' ? (
+                        ) : key === 'tone' ? (
+                          <ToneDropdown item={item} previewImages={previewImages} setPreviewImages={setPreviewImages} />
+                        ) : // <span className="flex justify-center">한국어</span>
+                        key === 'keyword' ? (
                           <div className="flex justify-center">
                             <AddKeywordsButton
                               item={item}

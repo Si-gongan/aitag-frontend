@@ -109,6 +109,7 @@ export interface PreviewImageItemType {
   alt: string;
   language: string;
   keywords: string[];
+  tone: string;
   size?: string;
   file?: File;
 }

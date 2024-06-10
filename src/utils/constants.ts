@@ -30,7 +30,7 @@ export const URL_TABLE_HEADER = [
 export const IMAGE_TABLE_HEADER = [
   { text: '이미지', value: 'image' },
   { text: '기존 대체 텍스트', value: 'alt' },
-  { text: '언어 선택', value: 'language' },
+  { text: '문체 선택', value: 'tone' },
   { text: '맞춤형 키워드', value: 'keyword' },
 ];
 
@@ -39,6 +39,13 @@ export const URL_PREVIEW_TABLE_HEADER = [
   { text: '기존 대체 텍스트', value: 'thumbnail' },
   { text: '언어 선택', value: 'thumbnail' },
   { text: '맞춤형 키워드', value: 'thumbnail' },
+];
+
+export const TONE = [
+  { text: 'informal(~사진)', value: 'informal' },
+  { text: 'honorific(~사진입니다)', value: 'honorific' },
+  { text: 'polite(~사진이에요)', value: 'polite' },
+  { text: 'plain(~사진이다)', value: 'plain' },
 ];
 
 export const TABLE_BODY_NUMBER = {
@@ -88,6 +95,10 @@ export const ERROR_MESSAGE = {
   KEYWORDS_LENGTH: '10자 이내로 입력해 주세요.',
   KEYWORDS_COUNT: '키워드는 3개까지 입력할 수 있어요.',
   OPINION_EMAIL_REGEX: '이메일을 제대로 입력했는지 확인해주세요.',
+  UPLOAD_FILE_SIZE: '파일 크기가 50MB를 초과합니다.',
+  UPLOAD_FILE_FORMAT: '파일 형식은  JPEF, PNG, GIF, WEBP만 가능합니다.',
+  UPLOAD_FILE_DUPLICATION: '이미 업로드된 중복 파일입니다.',
+  URL_DUPLICATION: '이미 입력된 중복 URL입니다.',
 };
 
 export const DASHBOARD_SORT = [

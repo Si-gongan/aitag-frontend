@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { PreviewImageItemType } from '@/types/common';
+import { ERROR_MESSAGE } from '@/utils/constants';
 
 interface FileInputFieldProps {
   previewImages: PreviewImageItemType[];
@@ -36,6 +37,7 @@ export default function FileInputField({
     }
 
     const newPreviewInfos: PreviewImageItemType[] = [];
+    const existingNames = new Set(previewImages.map((image) => image.name));
 
     Array.from(files).forEach((file) => {
       const { name, size: byteSize, type } = file;
@@ -45,13 +47,19 @@ export default function FileInputField({
 
       if (!alloewedImageTypes.includes(type)) {
         setUploading(false);
-        setToastMessage('파일 형식은  JPEF, PNG, GIP, WEBP만 가능합니다.');
+        setToastMessage(ERROR_MESSAGE.UPLOAD_FILE_FORMAT);
         return;
       }
 
       if (byteSize > 50 * 1024 * 1024) {
         setUploading(false);
-        setToastMessage('파일 크기가 50MB를 초과합니다.');
+        setToastMessage(ERROR_MESSAGE.UPLOAD_FILE_SIZE);
+        return;
+      }
+
+      if (existingNames.has(name)) {
+        setUploading(false);
+        setToastMessage(ERROR_MESSAGE.UPLOAD_FILE_DUPLICATION);
         return;
       }
 
@@ -65,13 +73,20 @@ export default function FileInputField({
           alt: '',
           language: '한국어',
           keywords: [],
+          tone: 'informal',
           size: sizeInKB,
           file,
         });
+
         if (newPreviewInfos.length === files.length) {
           // 이미지 정보를 모두 수집한 후에 state를 업데이트합니다.
           setPreviewImages((prev) => [...prev, ...newPreviewInfos]);
           setUploading(false);
+
+          // File input 초기화
+          if (event.target instanceof HTMLInputElement) {
+            event.target.value = '';
+          }
         }
       };
     });
@@ -92,7 +107,7 @@ export default function FileInputField({
         <Image src="/images/upload.svg" alt="이미지 업로드 아이콘" width={46} height={46} />
         <div className="flex flex-col items-center gap-15">
           <p className="font-bold text-grey/7">여기를 클릭해 파일을 불러오거나 Drag & Drop 하세요.</p>
-          <span className="text-[#A9ACB4]">JPEF, PNG, GIP, WEBP up to 50MB</span>
+          <span className="text-[#A9ACB4]">JPEF, PNG, GIF, WEBP up to 50MB</span>
         </div>
       </div>
       <div className="flex items-center justify-center w-233 h-70 text-17 text-brand/mainblue-d1 bg-[#F2F6FE] rounded-[0.25rem] border-1 border-brand/mainblue-d1">

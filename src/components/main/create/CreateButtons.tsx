@@ -18,11 +18,16 @@ interface CreateButtonsProps {
 export default function CreateButtons({ type = 'url', setProgressStage, selectedImages }: CreateButtonsProps) {
   const [showModalCreact, setShowModalCreact] = useState(false);
   const [showModalComplete, setShowModalComplete] = useState(false);
+  const [showModalError, setShowModalError] = useState(false);
 
   const router = useRouter();
 
   const handleToHome = () => {
     router.push(PATH.HOME);
+  };
+
+  const handleToMyPayment = () => {
+    router.push(PATH.MYPAGE_PAYMENT);
   };
 
   const handleToDashboard = () => {
@@ -44,6 +49,7 @@ export default function CreateButtons({ type = 'url', setProgressStage, selected
             image: newGongbangUrl,
             language: 'Korean',
             keywords: selectedImage.keywords,
+            tone: selectedImage.tone,
           };
         }
 
@@ -51,6 +57,7 @@ export default function CreateButtons({ type = 'url', setProgressStage, selected
           image: selectedImage.image,
           language: 'Korean',
           keywords: selectedImage.keywords,
+          tone: selectedImage.tone,
         };
       })
     );
@@ -67,6 +74,8 @@ export default function CreateButtons({ type = 'url', setProgressStage, selected
 
       if (response.ok || response.status === 201) {
         setShowModalComplete(true);
+      } else if (response.status === 400) {
+        setShowModalError(true);
       }
     } catch (error) {
       alert('에러');
@@ -100,6 +109,17 @@ export default function CreateButtons({ type = 'url', setProgressStage, selected
           onClick={handleToHome}
           onCancle={handleToDashboard}
           onClose={() => setShowModalComplete(false)}
+        />
+      )}
+      {showModalError && (
+        <ModalChoose
+          title="포인트 부족"
+          description="포인트가 부족해서 생성을 실패했습니다."
+          addDescription="포인트를 충전하러 가시겠습니까?"
+          leftButtonText="취소"
+          rightButtonText="충전하러 가기"
+          onClick={handleToMyPayment}
+          onClose={() => setShowModalError(false)}
         />
       )}
     </>

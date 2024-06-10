@@ -11,6 +11,7 @@ import CreateButtons from './CreateButtons';
 import RequestForExpert from './RequestForExpert';
 import UrlInputField from '@/components/common/input/UrlInputField';
 import Toast from '@/components/common/toast/Toast';
+import { ERROR_MESSAGE } from '@/utils/constants';
 
 export default function TabUrlSection() {
   const [urls, setUrls] = useState<string[]>([]);
@@ -18,16 +19,24 @@ export default function TabUrlSection() {
   const [previewImages, setPreviewImages] = useState<PreviewImageItemType[]>([]);
   const [loading, setLoading] = useState(false);
   const [progressStage, setProgressStage] = useState('one'); // one: url 입력, two: 해설진 작성
+  const [toastMessage, setToastMessage] = useState('');
 
   const selectedImages = previewImages.filter((previewImage) => Array.from(selectedUrls).includes(previewImage.name));
 
   const handleSubmitUrl = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!(event.target as HTMLFormElement).url.value) return;
+    const newUrl = (event.target as HTMLFormElement).url.value;
+
+    if (!newUrl) return;
+
+    const existingUrl = urls.find((url) => url === newUrl);
+    if (existingUrl) {
+      setToastMessage(ERROR_MESSAGE.URL_DUPLICATION);
+      return;
+    }
 
     // URL 리스트에 추가
-    const newUrl = (event.target as HTMLFormElement).url.value;
     setUrls((prev) => [...prev, newUrl]);
     (event.target as HTMLFormElement).url.value = '';
 
@@ -35,6 +44,7 @@ export default function TabUrlSection() {
     const scrapImagesOptions = {
       method: 'GET',
     };
+
     try {
       setLoading(true);
 
@@ -49,6 +59,7 @@ export default function TabUrlSection() {
           alt: image.alt,
           language: '한국어',
           keywords: [],
+          tone: 'informal',
         };
       });
 
@@ -74,6 +85,14 @@ export default function TabUrlSection() {
             <form onSubmit={handleSubmitUrl}>
               <UrlInputField name="url" placeholder="웹 URL 주소를 입력해주세요" buttonText="확인" loading={loading} />
             </form>
+            {toastMessage && (
+              <Toast
+                type="danger"
+                text={toastMessage}
+                size="absolute top-8 right-0 h-53 w-880"
+                onClose={() => setToastMessage('')}
+              />
+            )}
           </SectionLayout>
           <SectionLayout title="URL 리스트" description="대체텍스트 생성이 진행될 URL 리스트입니다.">
             <UrlListTable urls={urls} setUrls={setUrls} selectedUrls={selectedUrls} setSelectedUrls={setSelectedUrls} />
