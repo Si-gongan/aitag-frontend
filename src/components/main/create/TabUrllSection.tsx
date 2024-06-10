@@ -35,6 +35,7 @@ export default function TabUrlSection() {
     const scrapImagesOptions = {
       method: 'GET',
     };
+
     try {
       setLoading(true);
 
@@ -49,6 +50,7 @@ export default function TabUrlSection() {
           alt: image.alt,
           language: '한국어',
           keywords: [],
+          tone: 'informal',
         };
       });
 

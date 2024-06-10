@@ -30,7 +30,7 @@ export const URL_TABLE_HEADER = [
 export const IMAGE_TABLE_HEADER = [
   { text: '이미지', value: 'image' },
   { text: '기존 대체 텍스트', value: 'alt' },
-  { text: '언어 선택', value: 'language' },
+  { text: '문체 선택', value: 'tone' },
   { text: '맞춤형 키워드', value: 'keyword' },
 ];
 
@@ -39,6 +39,13 @@ export const URL_PREVIEW_TABLE_HEADER = [
   { text: '기존 대체 텍스트', value: 'thumbnail' },
   { text: '언어 선택', value: 'thumbnail' },
   { text: '맞춤형 키워드', value: 'thumbnail' },
+];
+
+export const TONE = [
+  { text: 'informal(~사진)', value: 'informal' },
+  { text: 'honorific(~사진입니다)', value: 'honorific' },
+  { text: 'polite(~사진이에요)', value: 'polite' },
+  { text: 'plain(~사진이다)', value: 'plain' },
 ];
 
 export const TABLE_BODY_NUMBER = {
