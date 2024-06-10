@@ -18,9 +18,21 @@ export const PATH = {
 };
 
 export const HEADER_MENU = [
-  { title: '워크스페이스', path: '/dashboard' },
-  { title: '요금제', path: '/plans' },
-  { title: '고객센터', path: '/support/notice' },
+  {
+    title: '워크스페이스',
+    option: [
+      { title: '대체텍스트 생성', path: PATH.CREATE_URL },
+      { title: '대시보드', path: PATH.DASHBOARD },
+    ],
+  },
+  { title: '요금제', option: PATH.PLANS },
+  {
+    title: '고객센터',
+    option: [
+      { title: '공지사항', path: PATH.SUPPORT_NOTICE },
+      { title: 'FAQ', path: PATH.SUPPORT_FAQ },
+    ],
+  },
 ];
 
 export const API_ROUTE = {
