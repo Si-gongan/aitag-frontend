@@ -197,6 +197,16 @@ export interface PaymentItemType {
   [key: string]: number | string;
 }
 
+export interface HeaderMenuOptionType {
+  title: string;
+  path: string;
+}
+
+export interface HeaderMenuType {
+  title: string;
+  option: HeaderMenuOptionType[];
+}
+
 export type CardType = Awaited<ReturnType<BrandPayInstance['getPaymentMethods']>>['cards'][0];
 
 // 서버 요청 및 리스폰스 데이터 타입

@@ -51,7 +51,7 @@ export default function ProfileDropDown({ user, handleLogout }: ProfileDropDownP
         />
       </button>
       {isOpen && (
-        <div className="absolute top-60 w-172 pt-18 pb-10 bg-white shadow-[2px_2px_14px_8px_rgba(0,0,0,0.1)] rounded z-50">
+        <div className="absolute top-53 w-172 pt-18 pb-10 bg-white shadow-[2px_2px_14px_8px_rgba(0,0,0,0.1)] rounded z-50">
           <Link href="/mypage" className="flex items-center h-36 px-16 text-13 text-gray-700 hover:bg-gray-100">
             마이페이지
           </Link>
