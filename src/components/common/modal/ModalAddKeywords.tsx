@@ -71,7 +71,7 @@ export default function ModalAddKeywords({ item, previewImages, setPreviewImages
   }, []);
 
   return (
-    <div className="relatvie flex flex-col w-260  p-20 gap-16 z-modal bg-white shadow-xl rounded-16 border-1 border-grey/3">
+    <div className="relatvie flex flex-col w-260  p-20 gap-16 bg-white shadow-xl rounded-16 border-1 border-grey/3">
       <h2 className="text-12 text-grey/7 text-center">추가할 키워드를 입력하세요.</h2>
       <div className="flex flex-col gap-12">
         <div className="flex flex-col gap-5">

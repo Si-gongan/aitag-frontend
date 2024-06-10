@@ -17,7 +17,7 @@ const AddKeywordsButton = ({ previewImages, setPreviewImages, item, onClick }: A
         {keyowrdsIs ? '수정하기' : '추가하기'}
       </button>
       {modalAddKeywords && (
-        <div className="absolute top-0 right-88">
+        <div className="absolute top-0 right-88 z-modal">
           <ModalAddKeywords
             item={item}
             previewImages={previewImages}

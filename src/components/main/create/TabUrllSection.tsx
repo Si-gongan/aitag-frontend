@@ -25,6 +25,7 @@ export default function TabUrlSection() {
 
   const handleSubmitUrl = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setToastMessage('');
 
     const newUrl = (event.target as HTMLFormElement).url.value;
 
