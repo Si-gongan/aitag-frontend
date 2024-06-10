@@ -98,6 +98,7 @@ export const ERROR_MESSAGE = {
   UPLOAD_FILE_SIZE: '파일 크기가 50MB를 초과합니다.',
   UPLOAD_FILE_FORMAT: '파일 형식은  JPEF, PNG, GIF, WEBP만 가능합니다.',
   UPLOAD_FILE_DUPLICATION: '이미 업로드된 중복 파일입니다.',
+  URL_DUPLICATION: '이미 입력된 중복 URL입니다.',
 };
 
 export const DASHBOARD_SORT = [
