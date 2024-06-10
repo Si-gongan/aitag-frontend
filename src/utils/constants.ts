@@ -87,6 +87,7 @@ export const OpinionFormFormat = {
 export const ERROR_MESSAGE = {
   KEYWORDS_LENGTH: '10자 이내로 입력해 주세요.',
   KEYWORDS_COUNT: '키워드는 3개까지 입력할 수 있어요.',
+  OPINION_EMAIL_REGEX: '이메일을 제대로 입력했는지 확인해주세요.',
 };
 
 export const DASHBOARD_SORT = [
@@ -179,3 +180,11 @@ export const TEMP_PLANS_INFO = [
     period: '',
   },
 ];
+
+export const OPINION_TEXT_INPUT = [
+  { label: '제목', name: 'title' },
+  { label: '작성자', name: 'writer' },
+  { label: '이메일', name: 'email' },
+];
+
+export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

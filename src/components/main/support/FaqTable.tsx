@@ -2,9 +2,9 @@ import { FaqContentType, FaqItemType, PaginationType, SupportType } from '@/type
 import PagenationButton from '@/components/common/button/PaginationButton';
 import ActionButtonSkyBlue from '@/components/common/button/ActionButtonSkyBlue';
 import { useState } from 'react';
-import ModalSupport from '@/components/common/modal/ModalSupport';
 import { getToken } from '@/utils/getToken';
 import FaqTableItem from './FaqTableItem';
+import ModalOpinion from '@/components/common/modal/ModalOpinion';
 
 interface FaqTableProps {
   faqs: SupportType[];
@@ -14,7 +14,7 @@ interface FaqTableProps {
 }
 
 export default function FaqTable({ faqs, pagination, setPagination, totalPages }: FaqTableProps) {
-  const [showModalSupport, setShowModalSupport] = useState<boolean>(false);
+  const [showModalOpinion, setShowModalOpinion] = useState<boolean>(false);
 
   const items: FaqItemType[] =
     faqs &&
@@ -37,7 +37,7 @@ export default function FaqTable({ faqs, pagination, setPagination, totalPages }
     if (!token) {
       alert('로그인이 필요합니다!');
     } else {
-      setShowModalSupport(true);
+      setShowModalOpinion(true);
     }
   };
 
@@ -62,7 +62,7 @@ export default function FaqTable({ faqs, pagination, setPagination, totalPages }
       <div className="flex justify-end">
         <ActionButtonSkyBlue text="고객센터 문의하기" size="w-150 h-54" onClick={handleClick} />
       </div>
-      {showModalSupport && <ModalSupport onClose={() => setShowModalSupport(false)} />}
+      {showModalOpinion && <ModalOpinion onClose={() => setShowModalOpinion(false)} />}
     </div>
   );
 }
