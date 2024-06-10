@@ -1,11 +1,11 @@
-interface SupportFileFiledProps {
+interface OpinionFileFiledProps {
   name: string;
   label: string;
   description?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function SupportFileFiled({ name, label, description, onChange }: SupportFileFiledProps) {
+export default function OpinionFileFiled({ name, label, description, onChange }: OpinionFileFiledProps) {
   return (
     <div className="flex gap-24 items-center">
       <h3 className="text-grey/6 font-bold w-58">{label}</h3>

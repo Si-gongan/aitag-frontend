@@ -7,7 +7,7 @@ interface ModalChooseProps {
   title: string;
   description?: string;
   addDescription?: string;
-  leftButtonText: string;
+  leftButtonText?: string;
   rightButtonText: string;
   onClick?: () => void; // 확인 버튼 눌렀을때
   onCancle?: () => void; // 취소 버튼을 눌렀을때
@@ -37,11 +37,13 @@ export default function ModalChoose({
           </div>
         </div>
         <div className="flex gap-30">
-          <ActionButtonGray
-            text={leftButtonText ? leftButtonText : '취소'}
-            size="w-233 h-54"
-            onClick={onCancle ? onCancle : onClose}
-          />
+          {leftButtonText && (
+            <ActionButtonGray
+              text={leftButtonText ? leftButtonText : '취소'}
+              size="w-233 h-54"
+              onClick={onCancle ? onCancle : onClose}
+            />
+          )}
           <ActionButton
             text={rightButtonText ? rightButtonText : '확인'}
             size="w-233 h-54"
