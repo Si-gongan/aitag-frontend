@@ -30,8 +30,8 @@ export default function TabUrlSection() {
 
     if (!newUrl) return;
 
-    const findDuplicatedUrl = urls.find((url) => url === newUrl);
-    if (findDuplicatedUrl) {
+    const existingUrl = urls.find((url) => url === newUrl);
+    if (existingUrl) {
       setToastMessage(ERROR_MESSAGE.URL_DUPLICATION);
       return;
     }
