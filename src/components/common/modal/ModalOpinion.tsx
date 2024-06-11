@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 import TextInputField from '../../main/support/TextInputField';
 import { useState } from 'react';
-import uploadImage from '@/utils/uploadImage';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE } from '@/utils/routes';
 import ModalConfirm from './ModalConfirm';
@@ -11,14 +10,13 @@ import Image from 'next/image';
 import { ERROR_MESSAGE, OPINION_TEXT_INPUT } from '@/utils/constants';
 import OpinionTextarea from '@/components/main/support/OpinionTextarea';
 import ModalChoose from './ModalChoose';
-import Spinner from '../animation/Spinner';
 
 interface ModalOpinionProps {
   onClose: () => void;
 }
 
 export default function ModalOpinion({ onClose }: ModalOpinionProps) {
-  const [value, setValue] = useState({ email: '', content: '', files: [] as File[] });
+  const [value, setValue] = useState({ title: '', writer: '', email: '', content: '' });
   const [loading, setLoading] = useState<boolean>(false);
   const [showModalError, setShowModalError] = useState<boolean>(false);
   const [showModalConfirm, setShowModalConfirm] = useState<boolean>(false);
@@ -33,15 +31,6 @@ export default function ModalOpinion({ onClose }: ModalOpinionProps) {
     setValue((prev) => ({ ...prev, [name]: value }));
   };
 
-  // 파일첨부 없앨건지 재확인 필요
-  const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    setValue((prev) => ({
-      ...prev,
-      files: files ? Array.from(files) : [],
-    }));
-  };
-
   const handleClose = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -49,21 +38,11 @@ export default function ModalOpinion({ onClose }: ModalOpinionProps) {
   };
 
   const handleSubmit = async () => {
-    let uploadedFiles = [];
-
-    if (value.files && value.files.length > 0) {
-      uploadedFiles = await Promise.all(
-        value.files.map(async (file) => {
-          const newGongbangUrl = await uploadImage(file);
-          return newGongbangUrl;
-        })
-      );
-    }
-
     const dataToSend = {
+      title: value.title,
+      writer: value.writer,
       email: value.email,
       content: value.content,
-      files: uploadedFiles,
     };
 
     const options = {
@@ -110,12 +89,6 @@ export default function ModalOpinion({ onClose }: ModalOpinionProps) {
           count={value.content.length}
         />
         <hr className="w-full border-1 border-grey/2" />
-        {/* <OpinionFileFiled
-          name="files"
-          label="파일첨부"
-          description="파일명은 -,_를 제외한 특수문자는 허용되지 않습니다."
-          onChange={handleChangeFile}
-        /> */}
         <div className="flex gap-34">
           <ActionButtonSkyBlue text="취소" size="w-130 h-50" onClick={onClose} />
           <ActionButton text="전송하기" size="w-130 h-50" onClick={handleSubmit} disabled={actionButtonDisabled} />

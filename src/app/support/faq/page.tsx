@@ -1,5 +1,7 @@
 'use client';
 
+import ActionButtonSkyBlue from '@/components/common/button/ActionButtonSkyBlue';
+import ModalOpinion from '@/components/common/modal/ModalOpinion';
 import FaqTab from '@/components/main/support/FaqTab';
 import FaqTable from '@/components/main/support/FaqTable';
 import { GetSupportFaqResponseType, SupportTabType } from '@/types/common';
@@ -10,6 +12,7 @@ import { useEffect, useState } from 'react';
 export default function FaqPage() {
   const [tab, setTab] = useState<SupportTabType>({ id: 'all', text: '전체' });
   const [faqData, setFaqData] = useState<GetSupportFaqResponseType>();
+  const [showModalOpinion, setShowModalOpinion] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const { faqs, totalPages } = faqData || { faqs: [], totalPages: 0 };
@@ -51,6 +54,10 @@ export default function FaqPage() {
       </div>
       <FaqTab tab={tab} setTab={setTab} />
       <FaqTable faqs={faqs || []} pagination={pagination} setPagination={setPagination} totalPages={totalPages} />
+      <div className="flex w-full justify-end -mt-54">
+        <ActionButtonSkyBlue text="고객센터 문의하기" size="w-150 h-54" onClick={() => setShowModalOpinion(true)} />
+      </div>
+      {showModalOpinion && <ModalOpinion onClose={() => setShowModalOpinion(false)} />}
     </section>
   );
 }
