@@ -70,7 +70,6 @@ export default function CreateButtons({ type = 'url', setProgressStage, selected
 
     try {
       const response = await fetchWithInterceptor(API_ROUTE.POST, options);
-      const result = await response.json();
 
       if (response.ok || response.status === 201) {
         setShowModalComplete(true);
