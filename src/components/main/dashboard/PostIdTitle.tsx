@@ -34,7 +34,7 @@ export default function PostIdTitle({
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
-  let { sort, setSort, pagination, setPagination, searchValue, setSearchValue } = useContext(DashboardContext);
+  let { sort, pagination, searchValue } = useContext(DashboardContext);
 
   const aiCompletedPage = target === 'ai';
   const inspectCompletedPage = target === 'inspect' && isComplete;
@@ -63,7 +63,7 @@ export default function PostIdTitle({
       <hr className="border-1 border-grey/3" />
       <div className="flex justify-between items-center">
         <ActionButtonGray text="뒤로가기" size="w-144 h-54" type="back" onClick={goBack} />
-        {aiCompletedPage && selectedWorks ? (
+        {aiCompletedPage && selectedWorks && !requestExpertPage ? (
           <div className="flex gap-8">
             <ActionButtonGray
               text="검수 요청"
@@ -74,7 +74,7 @@ export default function PostIdTitle({
             />
             <DownloadDropdown selectedWorks={selectedWorks} disabled={selectedTotal === 0} />
           </div>
-        ) : inspectCompletedPage ? (
+        ) : inspectCompletedPage && !requestExpertPage ? (
           <div className="flex gap-8">
             <ActionButton text="다운로드" size="w-144 h-54" />
             <SortDropdown type="inspect" sort={tableSort as DashbaordSortType} onClick={handleClickSort} />
