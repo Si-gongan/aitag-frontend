@@ -137,6 +137,7 @@ export interface WorkType {
   image: string;
   keywords: string[];
   language: string;
+  tone: string;
   answer?: string;
   before?: string;
   after?: string;
