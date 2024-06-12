@@ -1,19 +1,20 @@
 import { PreviewImageItemType } from '@/types/common';
 import { ERROR_MESSAGE } from '@/utils/constants';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface ModalAddKeywordsProps {
-  item?: PreviewImageItemType;
+  item: PreviewImageItemType;
   previewImages: PreviewImageItemType[];
   setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
   onClose: () => void;
 }
 
 export default function ModalAddKeywords({ item, previewImages, setPreviewImages, onClose }: ModalAddKeywordsProps) {
-  const [keywordTags, setKeywordTags] = useState<string[]>([]);
+  const [keywordTags, setKeywordTags] = useState<string[]>(item.keywords);
   const [errorText, setErrorText] = useState<string>('');
 
+  const modalRef = useRef<HTMLDivElement>(null);
   const over3Keywords = keywordTags.length > 2;
 
   const handleClickDelete = (tag: string) => {
@@ -31,25 +32,7 @@ export default function ModalAddKeywords({ item, previewImages, setPreviewImages
     setErrorText('');
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      if (event.nativeEvent.isComposing) {
-        // 한글 입력시 마지막 글자가 중복되는 현상을 해결해주는 코드
-        return;
-      }
-      const inputKeyword = (event.target as HTMLInputElement).value.trim();
-      if (inputKeyword.length > 10) {
-        console.error(ERROR_MESSAGE.KEYWORDS_LENGTH);
-        return;
-      }
-
-      setKeywordTags((prev) => [...prev, inputKeyword]);
-      (event.target as HTMLInputElement).value = '';
-    }
-  };
-
-  const handleClickClose = () => {
+  const saveKeywords = () => {
     const updatePreviewImages = previewImages.map((previewImage) => {
       if (previewImage.image === (item as PreviewImageItemType).image) {
         return { ...previewImage, keywords: keywordTags };
@@ -59,19 +42,45 @@ export default function ModalAddKeywords({ item, previewImages, setPreviewImages
     });
 
     setPreviewImages(updatePreviewImages);
+  };
 
-    onClose();
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+
+      // 한글 입력시 마지막 글자가 중복되는 현상을 해결해주는 코드
+      if (event.nativeEvent.isComposing) return;
+
+      const inputKeyword = (event.target as HTMLInputElement).value.trim();
+
+      if (inputKeyword && !keywordTags.includes(inputKeyword)) {
+        setKeywordTags((prev) => [...prev, inputKeyword]);
+        (event.target as HTMLInputElement).value = '';
+      }
+    }
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      onClose();
+    }
   };
 
   useEffect(() => {
-    const itemKeywords = item?.keywords;
-    if (itemKeywords) {
-      setKeywordTags([...itemKeywords]);
-    }
+    saveKeywords();
+  }, [keywordTags]);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   return (
-    <div className="relatvie flex flex-col w-260  p-20 gap-16 bg-white shadow-xl rounded-16 border-1 border-grey/3">
+    <div
+      ref={modalRef}
+      className="relative flex flex-col w-260 p-20 gap-16 bg-white shadow-xl rounded-16 border-1 border-grey/3">
       <h2 className="text-12 text-grey/7 text-center">추가할 키워드를 입력하세요.</h2>
       <div className="flex flex-col gap-12">
         <div className="flex flex-col gap-5">
@@ -100,7 +109,7 @@ export default function ModalAddKeywords({ item, previewImages, setPreviewImages
             ))}
         </div>
       </div>
-      <div className="absolute left-260 top-0 w-30 h-30" onClick={handleClickClose}>
+      <div className="absolute left-260 top-0 w-30 h-30" onClick={onClose}>
         <Image
           src="/images/Close-dark.svg"
           alt="맞춤형 키워드 입력 창 닫기 버튼"
