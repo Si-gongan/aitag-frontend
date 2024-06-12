@@ -6,7 +6,6 @@ import SortDropdown from '@/components/main/dashboard/SortDropdown';
 import { DashbaordSortType, GetPostResponseType } from '@/types/common';
 import { DASHBOARD_LIMIT } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
-import { initUrlParams } from '@/utils/initUrlParams';
 import { API_ROUTE, PATH } from '@/utils/routes';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
@@ -23,7 +22,6 @@ export default function DashboardContent() {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
-  // const items = (resultData && (resultData.hasOwnProperty('posts') ? resultData.posts : resultData?.inspects)) || [];
   const items = (resultData && ('posts' in resultData ? resultData.posts : resultData?.inspects)) || [];
 
   const handleSubmitSearch = (event: React.MouseEvent<HTMLFormElement>) => {
@@ -81,11 +79,6 @@ export default function DashboardContent() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    initUrlParams({ params, setSort, setSearchValue, setPagination });
-    getResultItem();
-  }, []);
 
   useEffect(() => {
     getResultItem();
