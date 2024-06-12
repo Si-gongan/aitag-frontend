@@ -33,6 +33,12 @@ export default function RequestForExpert({ type = 'url', selectedImages, setProg
     router.push(PATH.MYPAGE_PAYMENT);
   };
 
+  const handleToBack = () => {
+    setShowModalConfirm(false);
+
+    window.location.reload();
+  };
+
   const handleClickRequest = async () => {
     const selectedImagesWorks = await Promise.all(
       selectedImages.map(async (selectedImage) => {
@@ -101,6 +107,7 @@ export default function RequestForExpert({ type = 'url', selectedImages, setProg
           description="서비스가 정상적으로 접수되었습니다"
           buttonText="확인"
           onClose={() => setShowModalConfirm(false)}
+          onClick={handleToBack}
         />
       )}
       {showModalError && (
