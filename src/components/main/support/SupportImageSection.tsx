@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TabButton from './TabButton';
 import { usePathname } from 'next/navigation';
 
@@ -10,9 +10,12 @@ export default function SupportImageSection() {
   const parts = pathname.split('/');
   const currentPage = parts[2];
 
-  const initialPage = currentPage === 'notice' ? { id: 'notice', text: '공지사항' } : { id: 'faq', text: 'FAQ' };
+  const [page, setPage] = useState({ id: 'notice', text: '공지사항' });
 
-  const [page, setPage] = useState(initialPage);
+  useEffect(() => {
+    const initialPage = currentPage === 'notice' ? { id: 'notice', text: '공지사항' } : { id: 'faq', text: 'FAQ' };
+    setPage(initialPage);
+  }, [currentPage]);
 
   return (
     <section className="w-full flex justify-center items-center h-357 bg-[url('/images/support-image.png')] bg-cover bg-center">
