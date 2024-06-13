@@ -1,10 +1,15 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Image from 'next/image';
 import TextFieldWhite from '../common/text/TextFieldWhite';
 import TextFieldGray from '../common/text/TextFieldGray';
 import Link from 'next/link';
+import ModalOpinion from '../common/modal/ModalOpinion';
 
 const Footer = () => {
+  const [showModalOpinion, setShowModalOpinion] = useState<boolean>(false);
+
   return (
     <footer className="w-full relative bg-[#2E2E2E] pb-24">
       <div className="flex justify-between items-center px-100 pt-24 pb-8 max-w-screen-lg mx-auto">
@@ -26,7 +31,7 @@ const Footer = () => {
         <TextFieldGray text={'전화번호 0507-0177-5941 | 이메일 sigongan22@gmail.com'} />
         <TextFieldGray
           text={
-            '대표자 : 오주상 | 상호명 시(視)공간 | 사업자번호 : 389-43-00972 | 통신판매업 신고번호 : 제 ****-****-***** 호'
+            '대표자 : 오주상 | 상호명 시공간 | 사업자번호 : 389-43-00972 | 통신판매업 신고번호 : 제 ****-****-***** 호'
           }
         />
       </div>
@@ -37,10 +42,11 @@ const Footer = () => {
           <hr className="h-12 border-1 border-[#919191]" />
           <Link href="/">이용약관</Link>
           <hr className="h-12 border-1 border-[#919191]" />
-          <Link href="/">문의메일</Link>
+          <button onClick={() => setShowModalOpinion(true)}>문의메일</button>
         </div>
-        <TextFieldGray text={'Copyright ⓒ 2023. 시(視)공간. All rights reserved.'} />
+        <TextFieldGray text={'Copyright ⓒ 2023. 시공간. All rights reserved.'} />
       </div>
+      {showModalOpinion && <ModalOpinion onClose={() => setShowModalOpinion(false)} />}
     </footer>
   );
 };
