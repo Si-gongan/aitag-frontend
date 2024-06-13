@@ -103,20 +103,14 @@ export default function ModalAddKeywords({ item, previewImages, setPreviewImages
                 className="inline-flex items-center justify-center gap-6 h-25 px-8 rounded-6 text-12 text-grey/7 bg-grey/3">
                 {tag}
                 <div onClick={() => handleClickDelete(tag)}>
-                  <Image src="/images/Close.svg" width={12} height={12} alt="키워드 태그 삭제" />
+                  <Image src="/images/close-icon.svg" width={15} height={15} alt="키워드 태그 삭제" />
                 </div>
               </div>
             ))}
         </div>
       </div>
-      <div className="absolute left-260 top-0 w-30 h-30" onClick={onClose}>
-        <Image
-          src="/images/Close-dark.svg"
-          alt="맞춤형 키워드 입력 창 닫기 버튼"
-          width={30}
-          height={30}
-          style={{ objectFit: 'cover' }}
-        />
+      <div className="absolute right-10 top-7 w-20 h-20" onClick={onClose}>
+        <Image src="/images/close-keyword.svg" alt="맞춤형 키워드 입력 창 닫기 버튼" fill />
       </div>
     </div>
   );
