@@ -28,6 +28,8 @@ export default function Plans() {
 
   useEffect(() => {
     getUserInfo();
+
+    window.scrollTo(0, 0);
   }, []);
 
   const handleClick = async (i: number) => {

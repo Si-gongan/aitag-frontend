@@ -46,6 +46,10 @@ export default function FaqPage() {
     getFaqList();
   }, [tab, pagination.click]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section className="flex flex-col items-center w-980 pt-40 gap-100 mb-125">
       <div className="flex flex-col items-center gap-16">

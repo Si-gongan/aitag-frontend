@@ -78,6 +78,10 @@ export default function TabUrlSection() {
     setPreviewImages(updatedPreviewImages);
   }, [urls]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       {progressStage === 'one' ? (
