@@ -46,6 +46,8 @@ export default function NoticePage() {
 
   useEffect(() => {
     getNoticeList();
+
+    window.scrollTo(0, 0);
   }, []);
 
   return (

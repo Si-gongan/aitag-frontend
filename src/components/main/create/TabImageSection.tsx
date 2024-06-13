@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SectionLayout from './SectionLayout';
 import FileInputField from '@/components/common/input/FileInputField';
 import { PreviewImageItemType } from '@/types/common';
@@ -15,6 +15,10 @@ export default function TabImageSection() {
   const [previewImages, setPreviewImages] = useState<PreviewImageItemType[]>([]);
   const [progressStage, setProgressStage] = useState('one'); // one: url 입력, two: 해설진 작성
   const [toastMessage, setToastMessage] = useState('');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
