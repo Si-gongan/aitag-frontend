@@ -72,10 +72,10 @@ export default function ModalOpinion({ onClose }: ModalOpinionProps) {
     <div
       onClick={handleClose}
       className="fixed inset-0 flex justify-center items-center h-full w-full bg-overlay z-overlay">
-      <div className="relative flex flex-col items-center justify-center p-60 w-702 gap-20 z-modal bg-white shadow-2xl rounded-4">
+      <div className="relative flex flex-col items-center justify-center p-50 w-600 gap-17 z-modal bg-white shadow-2xl rounded-4">
         <h1 className="text-22 font-bold text-grey/7 mb-20">고객센터 문의하기</h1>
         {OPINION_TEXT_INPUT.map((item) => (
-          <div key={item.name} className="flex flex-col gap-20">
+          <div key={item.name} className="flex flex-col gap-17">
             <TextInputField name={item.name} label={item.label} onChange={handleChange} />
             <hr className="w-full border-1 border-grey/2" />
           </div>
@@ -89,9 +89,9 @@ export default function ModalOpinion({ onClose }: ModalOpinionProps) {
           count={value.content.length}
         />
         <hr className="w-full border-1 border-grey/2" />
-        <div className="flex gap-34">
-          <ActionButtonSkyBlue text="취소" size="w-130 h-50" onClick={onClose} />
-          <ActionButton text="전송하기" size="w-130 h-50" onClick={handleSubmit} disabled={actionButtonDisabled} />
+        <div className="flex gap-30">
+          <ActionButtonSkyBlue text="취소" size="w-111 h-42" onClick={onClose} />
+          <ActionButton text="전송하기" size="w-111 h-42" onClick={handleSubmit} disabled={actionButtonDisabled} />
         </div>
         <button className="absolute -right-52 top-0 w-48 h-48" onClick={onClose}>
           <Image fill src="/images/modal-close.svg" alt="모달창 닫기 버튼" />

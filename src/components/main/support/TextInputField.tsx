@@ -8,7 +8,7 @@ interface TextInputFieldProps {
 
 export default function TextInputField({ name, label, value, placeholder = '', onChange }: TextInputFieldProps) {
   return (
-    <div className="flex gap-24 items-center">
+    <div className="flex gap-24 items-center text-12">
       <label htmlFor={name} className="text-grey/6 font-bold w-58">
         {label}
       </label>
@@ -19,7 +19,7 @@ export default function TextInputField({ name, label, value, placeholder = '', o
           name={name}
           value={value}
           placeholder={placeholder}
-          className="flex items-center w-500 h-33 rounded-4 border-1 border-grey/4 text-grey/7 px-10 focus:border-primary-500 focus:outline-none"
+          className="flex items-center w-427 h-28 rounded-4 border-1 border-grey/4 text-grey/7 px-10 focus:border-primary-500 focus:outline-none"
           onChange={onChange}
         />
       ) : (
@@ -28,7 +28,7 @@ export default function TextInputField({ name, label, value, placeholder = '', o
           id={name}
           name={name}
           placeholder={placeholder}
-          className="flex items-center w-500 h-33 rounded-4 border-1 border-grey/4 text-grey/7 px-10 focus:border-primary-500 focus:outline-none"
+          className="flex items-center w-427 h-28 rounded-4 border-1 border-grey/4 text-grey/7 px-10 focus:border-primary-500 focus:outline-none"
           onChange={onChange}
         />
       )}
