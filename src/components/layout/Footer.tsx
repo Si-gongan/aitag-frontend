@@ -15,7 +15,7 @@ const Footer = () => {
       <div className="flex justify-between items-center px-100 pt-24 pb-8 max-w-screen-lg mx-auto">
         <div className="flex items-center">
           <Image src="/images/gongbang_logo.png" width={100} height={20} alt="글공방 로고" />
-          <TextFieldWhite text={'글공방'} style={'ml-40 text-lg font-Pretendard'} />
+          <TextFieldWhite text={'에이택'} style={'ml-40 text-lg font-Pretendard'} />
         </div>
         <div className="flex justify-between items-center gap-12">
           <Link href="https://www.instagram.com/sigongan.official?igsh=MzRlODBiNWFlZA==" target="_blank">
@@ -28,7 +28,7 @@ const Footer = () => {
       </div>
       <div className="relative justify-between items-center px-100 max-w-screen-lg mx-auto mb-10">
         <TextFieldGray text={'사무실 : 서울시 용산구 이촌로 58길 19 802'} />
-        <TextFieldGray text={'전화번호 0507-0177-5941 | 이메일 sigongan22@gmail.com'} />
+        <TextFieldGray text={'전화번호 010-4248-0230 | 이메일 sigongan22@gmail.com'} />
         <TextFieldGray
           text={
             '대표자 : 오주상 | 상호명 시공간 | 사업자번호 : 389-43-00972 | 통신판매업 신고번호 : 제 ****-****-***** 호'
