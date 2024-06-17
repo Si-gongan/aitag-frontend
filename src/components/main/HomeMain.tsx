@@ -13,9 +13,8 @@ import SoultionSecond from '../../../public/images/solution-second.svg';
 import Image from 'next/image';
 import TextTitleField from '../common/text/TextTitleField';
 import TextFieldContent from '../common/text/TextFieldContent';
-import TextSubTitleField from '../common/text/TextSubTitleField';
 import Link from 'next/link';
-import { API_ROUTE, PATH } from '@/utils/routes';
+import { PATH } from '@/utils/routes';
 
 const HomeMain = () => {
   return (
@@ -28,7 +27,7 @@ const HomeMain = () => {
               <TextFieldWhite text={'새로운 경험을 쓰다'} style={'text-40 font-medium'} />
             </div>
             <div className="mt-40">
-              <TextFieldWhite text={'글공방은 국내 유일한 대체 텍스트 제작 서비스입니다'} style={'text-14'} />
+              <TextFieldWhite text={'에이택은 국내 유일한 대체 텍스트 제작 서비스입니다'} style={'text-14'} />
               <TextFieldWhite
                 text={'대체텍스트를 통해 시각장애인도 경험 할 수 있는 디지털 환경을 만듭니다'}
                 style={'text-14'}
@@ -101,43 +100,63 @@ const HomeMain = () => {
             <p className="text-32 font-bold grid items-end text-primary-500">,</p>
           </div>
           <div className="grid items-center text-center mb-60">
-            <TextTitleField text={'글공방으로 실천하세요'} />
+            <TextTitleField text={'에이택으로 실천하세요'} />
           </div>
-          <div className="w-1000 flex items-center justify-between mx-auto mb-60">
-            <div>
-              <TextSubTitleField text={'정확도 높은 글공방 AI'} style={'mb-20'} />
-              <TextFieldContent text={'Image captioning, Visual Question Answering 등 '} />
-              <TextFieldContent text={'다양한 평가에서 압도적 1위를 차지한 GPT - 4 이미지  '} />
-              <TextFieldContent text={' 분석 모델을 활용해요. GPT - 4의 한국어 능력을 자체'} />
-              <TextFieldContent text={'기술로 보완하여 정확한 대체텍스트를 생성합니다'} />
+          <div className="flex flex-col gap-60 mb-136">
+            <div className="w-880 h-309 flex items-center justify-between mx-auto text-grey/7">
+              <div className="flex flex-col gap-20">
+                <h3 className="text-24 font-bold">정확도 높은 에이택 AI</h3>
+                <p className="text-16 leading-24">
+                  Image captioning, Visual Question Answering 등<br />
+                  다양한 평가에서 압도적 1위를 차지한 GPT - 4 이미지
+                  <br />
+                  분석 모델을 활용해요. GPT - 4의 한국어 능력을 자체 <br />
+                  기술로 보완하여 정확한 대체 텍스트를 생성합니다
+                </p>
+              </div>
+              <div className="mr-85">
+                <Image src="/images/accessibility1.png" alt="정확도가 높아지는 그래프" width={150} height={148} />
+              </div>
             </div>
-            <div>
-              <Image src="/images/icon01.png" width={300} height={300} alt="수첩과 돋보기 이미지" />
+            <div className="w-880 h-309 flex items-center justify-between mx-auto text-grey/7">
+              <div className="ml-103">
+                <Image
+                  src="/images/accessibility2.png"
+                  alt="사람과 잘 맞을 것 같은 퍼즐 조각"
+                  width={148}
+                  height={148}
+                />
+              </div>
+              <div className="flex flex-col gap-20">
+                <h3 className="text-24 font-bold">자유로운 커스터마이징</h3>
+                <p className="text-16 leading-24">
+                  대체 텍스트 생성 시 키워드를 추가하여 정확도를
+                  <br />
+                  높일 수 있습니다. 언어와 말투를 직접 지정하여
+                  <br />
+                  나만의 맞춤형 대체 텍스트를 만나보세요.
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="w-1000 flex items-center justify-between mx-auto mb-60">
-            <div>
-              <Image src="/images/icon02.png" width={300} height={300} alt="블럭 이미지" />
-            </div>
-            <div className="text-right">
-              <TextSubTitleField text={'자유로운 커스터마이징'} style={'mb-20'} />
-              <TextFieldContent text={'대체텍스트 생성 시 키워드를 추가하여 정확도를 '} />
-              <TextFieldContent text={'높일 수 있습니다. 언어와 말투를 직접 지정하여'} />
-              <TextFieldContent text={'나만의 맞춤형 대체텍스트를 만나보세요.'} />
-            </div>
-          </div>
-          <div className="w-1000 flex items-center justify-between mx-auto mb-60">
-            <div>
-              <TextSubTitleField text={'AI와 전문 해설진, '} style={''} />
-              <TextSubTitleField text={'원하는 서비스를 한번에'} style={'mb-20'} />
-
-              <TextFieldContent text={'비즈니스에 맞는 다양한 대체텍스트 생성 방법을  '} />
-              <TextFieldContent text={'선택해보세요. 빠르고 간단한 글공방 AI와 꼼꼼한 '} />
-              <TextFieldContent text={' 전문 해설진의 작성부터 검수까지, 내가 원하는 '} />
-              <TextFieldContent text={'서비스를 만나볼 수 있어요.'} />
-            </div>
-            <div>
-              <Image src="/images/icon03.png" width={300} height={300} alt="손 위에 AI 반도체 모형을 올려놓은 이미지" />
+            <div className="w-880 h-309 flex items-center justify-between mx-auto text-grey/7">
+              <div className="flex flex-col gap-20">
+                <h3 className="text-24 font-bold">
+                  AI와 전문 해설진,
+                  <br />
+                  원하는 서비스를 한번에
+                </h3>
+                <p className="text-16 leading-24">
+                  비즈니스에 맞는 다양한 대체 텍스트 생성 방법을
+                  <br />
+                  선택해보세요. 빠르고 간단한 에이택 AI와 꼼꼼한
+                  <br />
+                  전문 해설진의 작성부터 검수까지, 내가 원하는 <br />
+                  서비스를 만나볼 수 있어요.
+                </p>
+              </div>
+              <div className="mr-86">
+                <Image src="/images/accessibility3.png" alt="과녁 정중앙에 꽂힌 화살" width={148} height={148} />
+              </div>
             </div>
           </div>
         </div>
@@ -145,7 +164,7 @@ const HomeMain = () => {
           <div className="flex mb-50 mx-auto">
             <TextTitleField text={'효율적인 원클릭 솔루션'} />
             <p className="text-32 font-bold grid items-end text-primary-500">,&nbsp;</p>
-            <TextTitleField text={'글공방'} />
+            <TextTitleField text={'에이택'} />
           </div>
           <div className="w-1000 flex justify-between mx-auto">
             <div className="relative" style={{ borderRadius: '20px', overflow: 'hidden' }}>
@@ -163,23 +182,23 @@ const HomeMain = () => {
                 <TextFieldWhite text={'더 간편하게'} style="font-bold text-16 mb-10" />
                 <TextFieldWhite text={'웹사이트의 주소나 이미지 파일을 첨부하기만'} style="text-16" />
                 <TextFieldWhite text={'하면 클릭 한 번으로 대체텍스트를 생성할 수 '} style="text-16" />
-                <TextFieldWhite text={'있어요. 더욱 빠른 글공방 AI를 만나보세요.'} style="text-16" />
+                <TextFieldWhite text={'있어요. 더욱 빠른 에이택 AI를 만나보세요.'} style="text-16" />
               </div>
             </div>
           </div>
         </div>
         <div className="grid w-full text-center bg-[#FFFFFF]">
           <div className="flex mt-100 mb-15 mx-auto">
-            <TextTitleField text={'글공방과 함께한 기업들'} />
+            <TextTitleField text={'에이택과 함께한 기업들'} />
           </div>
           <div className="grid mb-50">
             <div>
-              <TextFieldContent text={'정보 접근성의 도약, 글공방이 함께합니다'} />
+              <TextFieldContent text={'정보 접근성의 도약, 에이택이 함께합니다'} />
             </div>
           </div>
           <div className="w-1000 flex justify-center mx-auto mb-100">
             <div>
-              <Image src="/images/company.png" width={1000} height={300} alt="글공방 참여 기업 로고" />
+              <Image src="/images/company.png" width={1000} height={300} alt="에이택 참여 기업 로고" />
             </div>
           </div>
         </div>
@@ -203,7 +222,7 @@ const HomeMain = () => {
               </div>
               <div className="mt-20">
                 <TextFieldWhite
-                  text={'본 홈페이지에는 글공방이 작성한 대체텍스트가 포함되어 있습니다.'}
+                  text={'본 홈페이지에는 에이택이 작성한 대체텍스트가 포함되어 있습니다.'}
                   style={'text-16 font-Noto Sans KR'}
                 />
               </div>
