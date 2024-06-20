@@ -15,7 +15,7 @@ export default function ModalTerm({ onClose }: ModalTermProps) {
       <div
         onClick={(e) => e.stopPropagation()}
         className="relative flex flex-col items-center p-40 gap-40 z-modal bg-white shadow-2xl rounded-4 w-700 h-600">
-        <h1 className="text-22 font-bold">이용약관</h1>
+        <h1 className="text-22 font-bold">에이택 웹사이트 이용약관</h1>
         <div className="flex flex-col gap-40 h-400 overflow-y-scroll scroll-block">
           <div className="flex flex-col gap-12 text-14">
             {POLICY_SERVICE.map((policy) => (
