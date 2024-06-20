@@ -6,6 +6,7 @@ import TextFieldWhite from '../common/text/TextFieldWhite';
 import TextFieldGray from '../common/text/TextFieldGray';
 import Link from 'next/link';
 import ModalOpinion from '../common/modal/ModalOpinion';
+import { PATH } from '@/utils/routes';
 
 const Footer = () => {
   const [showModalOpinion, setShowModalOpinion] = useState<boolean>(false);
@@ -40,7 +41,7 @@ const Footer = () => {
         <div className="flex items-center gap-12 text-white text-12">
           <Link href="/">개인정보처리방침</Link>
           <hr className="h-12 border-1 border-[#919191]" />
-          <Link href="/">이용약관</Link>
+          <Link href={PATH.POLICY_SERVICE}>이용약관</Link>
           <hr className="h-12 border-1 border-[#919191]" />
           <button onClick={() => setShowModalOpinion(true)}>문의메일</button>
         </div>

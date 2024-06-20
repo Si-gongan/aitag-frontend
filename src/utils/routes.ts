@@ -15,6 +15,8 @@ export const PATH = {
   MYPAGE: '/mypage',
   MYPAGE_PAYMENT: '/mypage/payment',
   PLANS: '/plans',
+  POLICY_PRIVACY: '/policy/privacy',
+  POLICY_SERVICE: '/policy/service',
 };
 
 export const HEADER_MENU = [
