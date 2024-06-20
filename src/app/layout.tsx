@@ -3,7 +3,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 
 export const metadata: Metadata = {
-  title: '글공방',
+  title: '에이택',
   description: 'AI 대체 텍스트 제작 서비스',
 };
 
