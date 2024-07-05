@@ -23,7 +23,7 @@ export default function ModalConfirm({ title, description, style, buttonText, on
         className={`relative flex flex-col items-center pt-70 pb-60 gap-40 z-modal bg-white shadow-2xl rounded-4 ${
           style ? style : 'w-700'
         }`}>
-        <Image src="/images/icon_check.svg" alt="체크 아이콘" width={100} height={100} />
+        <Image src="/images/Icon-check.svg" alt="체크 아이콘" width={100} height={100} />
         <div className="flex flex-col gap-14 text-grey/7 text-center">
           <h2 className="text-27 font-bold text-center">{title}</h2>
           {description}
