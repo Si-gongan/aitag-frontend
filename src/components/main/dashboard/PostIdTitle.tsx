@@ -35,7 +35,7 @@ export default function PostIdTitle({
   const titleDescription = getResultDetailTitle(target, isComplete, requestExpertPage);
 
   const goBack = () => {
-    router.replace(PATH.DASHBOARD);
+    router.push(PATH.DASHBOARD);
   };
 
   const handleClickSort = (selectedSort: DashbaordSortType) => {
