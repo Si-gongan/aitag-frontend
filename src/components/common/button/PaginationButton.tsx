@@ -32,7 +32,7 @@ export default function PagenationButton({ pagination, setPagination, totalPages
 
   return (
     <div className="flex justify-between items-center w-full">
-      <button className="flex items-center justify-center w-78 h-36" onClick={handlePrev}>
+      <button className="flex items-center justify-center w-78 h-36" disabled={startPage == 1} onClick={handlePrev}>
         {startPage > 1 && (
           <span className="flex items-center gap-8 text-[#2E2E2E]">
             <Image
@@ -57,7 +57,10 @@ export default function PagenationButton({ pagination, setPagination, totalPages
           </div>
         ))}
       </div>
-      <button className="flex items-center justify-center w-78 h-36" onClick={handleNext}>
+      <button
+        className="flex items-center justify-center w-78 h-36"
+        disabled={endPage == totalPages}
+        onClick={handleNext}>
         {endPage < totalPages && (
           <span className="flex items-center gap-8 text-[#2E2E2E]">
             다음
