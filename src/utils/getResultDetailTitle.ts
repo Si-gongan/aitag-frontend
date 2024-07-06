@@ -17,8 +17,7 @@ export const getResultDetailTitle = (target: string, isComplete: boolean, reques
       return isComplete
         ? {
             title: '작성 결과 확인',
-            description:
-              '전문 해설진의 검수 결과를 확인하세요. AI와 해설진의 대체텍스트를 비교해서 확인할 수 있습니다.',
+            description: '전문 해설진의 작성 결과를 확인하세요.',
           }
         : {
             title: '작성 진행중',
