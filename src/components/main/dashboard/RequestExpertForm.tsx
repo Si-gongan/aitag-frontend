@@ -3,18 +3,19 @@ import ActionButtonGray from '@/components/common/button/ActionButtonGray';
 import ModalChoose from '@/components/common/modal/ModalChoose';
 import ModalConfirm from '@/components/common/modal/ModalConfirm';
 import { WorkType } from '@/types/common';
-import { ExpertRequestFormFormat } from '@/utils/constants';
+import { ExpertRequestFormFormat, InspectRequestFormFormat } from '@/utils/constants';
 import { fetchWithInterceptor } from '@/utils/fetchWithInterceptor';
 import { API_ROUTE, PATH } from '@/utils/routes';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 interface RequestExpertFormProps {
+  postId: string;
   selectedWorks: WorkType[];
   setRequestExpertPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function RequestExpertForm({ selectedWorks, setRequestExpertPage }: RequestExpertFormProps) {
+export default function RequestExpertForm({ postId, selectedWorks, setRequestExpertPage }: RequestExpertFormProps) {
   const [value, setValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [showModalConfirm, setShowModalConfirm] = useState<boolean>(false);
@@ -31,25 +32,23 @@ export default function RequestExpertForm({ selectedWorks, setRequestExpertPage 
   };
 
   const handleClickRequest = async () => {
-    const worksForm = selectedWorks.map((selectedWork) => {
-      return {
-        image: selectedWork.image,
-        language: 'Korean',
-        keywords: selectedWork.keywords,
-        tone: selectedWork.tone,
-      };
-    });
+    const workIds = selectedWorks.map((work) => work.id);
 
     setLoading(true);
 
-    const ExpertRequestForm = { ...ExpertRequestFormFormat, works: worksForm, detail: value };
+    const ExpertRequestForm = {
+      ...InspectRequestFormFormat,
+      postId,
+      workIds,
+      detail: value,
+    };
     const options = {
       method: 'POST',
       body: JSON.stringify(ExpertRequestForm),
     };
 
     try {
-      const response = await fetchWithInterceptor(API_ROUTE.POST, options);
+      const response = await fetchWithInterceptor(API_ROUTE.INSPECT, options);
 
       if (response.ok || response.status === 201) {
         setShowModalConfirm(true);

@@ -54,7 +54,11 @@ export default function PostId() {
         selectedWorks={selectedWorks}
       />
       {requestExpertPage ? (
-        <RequestExpertForm selectedWorks={selectedWorks} setRequestExpertPage={setRequestExpertPage} />
+        <RequestExpertForm
+          postId={post?.id as string}
+          selectedWorks={selectedWorks}
+          setRequestExpertPage={setRequestExpertPage}
+        />
       ) : (
         <div className="flex flex-col gap-23">
           <PostIdTable
