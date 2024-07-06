@@ -64,7 +64,12 @@ export default function RequestForExpert({ type = 'url', selectedImages, setProg
 
     setLoading(true);
 
-    const ExpertRequestForm = { ...ExpertRequestFormFormat, works: selectedImagesWorks, detail: value };
+    const ExpertRequestForm = {
+      ...ExpertRequestFormFormat,
+      target: 'comment',
+      works: selectedImagesWorks,
+      detail: value,
+    };
     const options = {
       method: 'POST',
       body: JSON.stringify(ExpertRequestForm),
@@ -72,6 +77,7 @@ export default function RequestForExpert({ type = 'url', selectedImages, setProg
 
     try {
       const response = await fetchWithInterceptor(API_ROUTE.POST, options);
+
       const result = await response.json();
 
       if (response.ok || response.status === 201) {

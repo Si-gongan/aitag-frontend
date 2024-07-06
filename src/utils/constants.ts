@@ -84,6 +84,13 @@ export const AiRequestFormFormat = {
   ],
 };
 
+export const InspectRequestFormFormat = {
+  title: '해설진 검수 요청',
+  postId: '',
+  workIds: [],
+  detail: '',
+};
+
 export const OpinionFormFormat = {
   clientId: '',
   email: '',
