@@ -18,8 +18,17 @@ export default function SupportImageSection() {
   }, [currentPage]);
 
   return (
-    <section className="w-full flex justify-center items-center h-357 bg-[url('/images/support-image.png')] bg-cover bg-center">
-      <div className="w-full max-w-980 flex flex-col gap-60">
+    <section className="relative flex justify-center items-center w-full h-357">
+      <Image
+        src="/images/support-image.png"
+        alt="고객센터 페이지 배너"
+        fill
+        sizes="100vw"
+        style={{ objectFit: 'cover' }}
+        placeholder="blur"
+        blurDataURL="/images/plansImage.png"
+      />
+      <div className="absolute w-full max-w-980 flex flex-col gap-30 text-white">
         <div className="flex flex-col gap-10">
           <div className="flex gap-15 items-center text-white text-16">
             <Image src="/images/icon_home.png" alt="집 아이콘" width={17} height={14} />

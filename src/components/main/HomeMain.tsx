@@ -44,6 +44,8 @@ const HomeMain = () => {
             fill
             style={{ objectFit: 'cover' }}
             alt="노트북 측면과 노트북을 타이핑하고 있는 손 이미지"
+            placeholder="blur"
+            blurDataURL="/images/landing_main.png"
           />
         </div>
         <div className="grid w-full h-600 bg-[#FFFFFF]">
