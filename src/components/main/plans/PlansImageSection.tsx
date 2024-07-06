@@ -1,7 +1,18 @@
+import Image from 'next/image';
+
 export default function PlansImageSection() {
   return (
-    <section className="w-full flex justify-center items-center h-357 bg-[url('/images/plansImage.png')] bg-cover bg-center">
-      <div className="w-full max-w-980 flex flex-col gap-30 text-white">
+    <section className="relative flex justify-center items-center w-full h-357">
+      <Image
+        src="/images/plansImage.png"
+        alt="요금제 페이지 배너"
+        fill
+        sizes="100vw"
+        style={{ objectFit: 'cover' }}
+        placeholder="blur"
+        blurDataURL="/images/plansImage.png"
+      />
+      <div className="absolute w-full max-w-980 flex flex-col gap-30 text-white">
         <h1 className="text-52 font-bold">요금제</h1>
         <p className="text-18 leading-[27px]">
           Credit을 사용하여 글공방 서비스를 이용해보세요.
