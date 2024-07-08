@@ -23,7 +23,8 @@ export default function Tabs() {
       {CREATE_TABS.map((tab, index) => (
         <div
           key={tab.id}
-          className={`flex items-center justify-center w-1/2 h-full ${index === 0 ? 'border-r-1 border-grey/3' : ''} ${
+          aria-label={`${tab.title} 단추`}
+          className={`flex items-center justify-center w-1/2 h-full ${index === 0 && 'border-r-1 border-grey/3'} ${
             page === tab.id && 'bg-grey/1'
           }`}
           onClick={() => handleClickTabs(tab.id)}>
