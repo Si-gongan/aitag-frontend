@@ -20,6 +20,8 @@ export default function TabButton({ page, setPage }: TabButtonProps) {
       {SUPPORT_TAB.map((tab) => (
         <li
           key={tab.id}
+          tabIndex={0}
+          aria-label={`${tab.text} 단추`}
           className={`relative flex items-center justify-center pt-12 pb-13 text-18 font-medium ${
             page.id === tab.id
               ? 'left-0 duration-200 ease-in absolute block w-106 h-51 rounded-full appearnce-none text-primary-500 bg-white border-1 border-primary-500'

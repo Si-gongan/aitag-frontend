@@ -4,9 +4,8 @@ import { API_ROUTE, PATH } from '@/utils/routes';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, MouseEvent } from 'react';
-import { FiEyeOff, FiEye } from 'react-icons/fi'
+import { FiEyeOff, FiEye } from 'react-icons/fi';
 import AlertDanger from '@/components/common/alert/AlertDanger';
-
 
 interface ErrorResponse {
   message: string;
@@ -34,7 +33,7 @@ export default function Login() {
       router.replace(PATH.DASHBOARD); // 로그인 상태일 때 대시보드로 리디렉션
     }
   }, [router]);
-  
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setLoginData((prev) => ({ ...prev, [id]: value }));
@@ -81,8 +80,10 @@ export default function Login() {
     <div className="flex items-center justify-center min-h-screen bg-[#FAFBFC] px-6">
       <div className="w-full h-3/5 max-w-4xl">
         <h1 className="text-32 font-bold text-center text-gray-800 mb-10">로그인</h1>
-        <div className='mb-60'>
-          <h1 className='text-16 text-center text-gray-600'>맞춤형 대체텍스트 제작소, 글공방에 오신 것을 환영합니다!</h1>
+        <div className="mb-60">
+          <h1 className="text-16 text-center text-gray-600">
+            맞춤형 대체텍스트 제작소, 에이택에 오신 것을 환영합니다!
+          </h1>
           <AlertDanger message={errorMessage} />
         </div>
         <form className="px-8" onSubmit={handleSubmit}>
@@ -97,9 +98,16 @@ export default function Login() {
             />
           </div>
           <div className="mb-20 mx-auto relative">
-            <input className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16" id="password" type={showPwd ? "text" : 'password'} placeholder="PW" value={loginData.password} onChange={handleChange}/>
-            <div onClick={togglePasswordVisibility} className='absolute bottom-20 right-15 text-gray-700'>
-              {showPwd ? <FiEye /> : <FiEyeOff /> }
+            <input
+              className="border rounded-lg w-full h-53 py-10 px-15 text-gray-700 focus:outline-none text-16"
+              id="password"
+              type={showPwd ? 'text' : 'password'}
+              placeholder="PW"
+              value={loginData.password}
+              onChange={handleChange}
+            />
+            <div onClick={togglePasswordVisibility} className="absolute bottom-20 right-15 text-gray-700">
+              {showPwd ? <FiEye /> : <FiEyeOff />}
             </div>
           </div>
           <div className="flex items-center justify-end mb-30">

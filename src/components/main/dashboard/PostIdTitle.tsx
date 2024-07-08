@@ -1,4 +1,3 @@
-import ActionButton from '@/components/common/button/ActionButton';
 import ActionButtonGray from '@/components/common/button/ActionButtonGray';
 import { getResultDetailTitle } from '@/utils/getResultDetailTitle';
 import { useRouter } from 'next/navigation';
@@ -30,8 +29,6 @@ export default function PostIdTitle({
 }: PostIdTitleProps) {
   const router = useRouter();
 
-  const aiCompletedPage = target === 'ai';
-  const inspectCompletedPage = target === 'inspect' && isComplete;
   const titleDescription = getResultDetailTitle(target, isComplete, requestExpertPage);
 
   const goBack = () => {
@@ -53,24 +50,22 @@ export default function PostIdTitle({
       <hr className="border-1 border-grey/3" />
       <div className="flex justify-between items-center">
         <ActionButtonGray text="뒤로가기" size="w-144 h-54" type="back" onClick={goBack} />
-        {aiCompletedPage && selectedWorks && !requestExpertPage ? (
+        {isComplete && selectedWorks && !requestExpertPage && (
           <div className="flex gap-8">
-            <ActionButtonGray
-              text="검수 요청"
-              size="w-144 h-54"
-              type="back"
-              onClick={() => setRequestExpertPage && setRequestExpertPage(true)}
-              disabled={selectedTotal === 0}
-            />
             <DownloadDropdown selectedWorks={selectedWorks} disabled={selectedTotal === 0} />
+            {target === 'ai' && (
+              <ActionButtonGray
+                text="검수 요청"
+                size="w-144 h-54"
+                type="back"
+                onClick={() => setRequestExpertPage && setRequestExpertPage(true)}
+                disabled={selectedTotal === 0}
+              />
+            )}
+            {target === 'inspect' && (
+              <SortDropdown type="inspect" sort={tableSort as DashbaordSortType} onClick={handleClickSort} />
+            )}
           </div>
-        ) : inspectCompletedPage && !requestExpertPage ? (
-          <div className="flex gap-8">
-            <ActionButton text="다운로드" size="w-144 h-54" />
-            <SortDropdown type="inspect" sort={tableSort as DashbaordSortType} onClick={handleClickSort} />
-          </div>
-        ) : (
-          ''
         )}
       </div>
     </section>

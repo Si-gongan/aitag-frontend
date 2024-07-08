@@ -15,15 +15,15 @@ const Footer = () => {
     <footer className="w-full relative bg-[#2E2E2E] pb-24">
       <div className="flex justify-between items-center px-100 pt-24 pb-8 max-w-screen-lg mx-auto">
         <div className="flex items-center">
-          <Image src="/images/gongbang_logo.png" width={100} height={20} alt="글공방 로고" />
+          <Image src="/images/gongbang_logo.png" width={100} height={20} alt="에이택 로고" />
           <TextFieldWhite text={'에이택'} style={'ml-40 text-lg font-Pretendard'} />
         </div>
         <div className="flex justify-between items-center gap-12">
-          <Link href="https://www.instagram.com/sigongan.official?igsh=MzRlODBiNWFlZA==" target="_blank">
-            <Image src="/images/instagram.svg" width={44} height={44} alt="글공방 페이스북" />
-          </Link>
           <Link href="https://www.facebook.com/profile.php?id=100089078353915" target="_blank">
-            <Image src="/images/facebook.svg" width={44} height={44} alt="글공방 인스타그램" />
+            <Image src="/images/instagram.svg" width={44} height={44} alt="에이택 페이스북" />
+          </Link>
+          <Link href="https://www.instagram.com/sigongan.official?igsh=MzRlODBiNWFlZA==" target="_blank">
+            <Image src="/images/facebook.svg" width={44} height={44} alt="에이택 인스타그램" />
           </Link>
         </div>
       </div>
