@@ -5,6 +5,9 @@ import Header from '@/components/layout/Header';
 export const metadata: Metadata = {
   title: '에이택',
   description: 'AI 대체 텍스트 제작 서비스',
+  icons: {
+    icon: '/images/logo_symbol.png',
+  },
 };
 
 export default function RootLayout({
