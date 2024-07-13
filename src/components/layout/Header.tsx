@@ -69,7 +69,7 @@ export default function Header() {
     <header className="sticky top-0 right-0 left-0 flex items-center justify-center h-63 z-sticky bg-white shadow-lg">
       <div className="flex justify-between w-full max-w-980 px-20">
         <Link href="/">
-          <Image width={100} height={30} src="/images/logo-icon.svg" alt="Logo" />
+          <Image width={100} height={30} src="/images/atag_logo_en.svg" alt="Logo" />
         </Link>
         <div className="flex items-center">
           <div className="flex items-center h-28 text-bold text-[#4D4D4D]">
