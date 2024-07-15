@@ -15,7 +15,7 @@ const Footer = () => {
     <footer className="w-full relative bg-[#2E2E2E] pb-24">
       <div className="flex justify-between items-center px-100 pt-24 pb-8 max-w-screen-lg mx-auto">
         <div className="flex items-center">
-          <Image src="/images/gongbang_logo.png" width={100} height={20} alt="에이택 로고" />
+          <Image src="/images/atag_logo_en_white.svg" width={100} height={20} alt="에이택 로고" />
           <TextFieldWhite text={'에이택'} style={'ml-40 text-lg font-Pretendard'} />
         </div>
         <div className="flex justify-between items-center gap-12">
