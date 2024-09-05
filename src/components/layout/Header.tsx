@@ -49,6 +49,7 @@ export default function Header() {
       if (response.ok) {
         setUser(data.result.user as GetUserInfoType);
       } else {
+        handleLogout();
         throw new Error(data.message || '사용자 정보를 불러오는데 실패했습니다.');
       }
     } catch (error) {
