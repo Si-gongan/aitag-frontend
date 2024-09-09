@@ -60,7 +60,7 @@ export const WorkItemFormFormat = {
 };
 
 export const ExpertRequestFormFormat = {
-  title: '해설진 생성 요청',
+  title: '해설진 작성 요청',
   target: 'comment',
   works: [
     {
@@ -73,7 +73,7 @@ export const ExpertRequestFormFormat = {
 };
 
 export const AiRequestFormFormat = {
-  title: 'ai 생성 요청',
+  title: 'AI 생성 요청',
   target: 'ai',
   works: [
     {

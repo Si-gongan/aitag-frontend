@@ -1,10 +1,10 @@
 export const getStatusText = (isComplete: boolean, sort: string) => {
   switch (sort) {
     case 'ai':
-      return isComplete ? '생성완료' : '생성중';
+      return isComplete ? '생성 완료' : '생성 중';
     case 'comment':
-      return isComplete ? '작성 완료' : '작성 진행중';
+      return isComplete ? '작성 완료' : '작성 진행 중';
     case 'inspect':
-      return isComplete ? '검수 완료' : '검수 진행중';
+      return isComplete ? '검수 완료' : '검수 진행 중';
   }
 };

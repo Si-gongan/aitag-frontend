@@ -63,7 +63,7 @@ export default function PostId() {
         <div className="flex flex-col gap-23">
           <PostIdTable
             works={works}
-            selectable={target === 'ai' ? true : false}
+            selectable={isComplete}
             selectedWorks={selectedWorks}
             setSelectedWorks={setSelectedWorks}
             showTableNum={target === 'ai' || isComplete ? 10 : 5}

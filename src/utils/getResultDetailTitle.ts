@@ -20,7 +20,7 @@ export const getResultDetailTitle = (target: string, isComplete: boolean, reques
             description: '전문 해설진의 작성 결과를 확인하세요.',
           }
         : {
-            title: '작성 진행중',
+            title: '작성 진행 중',
             description: '전문 해설진의 검수가 진행중입니다.',
           };
     case 'inspect':
@@ -31,7 +31,7 @@ export const getResultDetailTitle = (target: string, isComplete: boolean, reques
               '전문 해설진의 검수 결괄르 확인하세요. AI와 해설진의 대체텍스트를 비교해서 확인할 수 있습니다.',
           }
         : {
-            title: '검수 진행중',
+            title: '검수 진행 중',
             description: '전문 해설진의 작성이 진행중입니다.',
           };
   }

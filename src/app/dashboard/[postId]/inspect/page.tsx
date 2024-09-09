@@ -46,11 +46,17 @@ export default function PostIdINSPECT() {
 
   return (
     <div className="flex flex-col w-1092 min-h-800 pt-40 pb-40 gap-60 bg-white">
-      <PostIdTitle target="inspect" isComplete={isComplete} tableSort={tableSort} setTableSort={setTableSort} />
+      <PostIdTitle 
+        target="inspect" 
+        isComplete={isComplete} 
+        tableSort={tableSort} 
+        setTableSort={setTableSort}
+        selectedTotal={selectedTotal}
+        selectedWorks={selectedWorks} />
       <div className="flex flex-col gap-23">
         <PostIdTable
           works={works}
-          selectable={false}
+          selectable={isComplete}
           selectedWorks={selectedWorks}
           setSelectedWorks={setSelectedWorks}
           showTableNum={isComplete ? 10 : 5}

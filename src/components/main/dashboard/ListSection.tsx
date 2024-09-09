@@ -83,9 +83,9 @@ export default function ListSection({ items, totalPages }: ListSectionProps) {
                   {getStatusText(item.isComplete, sort.id)}
                   {item.isComplete ? (
                     <DownloadDropdown type="icon" selectedWorks={item.works} disabled={false} />
-                  ) : (
+                  ) : item.target === 'ai' ? (
                     <Image src="/images/dashboard-loading.gif" alt="진행 상태 아이콘" width={20} height={20} />
-                  )}
+                  ) : <></>}
                   {/* <Image
                     src={item.isComplete ? '/images/tabler_download.svg' : '/images/dashboard-loading.gif'}
                     alt="진행 상태 아이콘"
