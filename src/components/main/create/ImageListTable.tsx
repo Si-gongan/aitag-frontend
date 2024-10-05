@@ -12,6 +12,7 @@ interface ImageListTableProps {
   type?: string;
   previewImages: PreviewImageItemType[] | [];
   setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
+  setSelectedImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
   selectedUrls: Set<string> | PreviewImageItemType[];
   selectedImages: PreviewImageItemType[] | [];
 }
@@ -20,6 +21,7 @@ export default function ImageListTable({
   type = 'url',
   previewImages,
   setPreviewImages,
+  setSelectedImages,
   selectedUrls,
   selectedImages,
 }: ImageListTableProps) {
@@ -55,6 +57,8 @@ export default function ImageListTable({
       setSelectedItems(selectedImages.map((item) => item.image as string));
     }
   };
+
+  console.log(selectedItems.length, selectedImages.length);
 
   return (
     <>
@@ -115,14 +119,18 @@ export default function ImageListTable({
                         ) : key === 'alt' ? (
                           <span className="p-12">{item.alt ? item.alt : '없음'}</span>
                         ) : key === 'tone' ? (
-                          <ToneDropdown item={item} previewImages={previewImages} setPreviewImages={setPreviewImages} />
+                          <ToneDropdown
+                            item={item}
+                            previewImages={previewImages}
+                            setPreviewImages={setSelectedImages}
+                          />
                         ) : // <span className="flex justify-center">한국어</span>
                         key === 'keyword' ? (
                           <div className="flex justify-center">
                             <AddKeywordsButton
                               item={item}
                               previewImages={previewImages}
-                              setPreviewImages={setPreviewImages}
+                              setPreviewImages={setSelectedImages}
                             />
                           </div>
                         ) : (

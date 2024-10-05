@@ -6,6 +6,7 @@ import { ERROR_MESSAGE } from '@/utils/constants';
 interface FileInputFieldProps {
   previewImages: PreviewImageItemType[];
   setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
+  setSelectedImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
   setUploading: React.Dispatch<React.SetStateAction<boolean>>;
   setToastMessage: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -13,6 +14,7 @@ interface FileInputFieldProps {
 export default function FileInputField({
   previewImages,
   setPreviewImages,
+  setSelectedImages,
   setUploading,
   setToastMessage,
 }: FileInputFieldProps) {
@@ -81,6 +83,7 @@ export default function FileInputField({
         if (newPreviewInfos.length === files.length) {
           // 이미지 정보를 모두 수집한 후에 state를 업데이트합니다.
           setPreviewImages((prev) => [...prev, ...newPreviewInfos]);
+          setSelectedImages((prev) => [...prev, ...newPreviewInfos]);
           setUploading(false);
 
           // File input 초기화
