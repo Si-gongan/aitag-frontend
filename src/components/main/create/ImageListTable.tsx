@@ -64,7 +64,7 @@ export default function ImageListTable({
           <tr>
             <th className="w-64">
               <Checkbox
-                checked={selectedImages.length === previewImages.length}
+                checked={selectedImages.length > 0 && selectedImages.length === previewImages.length}
                 value="all"
                 handleCheck={handleCheckAll}
               />

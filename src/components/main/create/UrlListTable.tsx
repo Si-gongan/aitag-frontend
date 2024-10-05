@@ -65,12 +65,16 @@ export default function UrlListTable({ urls, setUrls, selectedUrls, setSelectedU
         <thead className="bg-grey/0 h-64 border-b-1">
           <tr>
             <th className="w-124">
-              <Checkbox checked={selectedUrls.size === urls.length} value="all_url" handleCheck={handleCheckAll} />
+              <Checkbox
+                checked={selectedUrls.size > 0 && selectedUrls.size === urls.length}
+                value="all_url"
+                handleCheck={handleCheckAll}
+              />
             </th>
             {URL_TABLE_HEADER.map((header, index) => (
               <th key={index} className={`${header.image ? 'w-124' : 'px-12'}`}>
                 {header.text}{' '}
-                {header.image && selectedUrls.size === urls.length && (
+                {header.image && selectedUrls.size > 0 && selectedUrls.size === urls.length && (
                   <div onClick={() => handleClickDelete('all_url')} className="flex justify-center items-center">
                     <Image src={header.image} width={24} height={24} alt="url 삭제 이미지" />
                   </div>
