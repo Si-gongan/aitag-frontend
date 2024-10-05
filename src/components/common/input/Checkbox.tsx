@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 // FIX: 전체적으로 리팩토링 필요
 // FIX: 현재 체크박스 UI 이미지로 수정 중 -> CSS로 변경
@@ -13,16 +13,13 @@ interface CheckboxProps {
 }
 
 export default function Checkbox({ value, handleCheck, checked, disabled, size = 24 }: CheckboxProps) {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleCheck(e.target.value);
+  };
+
   return (
     <label htmlFor={value} className="flex items-center cursor-pointer justify-center">
-      <input
-        id={value}
-        type="checkbox"
-        value={value}
-        className="hidden"
-        checked={checked}
-        onChange={() => handleCheck(value)}
-      />
+      <input id={value} type="checkbox" value={value} className="hidden" checked={checked} onChange={handleChange} />
       <Image
         src={checked ? '/images/checkbox_checked.svg' : '/images/checkbox.svg'}
         alt="체크박스 아이콘"

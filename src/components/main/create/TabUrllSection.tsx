@@ -20,8 +20,7 @@ export default function TabUrlSection() {
   const [loading, setLoading] = useState(false);
   const [progressStage, setProgressStage] = useState('one'); // one: url 입력, two: 해설진 작성
   const [toastMessage, setToastMessage] = useState('');
-
-  const selectedImages = previewImages.filter((previewImage) => Array.from(selectedUrls).includes(previewImage.name));
+  const [selectedImages, setSelectedImages] = useState<PreviewImageItemType[]>([]);
 
   const handleSubmitUrl = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -65,6 +64,7 @@ export default function TabUrlSection() {
       });
 
       setPreviewImages((prev) => [...prev, ...newImageDatas]);
+      setSelectedImages((prev) => [...prev, ...newImageDatas]);
     } catch (error) {
       console.error('크롤링 이미지 데이터 요청 실패', error);
     } finally {
@@ -115,9 +115,10 @@ export default function TabUrlSection() {
               setPreviewImages={setPreviewImages}
               selectedUrls={selectedUrls}
               selectedImages={selectedImages}
+              setSelectedImages={setSelectedImages}
             />
           </SectionLayout>
-          {selectedUrls.size !== 0 && (
+          {selectedImages.length !== 0 && (
             <CreateButtons setProgressStage={setProgressStage} selectedImages={selectedImages} />
           )}
         </div>

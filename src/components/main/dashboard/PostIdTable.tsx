@@ -78,7 +78,7 @@ export default function PostIdTable({
         <tr className="table w-full">
           {selectable && (
             <th className="w-104 h-53">
-              <Checkbox value="all" checked={isSelectedAll()} onChange={() => handleCheck('all')} />
+              <Checkbox value="all" checked={isSelectedAll()} handleCheck={() => handleCheck('all')} />
             </th>
           )}
           {headers.map((header) => (
@@ -104,7 +104,7 @@ export default function PostIdTable({
                 <Checkbox
                   value={item.id as string}
                   checked={selectedWorks?.some((work) => work.id === item.id)}
-                  onChange={() => handleCheck(item.id as string)}
+                  handleCheck={() => handleCheck(item.id as string)}
                 />
               </td>
             )}

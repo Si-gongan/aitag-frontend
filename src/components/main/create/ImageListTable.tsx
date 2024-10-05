@@ -42,8 +42,8 @@ export default function ImageListTable({
   };
 
   const handleCheck = (value: PreviewImageItemType) => {
-    if (selectedImages.some((item) => item.name === value.name)) {
-      setSelectedImages((prev) => prev.filter((item) => item.name !== value.name));
+    if (selectedImages.some((item) => item.image === value.image)) {
+      setSelectedImages((prev) => prev.filter((item) => item.image !== value.image));
     } else {
       setSelectedImages((prev) => [...prev, value]);
     }
@@ -94,13 +94,13 @@ export default function ImageListTable({
                   <tr
                     key={index}
                     className={`h-48 border-b-1 ${
-                      selectedItem.some((url) => url === item.name) ? 'bg-[#F2F6FE]' : ''
+                      selectedItem.some((url) => url === item.image) ? 'bg-[#F2F6FE]' : ''
                     }`}>
                     <td>
                       <Checkbox
                         handleCheck={() => handleCheck(item)}
-                        checked={selectedImages.some((image) => image.name === item.name)}
-                        value={item.name}
+                        checked={selectedImages.some((image) => image.image === item.image)}
+                        value={item.image}
                       />
                     </td>
                     {tableHeaderKey.map((key) => (
