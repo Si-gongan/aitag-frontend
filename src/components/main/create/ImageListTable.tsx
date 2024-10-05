@@ -23,6 +23,7 @@ export default function ImageListTable({
   selectedUrls,
   selectedImages,
 }: ImageListTableProps) {
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [pagination, setPagination] = useState({ start: 1, click: 1 });
   const totalPages = Math.ceil(previewImages.length / 5);
 
@@ -32,18 +33,27 @@ export default function ImageListTable({
 
   const selectedItem = Array.isArray(selectedUrls) ? selectedUrls.map((item) => item.name) : Array.from(selectedUrls);
 
-  const isSelectedAll = () => {
-    if (selectedImages) {
-      return selectedImages.length === previewImages.length && previewImages.length !== 0;
-    }
-    return false;
-  };
-
   const handleClickPagination = (num: number) => {
     setPagination((prevPagination) => ({
       ...prevPagination,
       click: num,
     }));
+  };
+
+  const handleCheck = (value: string) => {
+    if (selectedItems.includes(value)) {
+      setSelectedItems((prev) => prev.filter((item) => item !== value));
+    } else {
+      setSelectedItems((prev) => [...prev, value]);
+    }
+  };
+
+  const handleCheckAll = () => {
+    if (selectedItems.length === selectedImages.length) {
+      setSelectedItems([]);
+    } else {
+      setSelectedItems(selectedImages.map((item) => item.image as string));
+    }
   };
 
   return (
@@ -52,7 +62,11 @@ export default function ImageListTable({
         <thead className="bg-grey/0 h-64 border-b-1">
           <tr>
             <th className="w-64">
-              <Checkbox checked={isSelectedAll()} value="all" disabled />
+              <Checkbox
+                checked={selectedItems.length === selectedImages.length}
+                value="all"
+                handleCheck={handleCheckAll}
+              />
             </th>
             {IMAGE_TABLE_HEADER.map((header, index) => (
               <th
@@ -83,9 +97,9 @@ export default function ImageListTable({
                     }`}>
                     <td>
                       <Checkbox
-                        checked={selectedItem.some((url) => url === item.name)}
+                        handleCheck={() => handleCheck(item.image as string)}
+                        checked={selectedItems.includes(item.image as string)}
                         value={item.image as string}
-                        disabled
                       />
                     </td>
                     {tableHeaderKey.map((key) => (

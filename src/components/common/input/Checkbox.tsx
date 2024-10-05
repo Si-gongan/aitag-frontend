@@ -1,34 +1,18 @@
 import Image from 'next/image';
 import { ChangeEvent, useEffect, useState } from 'react';
 
+// FIX: 전체적으로 리팩토링 필요
+// FIX: 현재 체크박스 UI 이미지로 수정 중 -> CSS로 변경
+
 interface CheckboxProps {
   value: string; // 'all' 또는 특정값
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleCheck: (value: string) => void;
   checked?: boolean;
   disabled?: boolean;
   size?: number;
 }
 
-export default function Checkbox({ value, checked, onChange, disabled, size = 24 }: CheckboxProps) {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (disabled) return;
-
-    const newValue = !isChecked;
-    setIsChecked(newValue);
-
-    if (onChange) {
-      onChange(event); // 부모 컴포넌트로 클릭 이벤트를 전달
-    }
-  };
-
-  useEffect(() => {
-    if (checked !== undefined) {
-      setIsChecked(checked);
-    }
-  }, [checked]);
-
+export default function Checkbox({ value, handleCheck, checked, disabled, size = 24 }: CheckboxProps) {
   return (
     <label htmlFor={value} className="flex items-center cursor-pointer justify-center">
       <input
@@ -36,11 +20,11 @@ export default function Checkbox({ value, checked, onChange, disabled, size = 24
         type="checkbox"
         value={value}
         className="hidden"
-        checked={isChecked}
-        onChange={handleChangeInput}
+        checked={checked}
+        onChange={() => handleCheck(value)}
       />
       <Image
-        src={isChecked ? '/images/checkbox_checked.svg' : '/images/checkbox.svg'}
+        src={checked ? '/images/checkbox_checked.svg' : '/images/checkbox.svg'}
         alt="체크박스 아이콘"
         width={size}
         height={size}
