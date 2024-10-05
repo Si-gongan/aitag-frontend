@@ -102,7 +102,7 @@ export default function FileInputField({
       className={`flex flex-col w-full h-428 items-center justify-center gap-60 border-4 border-dashed rounded-8 z-DEFAULT ${
         isActive ? 'bg-grey/0 border-grey/4' : 'border-#CED3D6'
       }`}>
-      <input type="file" id="image" className="hidden" multiple onChange={handleDropOrChange} />
+      <input type="file" id="image" className="hidden" multiple onChange={handleDropOrChange} accept="image/*" />
       <div className="flex flex-col items-center gap-48">
         <Image src="/images/upload.svg" alt="이미지 업로드 아이콘" width={46} height={46} />
         <div className="flex flex-col items-center gap-15">
