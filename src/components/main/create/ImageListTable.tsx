@@ -25,7 +25,6 @@ export default function ImageListTable({
   selectedUrls,
   selectedImages,
 }: ImageListTableProps) {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [pagination, setPagination] = useState({ start: 1, click: 1 });
   const totalPages = Math.ceil(previewImages.length / 5);
 
@@ -42,23 +41,21 @@ export default function ImageListTable({
     }));
   };
 
-  const handleCheck = (value: string) => {
-    if (selectedItems.includes(value)) {
-      setSelectedItems((prev) => prev.filter((item) => item !== value));
+  const handleCheck = (value: PreviewImageItemType) => {
+    if (selectedImages.some((item) => item.name === value.name)) {
+      setSelectedImages((prev) => prev.filter((item) => item.name !== value.name));
     } else {
-      setSelectedItems((prev) => [...prev, value]);
+      setSelectedImages((prev) => [...prev, value]);
     }
   };
 
   const handleCheckAll = () => {
-    if (selectedItems.length === selectedImages.length) {
-      setSelectedItems([]);
+    if (selectedImages.length === previewImages.length) {
+      setSelectedImages([]);
     } else {
-      setSelectedItems(selectedImages.map((item) => item.image as string));
+      setSelectedImages(previewImages);
     }
   };
-
-  console.log(selectedItems.length, selectedImages.length);
 
   return (
     <>
@@ -67,7 +64,7 @@ export default function ImageListTable({
           <tr>
             <th className="w-64">
               <Checkbox
-                checked={selectedItems.length === selectedImages.length}
+                checked={selectedImages.length === previewImages.length}
                 value="all"
                 handleCheck={handleCheckAll}
               />
@@ -101,9 +98,9 @@ export default function ImageListTable({
                     }`}>
                     <td>
                       <Checkbox
-                        handleCheck={() => handleCheck(item.image as string)}
-                        checked={selectedItems.includes(item.image as string)}
-                        value={item.image as string}
+                        handleCheck={() => handleCheck(item)}
+                        checked={selectedImages.some((image) => image.name === item.name)}
+                        value={item.name}
                       />
                     </td>
                     {tableHeaderKey.map((key) => (

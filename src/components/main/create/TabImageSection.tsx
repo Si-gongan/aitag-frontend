@@ -65,7 +65,7 @@ export default function TabImageSection() {
             />
           </SectionLayout>
           {previewImages.length !== 0 && (
-            <CreateButtons type="image" setProgressStage={setProgressStage} selectedImages={previewImages} />
+            <CreateButtons type="image" setProgressStage={setProgressStage} selectedImages={selectedImages} />
           )}
         </div>
       ) : (
