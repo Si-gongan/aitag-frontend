@@ -15,7 +15,7 @@ import { ERROR_MESSAGE } from '@/utils/constants';
 
 export default function TabUrlSection() {
   const [urls, setUrls] = useState<string[]>([]);
-  const [selectedUrls, setSelectedUrls] = useState<Set<string>>(new Set());
+  const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
   const [previewImages, setPreviewImages] = useState<PreviewImageItemType[]>([]);
   const [loading, setLoading] = useState(false);
   const [progressStage, setProgressStage] = useState('one'); // one: url 입력, two: 해설진 작성
@@ -54,8 +54,8 @@ export default function TabUrlSection() {
 
       const newImageDatas = resultImages.map((image: ScrapImagesResponseType) => {
         return {
-          name: newUrl,
-          image: image.url,
+          site_url: newUrl,
+          src: image.url,
           alt: image.alt,
           language: '한국어',
           keywords: [],
@@ -65,22 +65,13 @@ export default function TabUrlSection() {
 
       setPreviewImages((prev) => [...prev, ...newImageDatas]);
       setSelectedImages((prev) => [...prev, ...newImageDatas]);
+      setSelectedUrls((prev) => [...prev, newUrl]);
     } catch (error) {
       console.error('크롤링 이미지 데이터 요청 실패', error);
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    const updatedPreviewImages = previewImages.filter((previewImage) => urls.includes(previewImage.name));
-
-    setPreviewImages(updatedPreviewImages);
-  }, [urls]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <>
@@ -100,7 +91,15 @@ export default function TabUrlSection() {
             )}
           </SectionLayout>
           <SectionLayout title="URL 리스트" description="대체텍스트 생성이 진행될 URL 리스트입니다.">
-            <UrlListTable urls={urls} setUrls={setUrls} selectedUrls={selectedUrls} setSelectedUrls={setSelectedUrls} />
+            <UrlListTable
+              urls={urls}
+              setUrls={setUrls}
+              selectedUrls={selectedUrls}
+              setSelectedUrls={setSelectedUrls}
+              selectedImages={selectedImages}
+              setSelectedImages={setSelectedImages}
+              previewImages={previewImages}
+            />
           </SectionLayout>
           <SectionLayout title="이미지 미리보기" description="대체텍스트 생성할 이미지를 선택해주세요.">
             {loading && (

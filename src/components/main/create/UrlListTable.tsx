@@ -3,6 +3,7 @@
 import PagenationButton from '@/components/common/button/PaginationButton';
 import Checkbox from '@/components/common/input/Checkbox';
 import ModalChoose from '@/components/common/modal/ModalChoose';
+import { PreviewImageItemType } from '@/types/common';
 import { URL_TABLE_HEADER } from '@/utils/constants';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -10,11 +11,22 @@ import { useState } from 'react';
 interface UrlListTableProps {
   urls: string[];
   setUrls: React.Dispatch<React.SetStateAction<string[]>>;
-  selectedUrls: Set<string>;
-  setSelectedUrls: React.Dispatch<React.SetStateAction<Set<string>>>;
+  selectedUrls: string[];
+  setSelectedUrls: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedImages: PreviewImageItemType[];
+  setSelectedImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
+  previewImages: PreviewImageItemType[];
 }
 
-export default function UrlListTable({ urls, setUrls, selectedUrls, setSelectedUrls }: UrlListTableProps) {
+export default function UrlListTable({
+  urls,
+  setUrls,
+  selectedUrls,
+  setSelectedUrls,
+  selectedImages,
+  setSelectedImages,
+  previewImages,
+}: UrlListTableProps) {
   const [pagination, setPagination] = useState({ start: 1, click: 1 });
   const [showModalDelete, setShowModalDelete] = useState<boolean>(false);
 
@@ -32,29 +44,36 @@ export default function UrlListTable({ urls, setUrls, selectedUrls, setSelectedU
     }));
   };
 
-  const handleCheckboxChange = (value: string) => {
-    const newSelection = new Set(selectedUrls);
-    if (newSelection.has(value)) {
-      newSelection.delete(value);
+  const handleCheckboxChange = (siteUrl: string) => {
+    console.log(siteUrl);
+
+    const newSelection = [...selectedUrls];
+    if (newSelection.includes(siteUrl)) {
+      newSelection.splice(newSelection.indexOf(siteUrl), 1);
+      setSelectedImages((prev) => prev.filter((item) => item.site_url !== siteUrl));
     } else {
-      newSelection.add(value);
+      newSelection.push(siteUrl);
+      const newSelectedImages = previewImages.filter((item) => item.site_url === siteUrl);
+      if (newSelectedImages) {
+        setSelectedImages((prev) => [...prev, ...newSelectedImages]);
+      }
     }
     setSelectedUrls(newSelection);
   };
 
   const handleCheckAll = () => {
-    if (selectedUrls.size === urls.length) {
-      setSelectedUrls(new Set());
+    if (selectedUrls.length === urls.length) {
+      setSelectedUrls([]);
     } else {
-      setSelectedUrls(new Set(urls));
+      setSelectedUrls(urls);
     }
   };
 
-  const handleClickDelete = (item: string) => {
-    if (item === 'all_url') {
+  const handleClickDelete = (selectedUrl: string) => {
+    if (selectedUrl === 'all_url') {
       setShowModalDelete(true);
     } else {
-      const updatedUrls = urls.filter((url) => url !== item);
+      const updatedUrls = urls.filter((url) => url !== selectedUrl);
       setUrls(updatedUrls);
     }
   };
@@ -66,7 +85,7 @@ export default function UrlListTable({ urls, setUrls, selectedUrls, setSelectedU
           <tr>
             <th className="w-124">
               <Checkbox
-                checked={selectedUrls.size > 0 && selectedUrls.size === urls.length}
+                checked={selectedUrls.length > 0 && selectedUrls.length === urls.length}
                 value="all_url"
                 handleCheck={handleCheckAll}
               />
@@ -74,7 +93,7 @@ export default function UrlListTable({ urls, setUrls, selectedUrls, setSelectedU
             {URL_TABLE_HEADER.map((header, index) => (
               <th key={index} className={`${header.image ? 'w-124' : 'px-12'}`}>
                 {header.text}{' '}
-                {header.image && selectedUrls.size > 0 && selectedUrls.size === urls.length && (
+                {header.image && selectedUrls.length > 0 && selectedUrls.length === urls.length && (
                   <div onClick={() => handleClickDelete('all_url')} className="flex justify-center items-center">
                     <Image src={header.image} width={24} height={24} alt="url 삭제 이미지" />
                   </div>
@@ -85,9 +104,13 @@ export default function UrlListTable({ urls, setUrls, selectedUrls, setSelectedU
         </thead>
         <tbody>
           {urls.slice(startIndex, endIndex).map((url, index) => (
-            <tr key={index} className={`h-48 border-b-1 ${selectedUrls.has(url) ? 'bg-[#F2F6FE]' : ''}`}>
+            <tr key={index} className={`h-48 border-b-1 ${selectedUrls.includes(url) ? 'bg-[#F2F6FE]' : ''}`}>
               <td>
-                <Checkbox checked={selectedUrls.has(url)} value={url} handleCheck={() => handleCheckboxChange(url)} />
+                <Checkbox
+                  checked={selectedUrls.includes(url)}
+                  value={url}
+                  handleCheck={() => handleCheckboxChange(url)}
+                />
               </td>
               <td className="p-12">{url}</td>
               <td>

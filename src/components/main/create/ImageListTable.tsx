@@ -13,14 +13,12 @@ interface ImageListTableProps {
   previewImages: PreviewImageItemType[] | [];
   setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
   setSelectedImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
-  selectedUrls: Set<string> | PreviewImageItemType[];
-  selectedImages: PreviewImageItemType[] | [];
+  selectedUrls: string[];
+  selectedImages: PreviewImageItemType[];
 }
 
 export default function ImageListTable({
-  type = 'url',
   previewImages,
-  setPreviewImages,
   setSelectedImages,
   selectedUrls,
   selectedImages,
@@ -32,8 +30,6 @@ export default function ImageListTable({
   const endIndex = pagination.click * 5;
   const tableHeaderKey = IMAGE_TABLE_HEADER.map((header) => header.value); // value 순서에 맞게 테이블 데이터를 출력하기 위한 배열
 
-  const selectedItem = Array.isArray(selectedUrls) ? selectedUrls.map((item) => item.name) : Array.from(selectedUrls);
-
   const handleClickPagination = (num: number) => {
     setPagination((prevPagination) => ({
       ...prevPagination,
@@ -41,9 +37,11 @@ export default function ImageListTable({
     }));
   };
 
+  console.log(selectedImages);
+
   const handleCheck = (value: PreviewImageItemType) => {
-    if (selectedImages.some((item) => item.image === value.image)) {
-      setSelectedImages((prev) => prev.filter((item) => item.image !== value.image));
+    if (selectedImages.some((item) => item.src === value.src)) {
+      setSelectedImages((prev) => prev.filter((item) => item.src !== value.src));
     } else {
       setSelectedImages((prev) => [...prev, value]);
     }
@@ -93,14 +91,12 @@ export default function ImageListTable({
                 return (
                   <tr
                     key={index}
-                    className={`h-48 border-b-1 ${
-                      selectedItem.some((url) => url === item.image) ? 'bg-[#F2F6FE]' : ''
-                    }`}>
+                    className={`h-48 border-b-1 ${selectedImages.some((image) => image.src === item.src) ? 'bg-[#F2F6FE]' : ''}`}>
                     <td>
                       <Checkbox
                         handleCheck={() => handleCheck(item)}
-                        checked={selectedImages.some((image) => image.image === item.image)}
-                        value={item.image}
+                        checked={selectedImages.some((image) => image.src === item.src)}
+                        value={item.src}
                       />
                     </td>
                     {tableHeaderKey.map((key) => (
@@ -108,7 +104,7 @@ export default function ImageListTable({
                         {key === 'image' ? (
                           <div className="flex justify-center items-center h-40 w-80 overflow-hidden">
                             <img
-                              src={item.image}
+                              src={item.src}
                               alt={`이미지 미리보기 썸네일 ${index}`}
                               className="w-40 h-40 overflow-hidden border-1 rounded-2 border-grey/4"
                             />
@@ -131,7 +127,7 @@ export default function ImageListTable({
                             />
                           </div>
                         ) : (
-                          item['image']
+                          item['src']
                         )}
                       </td>
                     ))}

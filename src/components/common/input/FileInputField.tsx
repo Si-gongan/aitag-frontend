@@ -71,7 +71,7 @@ export default function FileInputField({
         const previewUrl = reader.result as string;
         newPreviewInfos.push({
           name,
-          image: previewUrl,
+          src: previewUrl,
           alt: '',
           language: '한국어',
           keywords: [],
