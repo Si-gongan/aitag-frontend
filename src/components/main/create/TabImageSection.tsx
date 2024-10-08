@@ -16,7 +16,7 @@ export default function TabImageSection() {
   const [selectedImages, setSelectedImages] = useState<PreviewImageItemType[]>([]);
   const [progressStage, setProgressStage] = useState('one'); // one: url 입력, two: 해설진 작성
   const [toastMessage, setToastMessage] = useState('');
-
+  const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -59,7 +59,7 @@ export default function TabImageSection() {
               type="image"
               previewImages={previewImages}
               setPreviewImages={setPreviewImages}
-              selectedUrls={previewImages}
+              selectedUrls={selectedUrls}
               setSelectedImages={setSelectedImages}
               selectedImages={selectedImages}
             />
