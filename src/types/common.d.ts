@@ -105,13 +105,14 @@ export interface TableHeaderType {
 
 export interface PreviewImageItemType {
   name: string;
-  image: string; // 이미지 src
+  src: string;
   alt: string;
   language: string;
   keywords: string[];
   tone: string;
   size?: string;
   file?: File;
+  site_url?: string;
 }
 
 export interface PaginationType {
