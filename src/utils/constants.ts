@@ -123,7 +123,7 @@ export const DOWNLOAD_SORT = [
   { id: 'csv', name: 'CSV' },
   { id: 'json', name: 'JSON' },
   { id: 'txt', name: 'TXT' },
-];
+] as const;
 
 export const DASHBOARD_LIMIT = '10';
 

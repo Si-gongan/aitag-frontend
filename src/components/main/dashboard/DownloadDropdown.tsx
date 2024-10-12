@@ -1,6 +1,6 @@
 import { WorkType } from '@/types/common';
-import ExportDatas from '@/utils/ExportDatas';
 import { DOWNLOAD_SORT } from '@/utils/constants';
+import exportAltText from '@/utils/exportData';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
@@ -21,9 +21,9 @@ export default function DownloadDropdown({ type = 'button', selectedWorks, disab
     setShowDropDown((prev) => !prev);
   };
 
-  const handleClickExport = (exportForm: string) => {
+  const handleClickExport = (exportForm: 'csv' | 'txt' | 'json') => {
     toggleDropdown;
-    ExportDatas(exportForm, selectedWorks);
+    exportAltText(exportForm, selectedWorks);
   };
 
   useEffect(() => {
