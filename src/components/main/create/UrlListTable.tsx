@@ -64,8 +64,10 @@ export default function UrlListTable({
   const handleCheckAll = () => {
     if (selectedUrls.length === urls.length) {
       setSelectedUrls([]);
+      setSelectedImages([]);
     } else {
       setSelectedUrls(urls);
+      setSelectedImages(previewImages);
     }
   };
 
