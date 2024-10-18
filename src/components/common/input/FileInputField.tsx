@@ -6,6 +6,7 @@ import { ERROR_MESSAGE } from '@/utils/constants';
 interface FileInputFieldProps {
   previewImages: PreviewImageItemType[];
   setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
+  setSelectedImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
   setUploading: React.Dispatch<React.SetStateAction<boolean>>;
   setToastMessage: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -13,6 +14,7 @@ interface FileInputFieldProps {
 export default function FileInputField({
   previewImages,
   setPreviewImages,
+  setSelectedImages,
   setUploading,
   setToastMessage,
 }: FileInputFieldProps) {
@@ -69,7 +71,7 @@ export default function FileInputField({
         const previewUrl = reader.result as string;
         newPreviewInfos.push({
           name,
-          image: previewUrl,
+          src: previewUrl,
           alt: '',
           language: '한국어',
           keywords: [],
@@ -81,6 +83,7 @@ export default function FileInputField({
         if (newPreviewInfos.length === files.length) {
           // 이미지 정보를 모두 수집한 후에 state를 업데이트합니다.
           setPreviewImages((prev) => [...prev, ...newPreviewInfos]);
+          setSelectedImages((prev) => [...prev, ...newPreviewInfos]);
           setUploading(false);
 
           // File input 초기화
@@ -102,7 +105,7 @@ export default function FileInputField({
       className={`flex flex-col w-full h-428 items-center justify-center gap-60 border-4 border-dashed rounded-8 z-DEFAULT ${
         isActive ? 'bg-grey/0 border-grey/4' : 'border-#CED3D6'
       }`}>
-      <input type="file" id="image" className="hidden" multiple onChange={handleDropOrChange} />
+      <input type="file" id="image" className="hidden" multiple onChange={handleDropOrChange} accept="image/*" />
       <div className="flex flex-col items-center gap-48">
         <Image src="/images/upload.svg" alt="이미지 업로드 아이콘" width={46} height={46} />
         <div className="flex flex-col items-center gap-15">

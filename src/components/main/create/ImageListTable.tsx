@@ -12,14 +12,14 @@ interface ImageListTableProps {
   type?: string;
   previewImages: PreviewImageItemType[] | [];
   setPreviewImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
-  selectedUrls: Set<string> | PreviewImageItemType[];
-  selectedImages: PreviewImageItemType[] | [];
+  setSelectedImages: React.Dispatch<React.SetStateAction<PreviewImageItemType[]>>;
+  selectedUrls: string[];
+  selectedImages: PreviewImageItemType[];
 }
 
 export default function ImageListTable({
-  type = 'url',
   previewImages,
-  setPreviewImages,
+  setSelectedImages,
   selectedUrls,
   selectedImages,
 }: ImageListTableProps) {
@@ -30,20 +30,29 @@ export default function ImageListTable({
   const endIndex = pagination.click * 5;
   const tableHeaderKey = IMAGE_TABLE_HEADER.map((header) => header.value); // value 순서에 맞게 테이블 데이터를 출력하기 위한 배열
 
-  const selectedItem = Array.isArray(selectedUrls) ? selectedUrls.map((item) => item.name) : Array.from(selectedUrls);
-
-  const isSelectedAll = () => {
-    if (selectedImages) {
-      return selectedImages.length === previewImages.length && previewImages.length !== 0;
-    }
-    return false;
-  };
-
   const handleClickPagination = (num: number) => {
     setPagination((prevPagination) => ({
       ...prevPagination,
       click: num,
     }));
+  };
+
+  console.log(selectedImages);
+
+  const handleCheck = (value: PreviewImageItemType) => {
+    if (selectedImages.some((item) => item.src === value.src)) {
+      setSelectedImages((prev) => prev.filter((item) => item.src !== value.src));
+    } else {
+      setSelectedImages((prev) => [...prev, value]);
+    }
+  };
+
+  const handleCheckAll = () => {
+    if (selectedImages.length === previewImages.length) {
+      setSelectedImages([]);
+    } else {
+      setSelectedImages(previewImages);
+    }
   };
 
   return (
@@ -52,7 +61,11 @@ export default function ImageListTable({
         <thead className="bg-grey/0 h-64 border-b-1">
           <tr>
             <th className="w-64">
-              <Checkbox checked={isSelectedAll()} value="all" disabled />
+              <Checkbox
+                checked={selectedImages.length > 0 && selectedImages.length === previewImages.length}
+                value="all"
+                handleCheck={handleCheckAll}
+              />
             </th>
             {IMAGE_TABLE_HEADER.map((header, index) => (
               <th
@@ -78,14 +91,12 @@ export default function ImageListTable({
                 return (
                   <tr
                     key={index}
-                    className={`h-48 border-b-1 ${
-                      selectedItem.some((url) => url === item.name) ? 'bg-[#F2F6FE]' : ''
-                    }`}>
+                    className={`h-48 border-b-1 ${selectedImages.some((image) => image.src === item.src) ? 'bg-[#F2F6FE]' : ''}`}>
                     <td>
                       <Checkbox
-                        checked={selectedItem.some((url) => url === item.name)}
-                        value={item.image as string}
-                        disabled
+                        handleCheck={() => handleCheck(item)}
+                        checked={selectedImages.some((image) => image.src === item.src)}
+                        value={item.src}
                       />
                     </td>
                     {tableHeaderKey.map((key) => (
@@ -93,7 +104,7 @@ export default function ImageListTable({
                         {key === 'image' ? (
                           <div className="flex justify-center items-center h-40 w-80 overflow-hidden">
                             <img
-                              src={item.image}
+                              src={item.src}
                               alt={`이미지 미리보기 썸네일 ${index}`}
                               className="w-40 h-40 overflow-hidden border-1 rounded-2 border-grey/4"
                             />
@@ -101,18 +112,22 @@ export default function ImageListTable({
                         ) : key === 'alt' ? (
                           <span className="p-12">{item.alt ? item.alt : '없음'}</span>
                         ) : key === 'tone' ? (
-                          <ToneDropdown item={item} previewImages={previewImages} setPreviewImages={setPreviewImages} />
+                          <ToneDropdown
+                            item={item}
+                            previewImages={previewImages}
+                            setPreviewImages={setSelectedImages}
+                          />
                         ) : // <span className="flex justify-center">한국어</span>
                         key === 'keyword' ? (
                           <div className="flex justify-center">
                             <AddKeywordsButton
                               item={item}
                               previewImages={previewImages}
-                              setPreviewImages={setPreviewImages}
+                              setPreviewImages={setSelectedImages}
                             />
                           </div>
                         ) : (
-                          item['image']
+                          item['src']
                         )}
                       </td>
                     ))}

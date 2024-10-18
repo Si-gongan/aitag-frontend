@@ -34,7 +34,7 @@ export default function ModalAddKeywords({ item, previewImages, setPreviewImages
 
   const saveKeywords = () => {
     const updatePreviewImages = previewImages.map((previewImage) => {
-      if (previewImage.image === (item as PreviewImageItemType).image) {
+      if (previewImage.src === (item as PreviewImageItemType).src) {
         return { ...previewImage, keywords: keywordTags };
       } else {
         return previewImage;

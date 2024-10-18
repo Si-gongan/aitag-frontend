@@ -54,7 +54,7 @@ export default function CreateButtons({ type = 'url', setProgressStage, selected
         }
 
         return {
-          image: selectedImage.image,
+          image: selectedImage.src,
           language: 'Korean',
           keywords: selectedImage.keywords,
           tone: selectedImage.tone,

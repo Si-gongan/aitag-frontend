@@ -13,9 +13,10 @@ import Toast from '@/components/common/toast/Toast';
 export default function TabImageSection() {
   const [uploading, setUploading] = useState(false);
   const [previewImages, setPreviewImages] = useState<PreviewImageItemType[]>([]);
+  const [selectedImages, setSelectedImages] = useState<PreviewImageItemType[]>([]);
   const [progressStage, setProgressStage] = useState('one'); // one: url 입력, two: 해설진 작성
   const [toastMessage, setToastMessage] = useState('');
-
+  const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -36,6 +37,7 @@ export default function TabImageSection() {
             <FileInputField
               previewImages={previewImages}
               setPreviewImages={setPreviewImages}
+              setSelectedImages={setSelectedImages}
               setUploading={setUploading}
               setToastMessage={setToastMessage}
             />
@@ -45,6 +47,7 @@ export default function TabImageSection() {
                   key={index}
                   info={info}
                   previewImages={previewImages}
+                  // FIX: handleDelete={handleDelete}
                   setPreviewImages={setPreviewImages}
                   uploading={uploading}
                 />
@@ -56,12 +59,13 @@ export default function TabImageSection() {
               type="image"
               previewImages={previewImages}
               setPreviewImages={setPreviewImages}
-              selectedUrls={previewImages}
-              selectedImages={previewImages}
+              selectedUrls={selectedUrls}
+              setSelectedImages={setSelectedImages}
+              selectedImages={selectedImages}
             />
           </SectionLayout>
           {previewImages.length !== 0 && (
-            <CreateButtons type="image" setProgressStage={setProgressStage} selectedImages={previewImages} />
+            <CreateButtons type="image" setProgressStage={setProgressStage} selectedImages={selectedImages} />
           )}
         </div>
       ) : (

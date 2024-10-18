@@ -54,7 +54,7 @@ export default function RequestForExpert({ type = 'url', selectedImages, setProg
         }
 
         return {
-          image: selectedImage.image,
+          image: selectedImage.src,
           language: 'Korean',
           keywords: selectedImage.keywords,
           tone: selectedImage.tone,
